@@ -1,0 +1,95 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="橋本 章平 インタビュー">
+
+<style>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+  }
+</style>
+
+<!-- Hero -->
+<section class="hero-bg relative py-28 px-6 text-white overflow-hidden">
+  <div class="absolute inset-0 opacity-5"
+    style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <a href="/interview" class="text-blue-300 text-xs font-bold tracking-widest uppercase hover:text-white transition-colors">← INTERVIEW 一覧に戻る</a>
+    <div class="mt-6 flex items-center gap-5">
+      <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-3xl font-black flex-shrink-0">
+        橋
+      </div>
+      <div>
+        <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">挑戦×成長</span>
+        <h1 class="text-3xl md:text-4xl font-black mt-2">橋本 章平</h1>
+        <p class="text-blue-200 text-sm mt-1">モバイル事業部 部長</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- インタビュー本文 -->
+<article class="bg-white py-16 px-6">
+  <div class="max-w-3xl mx-auto space-y-12">
+
+    <div class="bg-blue-50 rounded-2xl p-8">
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q1</p>
+      <p class="text-xl font-black text-gray-900 mb-4">今の仕事を一言で表すと？</p>
+      <p class="text-gray-700 leading-relaxed">
+        「人を育てる仕事」ですね。売上をつくるのは当然として、スタッフ一人ひとりが成長していく過程に立ち会えることが、この仕事の醍醐味だと思っています。入社したときは自信のなかった子が、数ヶ月後にチームを引っ張るようになる。その瞬間が一番嬉しい。
+      </p>
+    </div>
+
+    <div>
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q2</p>
+      <p class="text-xl font-black text-gray-900 mb-4">ダウインに入って、何が一番変わりましたか？</p>
+      <p class="text-gray-700 leading-relaxed">
+        「結果に対して言い訳をしなくなった」ことですかね。営業の世界は数字がすべてで、どんな理由があっても結果が出なければ意味がない。それを身体で覚えてから、仕事への向き合い方が変わりました。同時に、「チームで勝つ」ことの気持ちよさも知った。一人で成果を出すより、仲間と一緒に目標を超えたときの達成感のほうが、圧倒的に大きい。
+      </p>
+    </div>
+
+    <div class="bg-gray-50 rounded-2xl p-8">
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q3</p>
+      <p class="text-xl font-black text-gray-900 mb-4">どんな人に来てほしいですか？</p>
+      <p class="text-gray-700 leading-relaxed">
+        「素直な人」です。経験や学歴じゃない。「教えてもらったことをちゃんと実践できるか」「うまくいかなかったとき素直に振り返れるか」これだけです。逆にそれができれば、未経験でも絶対に成長できます。うちのチームはそれを証明してきたので、自信を持って言えます。
+      </p>
+    </div>
+
+    <div>
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q4</p>
+      <p class="text-xl font-black text-gray-900 mb-4">これからのダウイン モバイル事業部を、どう育てていきたいですか？</p>
+      <p class="text-gray-700 leading-relaxed">
+        関わった人全員が「ここで働いてよかった」と思えるチームにしたい。それだけです。数字の目標ももちろんありますが、それはあくまで手段。スタッフが胸を張れる環境をつくることが、僕のいちばん大事な仕事だと思っています。
+      </p>
+    </div>
+
+    <!-- 一言メッセージ -->
+    <div class="border-l-4 border-blue-600 pl-6 py-2">
+      <p class="text-2xl font-black text-gray-900 leading-relaxed">
+        「自ら掴んだチャンスが、自分を変える。<br />
+        <span class="text-blue-600">迷ってるなら、飛び込んでみてください。</span>」
+      </p>
+      <p class="text-gray-500 text-sm mt-3">橋本 章平 / モバイル事業部 部長</p>
+    </div>
+
+    <div class="pt-4 flex flex-col sm:flex-row gap-4">
+      <a href="/interview" class="inline-block border-2 border-blue-600 text-blue-600 font-bold px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 text-center">
+        ← インタビュー一覧
+      </a>
+      <a href="/recruit" class="inline-block bg-blue-600 text-white font-black px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 text-center">
+        採用エントリーはこちら →
+      </a>
+    </div>
+  </div>
+</article>
+
+</Layout>

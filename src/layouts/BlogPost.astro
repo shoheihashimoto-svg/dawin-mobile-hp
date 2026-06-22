@@ -1,0 +1,82 @@
+---
+import Layout from './Layout.astro';
+interface Props {
+  title: string;
+  date: string;
+  description: string;
+  author?: string;
+  category?: string;
+}
+const { title, date, description, author = '橋本 章平', category = '現場から' } = Astro.props;
+const formatted = new Date(date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<Layout title={title}>
+
+<style>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+  }
+  .prose h2 { font-size: 1.5rem; font-weight: 900; margin: 2rem 0 1rem; color: #111827; }
+  .prose h3 { font-size: 1.2rem; font-weight: 700; margin: 1.5rem 0 0.75rem; color: #1d4ed8; }
+  .prose p { margin: 1rem 0; line-height: 1.9; color: #374151; }
+  .prose ul { margin: 1rem 0 1rem 1.5rem; }
+  .prose li { margin: 0.5rem 0; line-height: 1.8; color: #374151; list-style-type: disc; }
+  .prose strong { font-weight: 700; color: #111827; }
+  .prose blockquote { border-left: 4px solid #3b82f6; padding-left: 1rem; color: #4b5563; font-style: italic; margin: 1.5rem 0; }
+</style>
+
+<!-- Hero -->
+<section class="hero-bg relative py-24 px-6 text-white overflow-hidden">
+  <div class="absolute inset-0 opacity-5"
+    style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <a href="/blog" class="text-blue-300 text-xs font-bold tracking-widest uppercase hover:text-white transition-colors">← BLOG 一覧に戻る</a>
+    <div class="mt-4 mb-3 flex items-center gap-3">
+      <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">{category}</span>
+      <span class="text-blue-200 text-xs">{formatted}</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-black leading-tight mb-4">{title}</h1>
+    <p class="text-blue-100/80">{description}</p>
+    <div class="flex items-center gap-3 mt-6">
+      <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-black text-white">橋</div>
+      <div>
+        <p class="font-bold text-white text-sm">{author}</p>
+        <p class="text-blue-200 text-xs">ダウイン モバイル事業部 部長</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 記事本文 -->
+<article class="py-16 px-6 bg-white">
+  <div class="max-w-3xl mx-auto">
+    <div class="prose">
+      <slot />
+    </div>
+    <div class="mt-16 pt-8 border-t border-gray-100 flex items-center gap-4">
+      <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full flex items-center justify-center font-black text-white text-xl">橋</div>
+      <div>
+        <p class="font-black text-gray-900">{author}</p>
+        <p class="text-sm text-gray-500">株式会社ダウイン モバイル事業部 部長<br />営業・マネジメントを軸に、チームの成長と事業拡大に取り組んでいます。</p>
+      </div>
+    </div>
+    <div class="mt-10 text-center">
+      <a href="/blog" class="inline-block border-2 border-blue-600 text-blue-600 font-bold px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 mr-4">
+        ← ブログ一覧
+      </a>
+      <a href="/recruit" class="inline-block bg-blue-600 text-white font-bold px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300">
+        採用情報を見る →
+      </a>
+    </div>
+  </div>
+</article>
+
+</Layout>

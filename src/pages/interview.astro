@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const members = [
+  {
+    id: 'hashimoto',
+    name: '橋本 章平',
+    kana: 'Shohei Hashimoto',
+    role: 'モバイル事業部 部長',
+    year: 'Manager',
+    quote: '自ら掴んだチャンスが、自分を変える。',
+    color: 'from-blue-900 to-blue-700',
+  },
+  {
+    id: 'inataba',
+    name: '犬束',
+    kana: '',
+    role: 'スタッフ',
+    year: 'Staff',
+    quote: 'チームがあるから、もっと頑張れる。',
+    color: 'from-indigo-900 to-indigo-700',
+  },
+  {
+    id: 'kihara',
+    name: '木原',
+    kana: '',
+    role: 'スタッフ',
+    year: 'Staff',
+    quote: '未経験でも、ここなら成長できると思った。',
+    color: 'from-blue-900 to-cyan-700',
+  },
+  {
+    id: 'nakamura',
+    name: '中村',
+    kana: '',
+    role: 'スタッフ',
+    year: 'Staff',
+    quote: '結果を出したとき、仲間が一番に喜んでくれる。',
+    color: 'from-slate-800 to-blue-800',
+  },
+  {
+    id: 'takahashi',
+    name: '高橋 / 森',
+    kana: '',
+    role: 'スタッフ',
+    year: 'Staff',
+    quote: 'ここの空気感が、ずっと続けられる理由。',
+    color: 'from-blue-800 to-indigo-900',
+  },
+  {
+    id: 'oba',
+    name: '大塲',
+    kana: '',
+    role: 'スタッフ',
+    year: 'Staff',
+    quote: 'イベントの達成感は、何にも代えられない。',
+    color: 'from-cyan-900 to-blue-800',
+  },
+  {
+    id: 'takata',
+    name: '髙田',
+    kana: '',
+    role: 'スタッフ',
+    year: 'Staff',
+    quote: '家庭をもっても続けられる環境がある。',
+    color: 'from-indigo-800 to-blue-900',
+  },
+];
+---
+<Layout title="INTERVIEW">
+
+<style>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+  }
+</style>
+
+<!-- Hero -->
+<section class="hero-bg relative py-32 px-6 text-white text-center overflow-hidden">
+  <div class="absolute inset-0 opacity-5"
+    style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <p class="text-blue-300 font-bold tracking-[0.3em] text-xs uppercase mb-6">Interview</p>
+    <h1 class="text-4xl md:text-6xl font-black mb-6">社員インタビュー</h1>
+    <p class="text-blue-100/80 text-lg">ここで働く人たちの、リアルな声を届けます。</p>
+  </div>
+</section>
+
+<!-- インタビュー一覧 -->
+<section class="py-20 px-6 bg-gray-950">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {members.map((m) => (
+        <div class={`group relative bg-gradient-to-br ${m.color} rounded-2xl overflow-hidden cursor-pointer`}>
+          <!-- 写真エリア（仮） -->
+          <div class="h-48 flex items-end p-6 relative">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center">
+                <span class="text-4xl text-white/50 font-black">{m.name.charAt(0)}</span>
+              </div>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          </div>
+          <!-- 情報 -->
+          <div class="p-6 text-white">
+            <p class="text-blue-300 text-xs font-bold tracking-widest uppercase mb-1">{m.year}</p>
+            <h3 class="text-xl font-black mb-1">{m.name}</h3>
+            <p class="text-gray-300 text-xs mb-4">{m.role}</p>
+            <p class="text-sm text-gray-200 leading-relaxed border-l-2 border-blue-400 pl-3 italic">
+              「{m.quote}」
+            </p>
+          </div>
+          <!-- Coming soon overlay（写真・本文なしの場合） -->
+          {m.id === 'hashimoto' ? (
+            <a href="/interview/hashimoto" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">
+              <span class="bg-white text-blue-600 text-xs font-bold px-4 py-2 rounded-full">インタビューを読む →</span>
+            </a>
+          ) : (
+            <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="bg-blue-600 text-white text-xs font-bold px-4 py-2 rounded-full">Coming Soon</span>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+    <p class="text-center text-gray-600 text-sm mt-12">※ 順次インタビュー記事を公開予定です。</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 px-6 bg-blue-600 text-white text-center">
+  <h2 class="text-2xl md:text-3xl font-black mb-4">仲間の声を聞いて、気になりましたか？</h2>
+  <p class="text-blue-100 mb-8">未経験・第二新卒も大歓迎。一歩踏み出してみてください。</p>
+  <a href="/recruit" class="inline-block bg-white text-blue-600 font-black px-10 py-4 rounded-full hover:bg-blue-50 transition-all duration-300 hover:shadow-xl">
+    エントリーしてみる →
+  </a>
+</section>
+
+</Layout>

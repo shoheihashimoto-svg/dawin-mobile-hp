@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="ABOUT">
+
+<style>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+  }
+  .ticker-track { animation: ticker 20s linear infinite; }
+</style>
+
+<!-- Hero -->
+<section class="hero-bg relative py-32 px-6 text-white text-center overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl"></div>
+  </div>
+  <div class="absolute inset-0 opacity-5"
+    style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <p class="text-blue-300 font-bold tracking-[0.3em] text-xs uppercase mb-6">About Us</p>
+    <h1 class="text-4xl md:text-6xl font-black mb-6">私たちについて</h1>
+    <p class="text-blue-100/80 text-lg">挑戦を楽しみ、仲間を大切にする。<br />それがダウイン モバイル事業部のスタイル。</p>
+  </div>
+</section>
+
+<!-- ミッション -->
+<section class="py-24 px-6 bg-gray-950 text-white">
+  <div class="max-w-4xl mx-auto text-center">
+    <p class="text-blue-400 font-bold text-xs tracking-widest uppercase mb-4">Mission</p>
+    <h2 class="text-3xl md:text-4xl font-black mb-10">私たちのミッション</h2>
+    <p class="text-2xl md:text-3xl font-black text-white leading-relaxed mb-8">
+      「自ら掴んだチャンスが、自分を変える。<br />
+      <span class="text-blue-400">隣の仲間を全力で思いやる。</span>」
+    </p>
+    <p class="text-gray-400 text-base leading-relaxed max-w-2xl mx-auto">
+      イベントの最前線で、スタッフひとりひとりが主役として活躍できる環境をつくる。
+      挑戦する人を応援し、成長を一緒に喜べるチームであり続けることが、私たちの使命です。
+    </p>
+  </div>
+</section>
+
+<!-- ティッカー -->
+<div class="bg-blue-600 py-4 overflow-hidden whitespace-nowrap">
+  <div class="ticker-track inline-flex gap-12 text-white font-bold text-sm tracking-widest">
+    {Array(2).fill(['CHALLENGE', 'GROWTH', 'TEAMWORK', 'PASSION', 'CAREER', 'MOTIVATION', 'MOBILE', 'NOW HIRING']).flat().map((w) => (
+      <span>✦ {w}</span>
+    ))}
+  </div>
+</div>
+
+<!-- 事業概要 -->
+<section class="py-24 px-6 bg-gray-950 text-white">
+  <div class="max-w-4xl mx-auto">
+    <p class="text-blue-400 font-bold text-xs tracking-widest uppercase mb-4 text-center">Business</p>
+    <h2 class="text-3xl font-black text-center mb-12">事業内容</h2>
+    <div class="flex flex-col gap-10">
+      <div class="space-y-5">
+        <p class="text-gray-300 leading-relaxed">
+          携帯キャリアの代理店からイベントを受注し、全国の商業施設でモバイルイベントを運営しています。
+        </p>
+        <p class="text-gray-300 leading-relaxed">
+          私たちのビジネスの核心は「人」。お客様に最高の体験を提供するスタッフを育て、
+          チームとして最大限のパフォーマンスを発揮することにこだわっています。
+        </p>
+        <p class="text-gray-300 leading-relaxed">
+          全国規模のイベント実績No.1を誇るまでに成長しました。
+        </p>
+      </div>
+      <div class="border border-white/10 rounded-2xl overflow-hidden"
+        style="display: grid; grid-template-columns: 7rem 1fr;">
+        {[
+          { label: '会社名', value: '株式会社ダウイン モバイル事業部' },
+          { label: '所在地', value: '【東京】港区西麻布1-14-1 井門西麻布ビル3F\n\n【福岡】博多区博多駅南1-3-8 博多パールビル605' },
+          { label: 'グループ', value: 'QLSホールディングス（東証グロース）' },
+          { label: 'チーム規模', value: '社員16名 ＋ アルバイト27名' },
+          { label: '事業内容', value: 'モバイルイベント企画・運営・派遣' },
+        ].map((item, i) => (
+          <>
+            <div class={`bg-blue-600 text-white text-xs font-bold px-4 py-4 flex items-center border-b border-blue-500 ${i === 4 ? 'border-b-0' : ''}`}>
+              {item.label}
+            </div>
+            <div class={`px-5 py-4 text-sm text-gray-300 whitespace-pre-line border-b border-white/10 ${i % 2 === 0 ? 'bg-white/5' : 'bg-white/[0.02]'} ${i === 4 ? 'border-b-0' : ''}`}>
+              {item.value}
+            </div>
+          </>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- バリュー -->
+<section class="py-24 px-6 bg-white">
+  <div class="max-w-4xl mx-auto">
+    <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-4 text-center">Values</p>
+    <h2 class="text-3xl font-black text-center mb-12">大切にしている価値観</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      {[
+        {
+          svg: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+          iconBg: 'bg-blue-600',
+          title: 'Challenge',
+          label: '挑戦',
+          body: '現状に満足せず、常に上を目指す。失敗を恐れず、まず動く。その繰り返しが成長をつくる。',
+          bg: 'bg-blue-50',
+          hover: 'bg-blue-600',
+        },
+        {
+          svg: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z',
+          iconBg: 'bg-indigo-600',
+          title: 'Teamwork',
+          label: 'チームワーク',
+          body: '隣の仲間を全力で思いやる。一人の成功よりチームの成功を喜べる文化を大切にしている。',
+          bg: 'bg-indigo-50',
+          hover: 'bg-indigo-600',
+        },
+        {
+          svg: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+          iconBg: 'bg-purple-600',
+          title: 'Growth',
+          label: '成長',
+          body: '入社後の育成に本気で向き合う。スタッフ全員が「なりたい自分」に近づける環境をつくる。',
+          bg: 'bg-purple-50',
+          hover: 'bg-purple-600',
+        },
+      ].map((v) => (
+        <div class={`group relative overflow-hidden rounded-2xl ${v.bg} p-8 text-center cursor-default h-64 flex flex-col items-center justify-center`}>
+          <div class={`w-16 h-16 ${v.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:-translate-y-1`}>
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={v.svg} />
+            </svg>
+          </div>
+          <p class="text-blue-600 text-xs font-bold tracking-widest uppercase mb-1">{v.title}</p>
+          <h3 class="text-xl font-black">{v.label}</h3>
+          <div class={`absolute inset-0 ${v.hover} text-white flex flex-col items-center justify-center p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-2xl`}>
+            <h3 class="text-lg font-bold mb-4">{v.label}</h3>
+            <p class="text-sm text-white/80 leading-relaxed">{v.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="relative py-28 px-6 overflow-hidden text-center">
+  <div class="hero-bg absolute inset-0"></div>
+  <div class="absolute inset-0 bg-black/30"></div>
+  <div class="relative z-10">
+    <p class="text-blue-300 font-bold tracking-widest text-xs uppercase mb-6">Join Us</p>
+    <h2 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
+      このチームで、挑戦してみませんか？
+    </h2>
+    <p class="text-blue-100/80 text-lg mb-12 max-w-xl mx-auto">
+      ミッションに共感したなら、まず話を聞きに来てください。
+    </p>
+    <a href="/recruit"
+      class="inline-block bg-white text-blue-900 font-black text-xl px-14 py-5 rounded-full hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] hover:scale-105 transition-all duration-300">
+      エントリーしてみる →
+    </a>
+  </div>
+</section>
+
+</Layout>

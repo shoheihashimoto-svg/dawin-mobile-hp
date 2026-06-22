@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="CONTACT">
+
+  <section class="py-24 px-6 bg-gray-50 min-h-screen">
+    <div class="max-w-2xl mx-auto">
+      <p class="text-blue-600 font-medium text-center text-sm tracking-widest uppercase mb-4">Contact Us</p>
+      <h1 class="text-3xl md:text-4xl font-black text-center mb-4">お問い合わせ</h1>
+      <p class="text-gray-500 text-center mb-12">採用以外のご質問・ご相談もお気軽にどうぞ。</p>
+
+      <form class="bg-white rounded-2xl shadow-sm p-8 space-y-6">
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-2">お名前 <span class="text-red-500">*</span></label>
+          <input type="text" required placeholder="橋本 章平"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
+          <input type="email" required placeholder="example@email.com"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-2">お問い合わせ種別</label>
+          <select class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition bg-white">
+            <option>採用について</option>
+            <option>事業・サービスについて</option>
+            <option>取材・メディア</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-2">メッセージ <span class="text-red-500">*</span></label>
+          <textarea required rows="5" placeholder="お問い合わせ内容をご記入ください"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"></textarea>
+        </div>
+        <button type="submit"
+          class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-colors text-sm">
+          送信する →
+        </button>
+        <p class="text-xs text-gray-400 text-center">
+          いただいた内容は2営業日以内にご返信いたします。
+        </p>
+      </form>
+
+      <div class="mt-10 text-center text-sm text-gray-500">
+        <p>採用エントリーはこちら →</p>
+        <a href="/recruit" class="inline-block mt-2 text-blue-600 font-bold hover:underline">採用情報ページへ</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

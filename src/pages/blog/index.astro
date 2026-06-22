@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const posts = await Astro.glob('./*.md');
+const sorted = posts.sort((a, b) =>
+  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+);
+---
+<Layout title="BLOG">
+
+<style>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+  }
+</style>
+
+<!-- Hero -->
+<section class="hero-bg relative py-32 px-6 text-white text-center overflow-hidden">
+  <div class="absolute inset-0 opacity-5"
+    style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <p class="text-blue-300 font-bold tracking-[0.3em] text-xs uppercase mb-6">Blog</p>
+    <h1 class="text-4xl md:text-6xl font-black mb-6">部長ブログ</h1>
+    <p class="text-blue-100/80 text-lg">現場のリアル、チームのこと、仕事への想いを発信しています。</p>
+  </div>
+</section>
+
+<!-- 記事一覧 -->
+<section class="py-20 px-6 bg-gray-950 text-white min-h-[50vh]">
+  <div class="max-w-4xl mx-auto">
+    {sorted.length === 0 ? (
+      <p class="text-center text-gray-500">記事を準備中です。</p>
+    ) : (
+      <div class="space-y-6">
+        {sorted.map((post) => {
+          const { title, date, description, category = '現場から' } = post.frontmatter;
+          const formatted = new Date(date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+          const slug = post.url;
+          return (
+            <a href={slug} class="group block bg-white/5 hover:bg-white/10 rounded-2xl p-6 md:p-8 transition-all duration-300 hover:scale-[1.01]">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">{category}</span>
+                <span class="text-gray-500 text-xs">{formatted}</span>
+              </div>
+              <h2 class="text-xl font-black mb-2 group-hover:text-blue-400 transition-colors">{title}</h2>
+              <p class="text-gray-400 text-sm leading-relaxed">{description}</p>
+              <p class="text-blue-400 text-sm font-bold mt-4 group-hover:underline">続きを読む →</p>
+            </a>
+          );
+        })}
+      </div>
+    )}
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-16 px-6 bg-blue-600 text-white text-center">
+  <h2 class="text-2xl font-black mb-3">ブログを読んで、気になりましたか？</h2>
+  <p class="text-blue-100 mb-6 text-sm">部長が本音で語る職場に、あなたも飛び込んでみませんか。</p>
+  <a href="/recruit" class="inline-block bg-white text-blue-600 font-black px-10 py-3 rounded-full hover:bg-blue-50 transition-all duration-300">
+    エントリーしてみる →
+  </a>
+</section>
+
+</Layout>

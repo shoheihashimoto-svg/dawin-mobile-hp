@@ -1,0 +1,254 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="HOME">
+
+<style>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .gradient-text {
+    background: linear-gradient(90deg, #60a5fa, #a78bfa, #60a5fa);
+    background-size: 200% auto;
+    animation: gradientShift 3s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+  }
+  .fade-up { animation: fadeUp 0.8s ease forwards; }
+  .fade-up-1 { animation-delay: 0.1s; opacity: 0; }
+  .fade-up-2 { animation-delay: 0.3s; opacity: 0; }
+  .fade-up-3 { animation-delay: 0.5s; opacity: 0; }
+  .fade-up-4 { animation-delay: 0.7s; opacity: 0; }
+  .ticker-track { animation: ticker 20s linear infinite; }
+</style>
+
+<!-- Hero -->
+<section class="hero-bg relative min-h-screen flex items-center justify-center text-white overflow-hidden">
+
+  <!-- 背景の装飾 -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- グリッド線の背景 -->
+  <div class="absolute inset-0 opacity-5"
+    style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+
+  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+    <p class="fade-up fade-up-1 text-blue-300 font-bold tracking-[0.3em] text-xs uppercase mb-8">
+      DAWIN MOBILE DIVISION
+    </p>
+
+    <h1 class="fade-up fade-up-2 font-black leading-[1.1] mb-8">
+      <span class="block text-5xl md:text-8xl mb-2">自ら掴んだ</span>
+      <span class="block text-5xl md:text-8xl mb-2">チャンスが、</span>
+      <span class="gradient-text block text-4xl md:text-6xl">
+        自分を変える。
+      </span>
+    </h1>
+
+    <p class="fade-up fade-up-3 text-blue-100/80 text-base md:text-xl leading-relaxed mb-12 max-w-xl mx-auto">
+      挑戦を楽しみ、仲間を大切にする人たちが集まるチーム。<br />
+      あなたの「成長したい」を、ここで形にしませんか。
+    </p>
+
+    <div class="fade-up fade-up-4 flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/recruit"
+        class="group relative overflow-hidden bg-white text-blue-900 font-black px-10 py-4 rounded-full text-lg transition-all duration-300 hover:shadow-[0_0_40px_rgba(96,165,250,0.5)]">
+        <span class="relative z-10">採用情報を見る →</span>
+        <div class="absolute inset-0 bg-blue-50 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+      </a>
+      <a href="/interview"
+        class="border-2 border-white/40 text-white font-bold px-10 py-4 rounded-full text-lg hover:bg-white/10 hover:border-white transition-all duration-300">
+        社員の声を聞く
+      </a>
+    </div>
+  </div>
+
+  <!-- スクロール -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-blue-300/60">
+    <span class="text-xs tracking-widest">SCROLL</span>
+    <div class="w-px h-12 bg-gradient-to-b from-blue-300/60 to-transparent"></div>
+  </div>
+</section>
+
+<!-- 数字で見るダウイン -->
+<section class="bg-gray-950 text-white py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <p class="text-blue-400 font-bold text-center text-xs tracking-widest uppercase mb-12">DAWIN Numbers</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div class="group rounded-2xl p-8 hover:bg-blue-600/20 transition-all duration-300">
+        <div class="h-32 flex flex-col items-center justify-center text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
+          <span class="text-blue-400">26</span><span class="text-2xl text-white font-bold">歳</span>
+        </div>
+        <div class="w-8 h-px bg-blue-500 mx-auto mb-3"></div>
+        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">平均年齢</p>
+      </div>
+      <div class="group rounded-2xl p-8 hover:bg-blue-600/20 transition-all duration-300">
+        <div class="h-32 flex flex-col items-center justify-center text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
+          No.<span class="text-blue-400">1</span>
+        </div>
+        <div class="w-8 h-px bg-blue-500 mx-auto mb-3"></div>
+        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">全国イベント実績</p>
+      </div>
+      <div class="group rounded-2xl p-8 hover:bg-blue-600/20 transition-all duration-300">
+        <div class="h-32 flex flex-col items-center justify-center text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
+          LIMIT<br /><span class="text-blue-400">LESS</span>
+        </div>
+        <div class="w-8 h-px bg-blue-500 mx-auto mb-3"></div>
+        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">広がる可能性</p>
+      </div>
+      <div class="group rounded-2xl p-8 hover:bg-blue-600/20 transition-all duration-300">
+        <div class="h-32 flex flex-col items-center justify-center text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
+          ONLY <span class="text-blue-400">ONE</span>
+        </div>
+        <div class="w-8 h-px bg-blue-500 mx-auto mb-3"></div>
+        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">唯一無二の環境</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ティッカー -->
+<div class="bg-blue-600 py-4 overflow-hidden whitespace-nowrap">
+  <div class="ticker-track inline-flex gap-12 text-white font-bold text-sm tracking-widest">
+    {Array(2).fill(['CHALLENGE', 'GROWTH', 'TEAMWORK', 'PASSION', 'CAREER', 'MOTIVATION', 'MOBILE', 'NOW HIRING']).flat().map((w) => (
+      <span>✦ {w}</span>
+    ))}
+  </div>
+</div>
+
+<!-- 3つの強み -->
+<section class="py-24 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <p class="text-blue-600 font-bold text-center text-xs tracking-widest uppercase mb-4">Why DAWIN</p>
+    <h2 class="text-3xl md:text-4xl font-black text-center mb-16">ダウインで働く3つの理由</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="group relative overflow-hidden rounded-2xl bg-blue-50 p-8 text-center cursor-default h-64 flex flex-col items-center justify-center">
+        <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:-translate-y-1">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold">挑戦が評価される</h3>
+        <div class="absolute inset-0 bg-blue-600 text-white flex flex-col items-center justify-center p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-2xl">
+          <h3 class="text-lg font-bold mb-4">挑戦が評価される</h3>
+          <ul class="text-sm text-blue-100 space-y-2 text-left">
+            <li class="font-semibold">✓ 年齢・経歴より「今」の行動を評価</li>
+            <li class="font-semibold">✓ 頑張りが給与に直結するインセンティブ制度</li>
+            <li class="font-semibold">✓ 昇格の基準が明確で、努力が報われる</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="group relative overflow-hidden rounded-2xl bg-indigo-50 p-8 text-center cursor-default h-64 flex flex-col items-center justify-center">
+        <div class="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:-translate-y-1">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold">仲間との絆が深い</h3>
+        <div class="absolute inset-0 bg-indigo-600 text-white flex flex-col items-center justify-center p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-2xl">
+          <h3 class="text-lg font-bold mb-4">仲間との絆が深い</h3>
+          <ul class="text-sm text-indigo-100 space-y-2 text-left">
+            <li class="font-semibold">✓ 困ったときに本音で話せる風通しの良さ</li>
+            <li class="font-semibold">✓ 結婚・育児後も安心して続けられる環境</li>
+            <li class="font-semibold">✓ チームで助け合う文化が根付いている</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="group relative overflow-hidden rounded-2xl bg-purple-50 p-8 text-center cursor-default h-64 flex flex-col items-center justify-center">
+        <div class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:-translate-y-1">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold">モバイル業界の最前線</h3>
+        <div class="absolute inset-0 bg-purple-600 text-white flex flex-col items-center justify-center p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-2xl">
+          <h3 class="text-lg font-bold mb-4">モバイル業界の最前線</h3>
+          <ul class="text-sm text-purple-100 space-y-2 text-left">
+            <li class="font-semibold">✓ 全国の商業施設でイベントを展開</li>
+            <li class="font-semibold">✓ 毎日、新しいお客様との出会いがある</li>
+            <li class="font-semibold">✓ 成果がその場で見えるやりがいのある仕事</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- インタビュー予告 -->
+<section class="py-24 px-6 bg-gray-950 text-white">
+  <div class="max-w-6xl mx-auto">
+    <p class="text-blue-400 font-bold text-center text-xs tracking-widest uppercase mb-4">Interview</p>
+    <h2 class="text-3xl md:text-4xl font-black text-center mb-4">働く仲間の声</h2>
+    <p class="text-gray-400 text-center mb-16">実際に働くスタッフが、リアルな言葉で語ります。</p>
+    <div class="grid md:grid-cols-3 gap-6">
+      {[
+        { name: '橋本 章平', role: 'モバイル事業部長', tag: '挑戦×成長' },
+        { name: '木原 裕樹', role: '統括マネージャー', tag: 'チームワーク' },
+        { name: '中村 翔', role: 'マネージャー', tag: 'やりがい' },
+      ].map((p) => (
+        <a href="/interview"
+          class="group block bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-blue-500 hover:bg-gray-800 transition-all duration-300">
+          <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full mb-4 flex items-center justify-center text-xl font-black">
+            {p.name[0]}
+          </div>
+          <span class="text-xs font-bold text-blue-400 bg-blue-950 px-3 py-1 rounded-full">{p.tag}</span>
+          <h3 class="font-bold text-lg mt-3 mb-1">{p.name}</h3>
+          <p class="text-sm text-gray-400 mb-4">{p.role}</p>
+          <p class="text-sm text-blue-400 font-bold group-hover:underline">インタビューを読む →</p>
+        </a>
+      ))}
+    </div>
+    <div class="text-center mt-10">
+      <a href="/interview"
+        class="inline-block border-2 border-blue-500 text-blue-400 font-bold px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300">
+        全員のインタビューを見る
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="relative py-28 px-6 overflow-hidden text-center">
+  <div class="hero-bg absolute inset-0"></div>
+  <div class="absolute inset-0 bg-black/30"></div>
+  <div class="relative z-10">
+    <p class="text-blue-300 font-bold tracking-widest text-xs uppercase mb-6">Join Us</p>
+    <h2 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
+      あなたの挑戦を、<br />ここから始めませんか。
+    </h2>
+    <p class="text-blue-100/80 text-lg mb-12 max-w-xl mx-auto">
+      隣の仲間を全力で思いやる環境で、<br />新しい自分にアップデートしよう。
+    </p>
+    <a href="/recruit"
+      class="inline-block bg-white text-blue-900 font-black text-xl px-14 py-5 rounded-full hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] hover:scale-105 transition-all duration-300">
+      採用エントリーはこちら →
+    </a>
+  </div>
+</section>
+
+</Layout>

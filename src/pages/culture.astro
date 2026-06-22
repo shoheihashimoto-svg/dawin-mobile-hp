@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="CULTURE">
+
+<style>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+  }
+  .ticker-track { animation: ticker 20s linear infinite; }
+</style>
+
+<!-- Hero -->
+<section class="hero-bg relative py-32 px-6 text-white text-center overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl"></div>
+  </div>
+  <div class="absolute inset-0 opacity-5"
+    style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <p class="text-blue-300 font-bold tracking-[0.3em] text-xs uppercase mb-6">Culture</p>
+    <h1 class="text-4xl md:text-6xl font-black mb-6">チームの文化</h1>
+    <p class="text-blue-100/80 text-lg">仲間と笑い、挑戦し、成長する。<br />ダウインの「らしさ」を、のぞいてみてください。</p>
+  </div>
+</section>
+
+<!-- ティッカー -->
+<div class="bg-blue-600 py-4 overflow-hidden whitespace-nowrap">
+  <div class="ticker-track inline-flex gap-12 text-white font-bold text-sm tracking-widest">
+    {Array(2).fill(['CHALLENGE', 'GROWTH', 'TEAMWORK', 'PASSION', 'CAREER', 'MOTIVATION', 'MOBILE', 'NOW HIRING']).flat().map((w) => (
+      <span>✦ {w}</span>
+    ))}
+  </div>
+</div>
+
+<!-- Instagram -->
+<section class="py-24 px-6 bg-gray-950 text-white">
+  <div class="max-w-5xl mx-auto">
+    <p class="text-blue-400 font-bold text-xs tracking-widest uppercase mb-4 text-center">Instagram</p>
+    <h2 class="text-3xl md:text-4xl font-black text-center mb-4">現場の空気感、届けます。</h2>
+    <p class="text-gray-400 text-center text-sm mb-12">スタッフのリアルな日常・イベントの様子をInstagramで発信中。</p>
+
+    <!-- Instagram埋め込み -->
+    <div class="mb-10">
+      <behold-widget feed-id="TBYqgD593bKfOyTDZrL2"></behold-widget>
+      <script>
+        (() => {
+          const d=document,s=d.createElement("script");s.type="module";
+          s.src="https://w.behold.so/widget.js";d.head.append(s);
+        })();
+      </script>
+    </div>
+
+    <div class="text-center">
+      <a href="https://www.instagram.com/dawin__mobile/" target="_blank" rel="noopener noreferrer"
+        class="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 text-white font-black px-10 py-4 rounded-full hover:scale-105 hover:shadow-[0_0_30px_rgba(236,72,153,0.4)] transition-all duration-300">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+        </svg>
+        @dawin__mobile をフォローする
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 1日のスケジュール -->
+<section class="py-24 px-6 bg-white">
+  <div class="max-w-3xl mx-auto">
+    <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-4 text-center">A Day in Life</p>
+    <h2 class="text-3xl font-black text-center mb-12">スタッフの1日</h2>
+    <div class="relative">
+      <div class="absolute left-16 top-0 bottom-0 w-px bg-blue-100"></div>
+      {[
+        { time: '08:30', label: '出発・移動', body: '会場への移動。車や電車で現場へ向かいます。' },
+        { time: '09:30', label: '会場設営', body: 'ブースのセッティング、機材の確認、当日の打ち合わせ。' },
+        { time: '10:00', label: 'イベント開始', body: 'お客様への接客・案内・提案がスタート。チームで連携しながら動きます。' },
+        { time: '13:00', label: '休憩・昼食', body: 'チームで交代しながら休憩。仲間との会話もリフレッシュの時間。' },
+        { time: '18:00', label: 'イベント終了・片付け', body: '撤収・清算・日報作成。チームで振り返りも行います。' },
+        { time: '19:00', label: '帰宅', body: '直帰OK。オン・オフの切り替えがしやすい環境です。' },
+      ].map((s) => (
+        <div class="flex gap-6 mb-8 relative">
+          <div class="w-16 flex-shrink-0 text-right">
+            <span class="text-blue-600 font-black text-sm">{s.time}</span>
+          </div>
+          <div class="relative">
+            <div class="absolute -left-[1.65rem] top-1 w-3 h-3 bg-blue-600 rounded-full border-2 border-white"></div>
+          </div>
+          <div class="flex-1 bg-gray-50 rounded-xl px-5 py-4 -mt-1">
+            <p class="font-black text-gray-900 mb-1">{s.label}</p>
+            <p class="text-sm text-gray-500 leading-relaxed">{s.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- チームの雰囲気 -->
+<section class="py-24 px-6 bg-gray-950 text-white">
+  <div class="max-w-4xl mx-auto">
+    <p class="text-blue-400 font-bold text-xs tracking-widest uppercase mb-4 text-center">Team Vibe</p>
+    <h2 class="text-3xl font-black text-center mb-12">ダウインらしさ</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      {[
+        {
+          svg: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z',
+          title: '仲間との打ち上げ・交流',
+          body: 'イベント後の打ち上げや食事会など、仲間との時間を大切にしています。',
+        },
+        {
+          svg: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+          title: '成果が見える・すぐ返ってくる',
+          body: '頑張りがその日の数字に出る。達成感をリアルタイムで感じられる仕事です。',
+        },
+        {
+          svg: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+          title: '家庭を持っても続けられる',
+          body: '結婚・育児後も活躍するスタッフが多数。柔軟な働き方を応援しています。',
+        },
+        {
+          svg: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+          title: '未経験でもすぐ活躍できる',
+          body: '丁寧な研修と先輩サポートで、入社後も安心してスタートできます。',
+        },
+      ].map((v) => (
+        <div class="bg-white/5 rounded-2xl p-6 flex gap-4 items-start hover:bg-blue-600/20 transition-all duration-300">
+          <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={v.svg} />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-black text-lg mb-2">{v.title}</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">{v.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="relative py-28 px-6 overflow-hidden text-center">
+  <div class="hero-bg absolute inset-0"></div>
+  <div class="absolute inset-0 bg-black/30"></div>
+  <div class="relative z-10">
+    <p class="text-blue-300 font-bold tracking-widest text-xs uppercase mb-6">Join Us</p>
+    <h2 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
+      この雰囲気、好きだと思ったら。
+    </h2>
+    <p class="text-blue-100/80 text-lg mb-12 max-w-xl mx-auto">
+      まずはエントリーしてみてください。話だけでも大歓迎です。
+    </p>
+    <a href="/recruit"
+      class="inline-block bg-white text-blue-900 font-black text-xl px-14 py-5 rounded-full hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] hover:scale-105 transition-all duration-300">
+      気軽にエントリーする →
+    </a>
+  </div>
+</section>
+
+</Layout>
