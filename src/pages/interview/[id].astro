@@ -1,0 +1,220 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const staffData = {
+  inataba: {
+    name: '犬束 誠',
+    role: 'エリアマネージャー（九州）',
+    color: 'from-indigo-900 to-indigo-700',
+    quote: 'チームがあるから、もっと頑張れる。',
+    qa: [
+      {
+        q: 'ダウインに入ったきっかけは？',
+        a: '最初は「とりあえず働ける場所を」と思って入りました。でも実際に働き始めたら、チームの雰囲気が想像以上によくて。気づいたら「もっとここで頑張りたい」に変わっていました。',
+      },
+      {
+        q: '仕事でいちばん嬉しかった瞬間は？',
+        a: 'イベントが終わったあと、チームみんなで「お疲れ様！」って言い合う瞬間が好きです。しんどいこともあるけど、その一言で全部報われる気がします。',
+      },
+      {
+        q: 'これから入る人に伝えたいことは？',
+        a: 'とにかく仲間がいい。一人で抱え込まなくていい環境なので、未経験でも安心してください。',
+      },
+    ],
+  },
+  kihara: {
+    name: '木原 裕樹',
+    role: 'スタッフ',
+    color: 'from-blue-900 to-cyan-700',
+    quote: '未経験でも、ここなら成長できると思った。',
+    qa: [
+      {
+        q: '入社前、不安はありましたか？',
+        a: '正直、めちゃくちゃありました。接客もイベントの仕事も全くの未経験で。でも面接のときに「失敗していい、覚えていけばいい」と言われて、少し気が楽になりました。',
+      },
+      {
+        q: '入って変わったことは？',
+        a: '自分から動けるようになりました。前は指示待ちのタイプだったんですが、チームを見ていたら自然と「自分もやらなきゃ」って気持ちになってきて。',
+      },
+      {
+        q: '今後の目標は？',
+        a: 'まずは後輩に頼られる存在になりたい。自分がそうしてもらったように、次は自分が誰かの支えになれたらと思っています。',
+      },
+    ],
+  },
+  nakamura: {
+    name: '中村 翔',
+    role: 'スタッフ',
+    color: 'from-slate-800 to-blue-800',
+    quote: '結果を出したとき、仲間が一番に喜んでくれる。',
+    qa: [
+      {
+        q: 'この仕事の醍醐味を一言で言うと？',
+        a: '「数字が出た瞬間」ですかね。目標を達成したときに、自分より先に仲間が喜んでくれる。あの感覚がクセになって、もっと頑張ろうってなります。',
+      },
+      {
+        q: '大変だと感じることは？',
+        a: 'お客さんによって反応が全然違うので、最初はどう接すればいいか迷いました。でも回数を重ねるうちに「この人にはこうアプローチしよう」って読めるようになってきました。',
+      },
+      {
+        q: 'チームの雰囲気はどうですか？',
+        a: '上下関係がきつくない。先輩もフラットに話してくれるので、言いたいことが言いやすい環境だと思います。',
+      },
+    ],
+  },
+  takahashi: {
+    name: '高橋 理佳',
+    role: 'スタッフ',
+    color: 'from-blue-800 to-indigo-900',
+    quote: 'ここの空気感が、ずっと続けられる理由。',
+    qa: [
+      {
+        q: '長く続けられる理由は何だと思いますか？',
+        a: 'やっぱりここの空気感ですね。ギスギスしていないというか、みんながお互いを気にかけながら動いている。それが毎日来やすい理由になっています。',
+      },
+      {
+        q: '印象に残っているエピソードは？',
+        a: '体調が悪かったとき、周りが自然とカバーしてくれたことがありました。「助けてって言わなくてもいい」環境って、なかなかないと思うんです。',
+      },
+      {
+        q: 'どんな人に向いていると思いますか？',
+        a: '人と話すのが嫌いじゃない人。あとは「一人じゃなく仲間と頑張りたい」という気持ちがある人。そういう人は絶対に合うと思います。',
+      },
+    ],
+  },
+  mori: {
+    name: '森 佳奈',
+    role: 'スタッフ',
+    color: 'from-violet-900 to-purple-800',
+    quote: '働くって、こんなに楽しいんだって気づかせてもらった。',
+    qa: [
+      {
+        q: 'ここで働いてみてどうでしたか？',
+        a: '最初は「バイトだし」くらいの気持ちだったんですが、気づいたら毎日来るのが楽しみになっていました。仕事ってこんなに楽しくなるんだって、初めて知った感じです。',
+      },
+      {
+        q: '職場の雰囲気は？',
+        a: '明るくて話しやすいです。女性も多いのでそこも安心でした。困ったことがあると誰かがすぐ声をかけてくれるので、一人で抱え込まなくてもいい環境だと思います。',
+      },
+      {
+        q: '働いて変わったことは？',
+        a: '自信がついたと思います。お客さんと話すのが苦手だったんですが、数をこなすうちに「自分でもできる」って思えるようになりました。',
+      },
+    ],
+  },
+  oba: {
+    name: '大塲 塁',
+    role: 'スタッフ',
+    color: 'from-cyan-900 to-blue-800',
+    quote: 'イベントの達成感は、何にも代えられない。',
+    qa: [
+      {
+        q: 'イベントの仕事の魅力は？',
+        a: '準備〜当日〜終了まで、一気にやりきる感覚が好きです。特に終わった後のあの達成感は他の仕事では味わえないと思っています。',
+      },
+      {
+        q: 'きつかった経験はありますか？',
+        a: '最初はトークがうまくいかなくて落ち込みました。でも先輩に「失敗した分だけ上手くなる」と言われてから、むしろ積極的にチャレンジするようになりました。',
+      },
+      {
+        q: '仕事を通じて成長したと感じることは？',
+        a: '人前で話すことへの恐怖がなくなりました。今では知らない人と話すのが面白いとさえ思えるようになっています。',
+      },
+    ],
+  },
+  takata: {
+    name: '高田 亜里沙',
+    role: 'スタッフ',
+    color: 'from-indigo-800 to-blue-900',
+    quote: '家庭をもっても続けられる環境がある。',
+    qa: [
+      {
+        q: '家庭と仕事の両立はできていますか？',
+        a: 'できています。シフトの融通が利くので、子どもの行事やイベントに合わせて調整しやすいです。「家庭があるから無理」とならない環境がありがたいです。',
+      },
+      {
+        q: '入社前と後でギャップはありましたか？',
+        a: '思っていたより動きやすかったです。家庭持ちは肩身が狭いかなと思っていたんですが、むしろ「無理しなくていい」と言ってくれる雰囲気があって。',
+      },
+      {
+        q: '同じ立場の方へ一言。',
+        a: '子育て中でも、自分の時間を持つことは大事だと思っています。ここはそれを後押ししてくれる場所です。',
+      },
+    ],
+  },
+};
+
+export function getStaticPaths() {
+  return Object.keys(staffData).map((id) => ({ params: { id } }));
+}
+
+const { id } = Astro.params;
+const staff = staffData[id];
+---
+<Layout title={`${staff.name} インタビュー`}>
+
+<style>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+  }
+</style>
+
+<!-- Hero -->
+<section class="hero-bg relative py-28 px-6 text-white overflow-hidden">
+  <div class="absolute inset-0 opacity-5"
+    style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <a href="/interview" class="text-blue-300 text-xs font-bold tracking-widest uppercase hover:text-white transition-colors">← INTERVIEW 一覧に戻る</a>
+    <div class="mt-6 flex items-center gap-5">
+      <div class={`w-20 h-20 bg-gradient-to-br ${staff.color} rounded-full flex items-center justify-center text-3xl font-black flex-shrink-0`}>
+        {staff.name.charAt(0)}
+      </div>
+      <div>
+        <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">スタッフインタビュー</span>
+        <h1 class="text-3xl md:text-4xl font-black mt-2">{staff.name}</h1>
+        <p class="text-blue-200 text-sm mt-1">{staff.role}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- インタビュー本文 -->
+<article class="bg-white py-16 px-6">
+  <div class="max-w-3xl mx-auto space-y-12">
+
+    {staff.qa.map((item, i) => (
+      <div class={i % 2 === 0 ? 'bg-blue-50 rounded-2xl p-8' : ''}>
+        <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q{i + 1}</p>
+        <p class="text-xl font-black text-gray-900 mb-4">{item.q}</p>
+        <p class="text-gray-700 leading-relaxed">{item.a}</p>
+      </div>
+    ))}
+
+    <!-- 一言メッセージ -->
+    <div class="border-l-4 border-blue-600 pl-6 py-2">
+      <p class="text-2xl font-black text-gray-900 leading-relaxed">
+        「<span class="text-blue-600">{staff.quote}</span>」
+      </p>
+      <p class="text-gray-500 text-sm mt-3">{staff.name} / {staff.role}</p>
+    </div>
+
+    <div class="pt-4 flex flex-col sm:flex-row gap-4">
+      <a href="/interview" class="inline-block border-2 border-blue-600 text-blue-600 font-bold px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 text-center">
+        ← インタビュー一覧
+      </a>
+      <a href="/recruit" class="inline-block bg-blue-600 text-white font-black px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 text-center">
+        採用エントリーはこちら →
+      </a>
+    </div>
+  </div>
+</article>
+
+</Layout>
