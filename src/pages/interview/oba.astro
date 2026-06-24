@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="大塲 塁 インタビュー">
+
+<style>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+  }
+</style>
+
+<!-- Hero -->
+<section class="hero-bg relative py-28 px-6 text-white overflow-hidden">
+  <div class="absolute inset-0 opacity-5"
+    style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <a href="/interview" class="text-blue-300 text-xs font-bold tracking-widest uppercase hover:text-white transition-colors">← INTERVIEW 一覧に戻る</a>
+    <div class="mt-6 flex items-center gap-5">
+      <div class="w-20 h-20 rounded-full bg-white/10 flex-shrink-0 border-2 border-blue-400 flex items-center justify-center">
+        <span class="text-3xl text-white/60 font-black">大</span>
+      </div>
+      <div>
+        <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">やりがい×成長</span>
+        <h1 class="text-3xl md:text-4xl font-black mt-2">大塲 塁</h1>
+        <p class="text-blue-200 text-sm mt-1">モバイルイベントスタッフ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- インタビュー本文 -->
+<article class="bg-white py-16 px-6">
+  <div class="max-w-3xl mx-auto space-y-12">
+
+    <div class="bg-blue-50 rounded-2xl p-8">
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q1</p>
+      <p class="text-xl font-black text-gray-900 mb-4">今の仕事を一言で表すと？</p>
+      <p class="text-gray-700 leading-relaxed">
+        「やりがい」ですね。数字を追いかける仕事ではあるんですが、それだけじゃなくて。お客様に感謝していただいたとき、代理店の方に「ありがとう」と言っていただいたとき、あの瞬間のために頑張れているんだと思います。やっていてよかったと思える瞬間が積み重なって、それがこの仕事を続けられる理由になっています。
+      </p>
+    </div>
+
+    <div>
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q2</p>
+      <p class="text-xl font-black text-gray-900 mb-4">チームの雰囲気を一言で言うと？</p>
+      <p class="text-gray-700 leading-relaxed">
+        本当に「仲がいい」です。いい意味でゆるくて、それでいてやるときはやる。飲み会とかなくても自然と仲良くなれる感じで、職場でこんなに人との繋がりができるとは正直思っていなかったですね。代理店の方ともお客様とも、たくさんの出会いがあって、それが仕事を超えた財産になっています。
+      </p>
+    </div>
+
+    <div class="bg-gray-50 rounded-2xl p-8">
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q3 / Q4</p>
+      <p class="text-xl font-black text-gray-900 mb-4">入社して変わったこと、身についたスキルは？</p>
+      <p class="text-gray-700 leading-relaxed">
+        「責任感」と「負けない気持ち」が一番変わったと思います。最初は結果が出なくて正直きつかったんですが、諦めなかったことで少しずつ変わっていった。その経験が「自分はやれる」という自信に繋がっています。<br /><br />
+        スキル面では「ヒアリング力」と「提案力」が大きく伸びました。お客様が何を求めているかを引き出して、それに合った提案をする。この仕事を通じて、人と話す対人スキル全体が確実に上がったと実感しています。
+      </p>
+    </div>
+
+    <div>
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q5</p>
+      <p class="text-xl font-black text-gray-900 mb-4">一番嬉しかった出来事を教えてください。</p>
+      <p class="text-gray-700 leading-relaxed">
+        お客様に「ありがとう」と言っていただいたことと、代理店の方に感謝していただいたことが重なったときが一番嬉しかったです。自分の仕事が、目の前のお客様だけじゃなくて、一緒に働く代理店の方にも届いているんだと感じた瞬間で。「この仕事をやっていてよかった」と素直に思えました。
+      </p>
+    </div>
+
+    <div class="bg-blue-50 rounded-2xl p-8">
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q6</p>
+      <p class="text-xl font-black text-gray-900 mb-4">しんどかった経験と、どう乗り越えましたか？</p>
+      <p class="text-gray-700 leading-relaxed">
+        思うように数字が出ず苦しい時期がありました。でも、課題を一つずつ丁寧に改善し続けた結果、徐々に成果を出せるようになりました。諦めないって、言葉では簡単ですけど、実際にやり続けるのは本当にきつい。それでも続けられたことが、今の自分の一番の財産だと思っています。
+      </p>
+    </div>
+
+    <!-- プロフィール補足 -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      {[
+        { label: 'OFF', value: '奥さんと旅行' },
+        { label: 'HOBBY', value: 'スポーツ観戦' },
+        { label: 'WANT', value: '人と話すのが好きな人と働きたい' },
+      ].map((item) => (
+        <div class="bg-gray-950 rounded-2xl p-5 text-white text-center">
+          <p class="text-blue-400 text-xs font-bold tracking-widest mb-2">{item.label}</p>
+          <p class="text-sm font-bold leading-snug">{item.value}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- 一言メッセージ -->
+    <div class="border-l-4 border-blue-600 pl-6 py-2">
+      <p class="text-2xl font-black text-gray-900 leading-relaxed">
+        「自分を変えたい、挑戦したいと思っているなら、<br />
+        <span class="text-blue-600">ぜひここで挑戦してみてください。</span>」
+      </p>
+      <p class="text-gray-500 text-sm mt-3">大塲 塁 / モバイルイベントスタッフ</p>
+    </div>
+
+    <div class="pt-4 flex flex-col sm:flex-row gap-4">
+      <a href="/interview" class="inline-block border-2 border-blue-600 text-blue-600 font-bold px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 text-center">
+        ← インタビュー一覧
+      </a>
+      <a href="/recruit" class="inline-block bg-blue-600 text-white font-black px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 text-center">
+        採用エントリーはこちら →
+      </a>
+    </div>
+  </div>
+</article>
+
+</Layout>

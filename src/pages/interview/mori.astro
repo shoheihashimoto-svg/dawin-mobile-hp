@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="森 佳奈 インタビュー">
+
+<style>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+  }
+</style>
+
+<!-- Hero -->
+<section class="hero-bg relative py-28 px-6 text-white overflow-hidden">
+  <div class="absolute inset-0 opacity-5"
+    style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <a href="/interview" class="text-blue-300 text-xs font-bold tracking-widest uppercase hover:text-white transition-colors">← INTERVIEW 一覧に戻る</a>
+    <div class="mt-6 flex items-center gap-5">
+      <div class="w-20 h-20 rounded-full bg-white/10 flex-shrink-0 border-2 border-blue-400 flex items-center justify-center">
+        <span class="text-3xl text-white/60 font-black">森</span>
+      </div>
+      <div>
+        <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">仲間×自信</span>
+        <h1 class="text-3xl md:text-4xl font-black mt-2">森 佳奈</h1>
+        <p class="text-blue-200 text-sm mt-1">モバイルイベントスタッフ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- インタビュー本文 -->
+<article class="bg-white py-16 px-6">
+  <div class="max-w-3xl mx-auto space-y-12">
+
+    <div class="bg-blue-50 rounded-2xl p-8">
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q1</p>
+      <p class="text-xl font-black text-gray-900 mb-4">今の仕事を一言で表すと？</p>
+      <p class="text-gray-700 leading-relaxed">
+        「仲間」ですね。自分らしくいられる居場所があるって、こんなに大事なことなんだと、ここに来て初めて気づきました。失敗しても責められる空気がなくて、「一緒に考えよう」と言ってくれる人たちがいる。一緒にいる人たちのことが好きで、それが毎日頑張れる一番の理由です。
+      </p>
+    </div>
+
+    <div>
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q2</p>
+      <p class="text-xl font-black text-gray-900 mb-4">チームの雰囲気を一言で言うと？</p>
+      <p class="text-gray-700 leading-relaxed">
+        「アットホーム」です。自分に合ったやり方を一緒に考えてくれたり、前向きなアドバイスをくれる方々がたくさんいる。家にいるみたいな安心感というか、自分らしくいられる職場ってなかなかないと思います。何より、ここにいると「自分の居場所があるな」と感じられるのがいいんです。
+      </p>
+    </div>
+
+    <div class="bg-gray-50 rounded-2xl p-8">
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q3 / Q4</p>
+      <p class="text-xl font-black text-gray-900 mb-4">入社して変わったこと、身についたスキルは？</p>
+      <p class="text-gray-700 leading-relaxed">
+        「自信」が一番変わりました。もともと考えすぎる性格で、うまくいくかな？と不安になることが多かったんですが、上司がいつもモチベーションが上がるアドバイスをくれて、気づいたら前向きになれていた。<br /><br />
+        スキル面では「提案力」が伸びたと思います。お客様に何が合うかを考えて提案する経験が積み重なって、今は自分の言葉で伝えられるようになってきました。
+      </p>
+    </div>
+
+    <div>
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q5</p>
+      <p class="text-xl font-black text-gray-900 mb-4">一番嬉しかった出来事を教えてください。</p>
+      <p class="text-gray-700 leading-relaxed">
+        考えすぎる私に、上司がいつもモチベーションが上がるアドバイスをくれることが一番印象に残っています。「失敗してもいい、一緒に考えよう」と言い続けてもらえたことで、自分でも気づかないうちに前向きになれていた。そういう人たちが周りにいるって、本当にありがたいと思います。
+      </p>
+    </div>
+
+    <div class="bg-blue-50 rounded-2xl p-8">
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q6</p>
+      <p class="text-xl font-black text-gray-900 mb-4">しんどかった経験と、どう乗り越えましたか？</p>
+      <p class="text-gray-700 leading-relaxed">
+        しんどいときは、まず自分の気持ちを整理するようにしました。頭の中でぐるぐるしているより、声に出したり書き出したりして整理すると楽になれる。それでも解決しないときは誰かに相談する。ここはそれができる環境なので、一人で抱え込まなくていいんだと改めて思っています。
+      </p>
+    </div>
+
+    <!-- プロフィール補足 -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      {[
+        { label: 'OFF', value: '旦那さんとご飯屋さん巡り' },
+        { label: 'HOBBY', value: 'ドライブ・カラオケ・温泉' },
+        { label: 'WANT', value: '素直な人と一緒に働きたい' },
+      ].map((item) => (
+        <div class="bg-gray-950 rounded-2xl p-5 text-white text-center">
+          <p class="text-blue-400 text-xs font-bold tracking-widest mb-2">{item.label}</p>
+          <p class="text-sm font-bold leading-snug">{item.value}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- 一言メッセージ -->
+    <div class="border-l-4 border-blue-600 pl-6 py-2">
+      <p class="text-2xl font-black text-gray-900 leading-relaxed">
+        「<span class="text-blue-600">一緒に仕事もプライベートも充実させよう！</span>」
+      </p>
+      <p class="text-gray-500 text-sm mt-3">森 佳奈 / モバイルイベントスタッフ</p>
+    </div>
+
+    <div class="pt-4 flex flex-col sm:flex-row gap-4">
+      <a href="/interview" class="inline-block border-2 border-blue-600 text-blue-600 font-bold px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 text-center">
+        ← インタビュー一覧
+      </a>
+      <a href="/recruit" class="inline-block bg-blue-600 text-white font-black px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 text-center">
+        採用エントリーはこちら →
+      </a>
+    </div>
+  </div>
+</article>
+
+</Layout>

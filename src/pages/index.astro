@@ -207,15 +207,19 @@ import Layout from '../layouts/Layout.astro';
     <p class="text-gray-400 text-center mb-16">実際に働くスタッフが、リアルな言葉で語ります。</p>
     <div class="grid md:grid-cols-3 gap-6">
       {[
-        { name: '橋本 章平', role: 'モバイル事業部長', tag: '挑戦×成長' },
-        { name: '木原 裕樹', role: '統括マネージャー', tag: 'チームワーク' },
-        { name: '中村 翔', role: 'マネージャー', tag: 'やりがい' },
+        { name: '橋本 章平', role: 'モバイル事業部長', tag: '挑戦×成長', href: '/interview/hashimoto', photo: '/hashimoto.jpg' },
+        { name: '木原 裕樹', role: '統括マネージャー', tag: 'チームワーク', href: '/interview/kihara', photo: null },
+        { name: '中村 翔', role: 'スタッフ', tag: '仲間×自発性', href: '/interview/nakamura', photo: null },
       ].map((p) => (
-        <a href="/interview"
+        <a href={p.href}
           class="group block bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-blue-500 hover:bg-gray-800 transition-all duration-300">
-          <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full mb-4 flex items-center justify-center text-xl font-black">
-            {p.name[0]}
-          </div>
+          {p.photo ? (
+            <img src={p.photo} alt={p.name} class="w-14 h-14 rounded-full object-cover mb-4" style="object-position: 50% 30%;" />
+          ) : (
+            <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full mb-4 flex items-center justify-center text-xl font-black">
+              {p.name[0]}
+            </div>
+          )}
           <span class="text-xs font-bold text-blue-400 bg-blue-950 px-3 py-1 rounded-full">{p.tag}</span>
           <h3 class="font-bold text-lg mt-3 mb-1">{p.name}</h3>
           <p class="text-sm text-gray-400 mb-4">{p.role}</p>

@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="髙田 亜里沙 インタビュー">
+
+<style>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+  }
+</style>
+
+<!-- Hero -->
+<section class="hero-bg relative py-28 px-6 text-white overflow-hidden">
+  <div class="absolute inset-0 opacity-5"
+    style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <a href="/interview" class="text-blue-300 text-xs font-bold tracking-widest uppercase hover:text-white transition-colors">← INTERVIEW 一覧に戻る</a>
+    <div class="mt-6 flex items-center gap-5">
+      <div class="w-20 h-20 rounded-full bg-white/10 flex-shrink-0 border-2 border-blue-400 flex items-center justify-center">
+        <span class="text-3xl text-white/60 font-black">髙</span>
+      </div>
+      <div>
+        <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">挑戦×仲間</span>
+        <h1 class="text-3xl md:text-4xl font-black mt-2">髙田 亜里沙</h1>
+        <p class="text-blue-200 text-sm mt-1">モバイルイベントスタッフ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- インタビュー本文 -->
+<article class="bg-white py-16 px-6">
+  <div class="max-w-3xl mx-auto space-y-12">
+
+    <div class="bg-blue-50 rounded-2xl p-8">
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q1</p>
+      <p class="text-xl font-black text-gray-900 mb-4">今の仕事を一言で表すと？</p>
+      <p class="text-gray-700 leading-relaxed">
+        「挑戦」ですね。毎日が新しい出来事の連続で、その分失敗もあるんですけど、それが成長に繋がっていると実感しています。前より積極的に「やってみよう」と思えるようになったのが、一番の変化かなと思います。
+      </p>
+    </div>
+
+    <div>
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q2</p>
+      <p class="text-xl font-black text-gray-900 mb-4">チームの雰囲気を一言で言うと？</p>
+      <p class="text-gray-700 leading-relaxed">
+        「和気あいあい」です。ピリピリした空気がなくて、みんな自然体でいられる。でも真剣にやるところはちゃんとやる。そのオンオフの切り替えが気持ちよくて、毎日来やすい職場だと思っています。プライベートでも遊べるような友達ができたのが、ここに入って一番よかったことかもしれないです。
+      </p>
+    </div>
+
+    <div class="bg-gray-50 rounded-2xl p-8">
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q3 / Q4</p>
+      <p class="text-xl font-black text-gray-900 mb-4">入社して変わったこと、身についたスキルは？</p>
+      <p class="text-gray-700 leading-relaxed">
+        気持ちの「余裕」が一番変わりました。最初は何でも焦ってしまっていたんですが、経験を積むうちに落ち着いて考えられるようになってきた。<br /><br />
+        それと「諦めない気持ち」が身についたと思います。うまくいかないことがあっても、「次どうしよう」と前を向けるようになった。この仕事を通じて、気持ちの粘り強さみたいなものが育ってきた気がしています。
+      </p>
+    </div>
+
+    <div>
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q5</p>
+      <p class="text-xl font-black text-gray-900 mb-4">一番嬉しかった出来事を教えてください。</p>
+      <p class="text-gray-700 leading-relaxed">
+        チームみんなで目標を達成したときが、今まで一番嬉しかったです。自分一人じゃなくて、チームで同じゴールに向かって頑張った結果が出た瞬間は格別で。みんなで喜び合えるこの仕事ならではの達成感でした。あの感覚はなかなか他の仕事じゃ味わえないと思います。
+      </p>
+    </div>
+
+    <div class="bg-blue-50 rounded-2xl p-8">
+      <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q6</p>
+      <p class="text-xl font-black text-gray-900 mb-4">しんどかった経験と、どう乗り越えましたか？</p>
+      <p class="text-gray-700 leading-relaxed">
+        うまくいかないときに一人で抱え込まず、すぐ先輩に聞くようにしていました。その場にいなくても電話して聞いて、フォローしてもらって。ここはそういうことが遠慮なくできる環境なので、しんどいときほど誰かに頼ることが大切だなと実感しています。
+      </p>
+    </div>
+
+    <!-- プロフィール補足 -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      {[
+        { label: 'OFF', value: '彼氏とお出かけ・ゲーム' },
+        { label: 'PET', value: 'キンクマハムスターのちゃみ' },
+        { label: 'HOBBY', value: '韓国語・アニメ・ゲーム' },
+      ].map((item) => (
+        <div class="bg-gray-950 rounded-2xl p-5 text-white text-center">
+          <p class="text-blue-400 text-xs font-bold tracking-widest mb-2">{item.label}</p>
+          <p class="text-sm font-bold leading-snug">{item.value}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- 一言メッセージ -->
+    <div class="border-l-4 border-blue-600 pl-6 py-2">
+      <p class="text-2xl font-black text-gray-900 leading-relaxed">
+        「私も含め、ほとんどの人が未経験からのスタートです。<br />
+        <span class="text-blue-600">とりあえず、やってみよう！</span>」
+      </p>
+      <p class="text-gray-500 text-sm mt-3">髙田 亜里沙 / モバイルイベントスタッフ</p>
+    </div>
+
+    <div class="pt-4 flex flex-col sm:flex-row gap-4">
+      <a href="/interview" class="inline-block border-2 border-blue-600 text-blue-600 font-bold px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 text-center">
+        ← インタビュー一覧
+      </a>
+      <a href="/recruit" class="inline-block bg-blue-600 text-white font-black px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 text-center">
+        採用エントリーはこちら →
+      </a>
+    </div>
+  </div>
+</article>
+
+</Layout>
