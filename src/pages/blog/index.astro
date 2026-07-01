@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-const posts = await Astro.glob('./*.md');
+const postModules = import.meta.glob('./*.md', { eager: true });
+const posts = Object.values(postModules) as any[];
 const sorted = posts.sort((a, b) =>
   new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
 );
