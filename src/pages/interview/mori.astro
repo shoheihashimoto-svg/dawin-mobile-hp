@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="森 佳奈 インタビュー">
+<Layout title="森 佳奈 インタビュー" description="スタッフ・森佳奈のインタビュー。「自分に合ったやり方を一緒に考えてくれる仲間がいる」。自信がついた理由と、アットホームな職場のリアル。">
 
 <style>
   @keyframes gradientShift {
@@ -88,9 +88,9 @@ import Layout from '../../layouts/Layout.astro';
         { label: 'HOBBY', value: 'ドライブ・カラオケ・温泉' },
         { label: 'WANT', value: '素直な人と一緒に働きたい' },
       ].map((item) => (
-        <div class="bg-gray-950 rounded-2xl p-5 text-white text-center">
-          <p class="text-blue-400 text-xs font-bold tracking-widest mb-2">{item.label}</p>
-          <p class="text-sm font-bold leading-snug">{item.value}</p>
+        <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-5 text-white text-center">
+          <p class="text-blue-200 text-sm font-bold tracking-widest mb-2">{item.label}</p>
+          <p class="text-base font-bold leading-snug">{item.value}</p>
         </div>
       ))}
     </div>

@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="橋本 章平 インタビュー">
+<Layout title="橋本 章平 インタビュー" description="モバイル事業部部長・橋本章平のインタビュー。「関わった人全員がここで働いてよかったと思えるチームにしたい」。未経験から成長できる環境とは。">
 
 <style>
   @keyframes gradientShift {
@@ -75,6 +75,20 @@ import Layout from '../../layouts/Layout.astro';
       <p class="text-gray-700 leading-relaxed">
         関わった人全員が「ここで働いてよかった」と思えるチームにしたい。それだけです。数字の目標ももちろんありますが、それはあくまで手段。スタッフが胸を張れる環境をつくることが、僕のいちばん大事な仕事だと思っています。
       </p>
+    </div>
+
+    <!-- プロフィール補足 -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      {[
+        { label: 'OFF', value: 'サウナ' },
+        { label: 'HOBBY', value: '子どもと野球' },
+        { label: 'WANT', value: '人生変えたい人と働きたい' },
+      ].map((item) => (
+        <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-5 text-white text-center">
+          <p class="text-blue-200 text-sm font-bold tracking-widest mb-2">{item.label}</p>
+          <p class="text-base font-bold leading-snug">{item.value}</p>
+        </div>
+      ))}
     </div>
 
     <!-- 一言メッセージ -->

@@ -7,10 +7,11 @@ interface Props {
   author?: string;
   category?: string;
 }
-const { title, date, description, author = '橋本 章平', category = '現場から' } = Astro.props;
-const formatted = new Date(date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+const { title, date, description, author = '橋本 章平', category = '現場から' } = Astro.props.frontmatter ?? Astro.props;
+const [y, m, d] = date.split('-').map(Number);
+const formatted = new Date(y, m - 1, d).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
-<Layout title={title}>
+<Layout title={title} description={description}>
 
 <style>
   @keyframes gradientShift {
@@ -23,13 +24,16 @@ const formatted = new Date(date).toLocaleDateString('ja-JP', { year: 'numeric', 
     background-size: 400% 400%;
     animation: gradientShift 10s ease infinite;
   }
-  .prose h2 { font-size: 1.5rem; font-weight: 900; margin: 2rem 0 1rem; color: #111827; }
-  .prose h3 { font-size: 1.2rem; font-weight: 700; margin: 1.5rem 0 0.75rem; color: #1d4ed8; }
-  .prose p { margin: 1rem 0; line-height: 1.9; color: #374151; }
-  .prose ul { margin: 1rem 0 1rem 1.5rem; }
-  .prose li { margin: 0.5rem 0; line-height: 1.8; color: #374151; list-style-type: disc; }
+</style>
+
+<style is:global>
+  .prose h2 { font-size: 1.5rem; font-weight: 900; margin: 2.5rem 0 1rem; color: #111827; padding-bottom: 0.5rem; border-bottom: 2px solid #e5e7eb; }
+  .prose h3 { font-size: 1.2rem; font-weight: 700; margin: 2rem 0 0.75rem; color: #1d4ed8; }
+  .prose p { margin: 1.25rem 0; line-height: 2; color: #374151; }
+  .prose ul { margin: 1.25rem 0 1.25rem 1.75rem; }
+  .prose li { margin: 0.6rem 0; line-height: 1.9; color: #374151; list-style-type: disc; }
   .prose strong { font-weight: 700; color: #111827; }
-  .prose blockquote { border-left: 4px solid #3b82f6; padding-left: 1rem; color: #4b5563; font-style: italic; margin: 1.5rem 0; }
+  .prose blockquote { border-left: 4px solid #3b82f6; padding: 0.75rem 1.25rem; color: #4b5563; font-style: italic; margin: 2rem 0; background: #eff6ff; border-radius: 0 0.5rem 0.5rem 0; }
 </style>
 
 <!-- Hero -->
@@ -45,13 +49,6 @@ const formatted = new Date(date).toLocaleDateString('ja-JP', { year: 'numeric', 
     </div>
     <h1 class="text-3xl md:text-4xl font-black leading-tight mb-4">{title}</h1>
     <p class="text-blue-100/80">{description}</p>
-    <div class="flex items-center gap-3 mt-6">
-      <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-black text-white">橋</div>
-      <div>
-        <p class="font-bold text-white text-sm">{author}</p>
-        <p class="text-blue-200 text-xs">ダウイン モバイル事業部 部長</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -61,14 +58,7 @@ const formatted = new Date(date).toLocaleDateString('ja-JP', { year: 'numeric', 
     <div class="prose">
       <slot />
     </div>
-    <div class="mt-16 pt-8 border-t border-gray-100 flex items-center gap-4">
-      <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full flex items-center justify-center font-black text-white text-xl">橋</div>
-      <div>
-        <p class="font-black text-gray-900">{author}</p>
-        <p class="text-sm text-gray-500">株式会社ダウイン モバイル事業部 部長<br />営業・マネジメントを軸に、チームの成長と事業拡大に取り組んでいます。</p>
-      </div>
-    </div>
-    <div class="mt-10 text-center">
+    <div class="mt-16 pt-8 border-t border-gray-100 text-center">
       <a href="/blog" class="inline-block border-2 border-blue-600 text-blue-600 font-bold px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 mr-4">
         ← ブログ一覧
       </a>

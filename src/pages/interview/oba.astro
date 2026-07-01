@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="大塲 塁 インタビュー">
+<Layout title="大塲 塁 インタビュー" description="スタッフ・大塲塁のインタビュー。「数字が出ず苦しかった時期を、課題を一つずつ改善し続けて乗り越えた」。諦めない気持ちで成長するリアルな現場。">
 
 <style>
   @keyframes gradientShift {
@@ -88,9 +88,9 @@ import Layout from '../../layouts/Layout.astro';
         { label: 'HOBBY', value: 'スポーツ観戦' },
         { label: 'WANT', value: '人と話すのが好きな人と働きたい' },
       ].map((item) => (
-        <div class="bg-gray-950 rounded-2xl p-5 text-white text-center">
-          <p class="text-blue-400 text-xs font-bold tracking-widest mb-2">{item.label}</p>
-          <p class="text-sm font-bold leading-snug">{item.value}</p>
+        <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-5 text-white text-center">
+          <p class="text-blue-200 text-sm font-bold tracking-widest mb-2">{item.label}</p>
+          <p class="text-base font-bold leading-snug">{item.value}</p>
         </div>
       ))}
     </div>
