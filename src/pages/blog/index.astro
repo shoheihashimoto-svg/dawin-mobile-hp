@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../../layouts/Layout.astro';
 
 const postModules = import.meta.glob('./*.md', { eager: true });
@@ -9,18 +9,6 @@ const sorted = posts.sort((a, b) =>
 ---
 <Layout title="BLOG">
 
-<style>
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  .hero-bg {
-    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
-    background-size: 400% 400%;
-    animation: gradientShift 10s ease infinite;
-  }
-</style>
 
 <!-- Hero -->
 <section class="hero-bg relative py-32 px-6 text-white text-center overflow-hidden">
@@ -44,12 +32,14 @@ const sorted = posts.sort((a, b) =>
         {sorted.map((post) => {
           const { title, date, description, category = '現場から' } = post.frontmatter;
           const formatted = new Date(date).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+          const readMin = Math.max(2, Math.ceil((post.rawContent?.()?.length ?? 800) / 400));
           const slug = post.url;
           return (
             <a href={slug} class="group block bg-white/5 hover:bg-white/10 rounded-2xl p-6 md:p-8 transition-all duration-300 hover:scale-[1.01]">
               <div class="flex items-center gap-3 mb-3">
                 <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">{category}</span>
                 <span class="text-gray-500 text-xs">{formatted}</span>
+                <span class="text-gray-600 text-xs">約{readMin}分</span>
               </div>
               <h2 class="text-xl font-black mb-2 group-hover:text-blue-400 transition-colors">{title}</h2>
               <p class="text-gray-400 text-sm leading-relaxed">{description}</p>

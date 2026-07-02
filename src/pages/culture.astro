@@ -3,23 +3,6 @@ import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="CULTURE">
 
-<style>
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  @keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .hero-bg {
-    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
-    background-size: 400% 400%;
-    animation: gradientShift 10s ease infinite;
-  }
-  .ticker-track { animation: ticker 20s linear infinite; }
-</style>
 
 <!-- Hero -->
 <section class="hero-bg relative py-32 px-6 text-white text-center overflow-hidden">

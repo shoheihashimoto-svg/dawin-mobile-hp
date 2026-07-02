@@ -1,20 +1,8 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="RECRUIT">
 
-<style>
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  .hero-bg {
-    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
-    background-size: 400% 400%;
-    animation: gradientShift 10s ease infinite;
-  }
-</style>
 
 <!-- Hero -->
 <section class="hero-bg relative py-32 px-6 text-white text-center overflow-hidden">
@@ -128,39 +116,42 @@ import Layout from '../layouts/Layout.astro';
     <p class="text-gray-400 text-center text-sm mb-12">入力いただいた情報は採用目的のみに使用します。</p>
 
     <form id="entryForm" class="space-y-5">
+      <div id="formError" class="hidden bg-red-500/20 border border-red-500/40 text-red-300 text-sm rounded-xl px-4 py-3">
+        送信に失敗しました。時間をおいて再度お試しください。
+      </div>
       <div class="grid md:grid-cols-2 gap-5">
         <div>
           <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">お名前 <span class="text-red-400">*</span></label>
-          <input type="text" required placeholder="橋本 章平"
+          <input type="text" name="name" required placeholder="橋本 章平"
             class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
         </div>
         <div>
           <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">フリガナ <span class="text-red-400">*</span></label>
-          <input type="text" required placeholder="ハシモト ショウヘイ"
+          <input type="text" name="kana" required placeholder="ハシモト ショウヘイ"
             class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
         </div>
       </div>
       <div class="grid md:grid-cols-2 gap-5">
         <div>
           <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">メールアドレス <span class="text-red-400">*</span></label>
-          <input type="email" required placeholder="example@email.com"
+          <input type="email" name="email" required placeholder="example@email.com"
             class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
         </div>
         <div>
           <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">電話番号 <span class="text-red-400">*</span></label>
-          <input type="tel" required placeholder="090-0000-0000"
+          <input type="tel" name="tel" required placeholder="090-0000-0000"
             class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
         </div>
       </div>
       <div class="grid md:grid-cols-2 gap-5">
         <div>
           <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">年齢</label>
-          <input type="number" placeholder="25"
+          <input type="number" name="age" placeholder="25"
             class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
         </div>
         <div>
           <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">希望職種</label>
-          <select class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition">
+          <select name="position" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition">
             <option class="text-gray-900">イベントスタッフ</option>
             <option class="text-gray-900">マネージャー候補</option>
             <option class="text-gray-900">どちらでも可</option>
@@ -168,7 +159,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <div>
           <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">希望種類</label>
-          <select class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition">
+          <select name="type" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition">
             <option class="text-gray-900">アルバイト</option>
             <option class="text-gray-900">社員</option>
             <option class="text-gray-900">どちらでも可</option>
@@ -177,7 +168,7 @@ import Layout from '../layouts/Layout.astro';
       </div>
       <div>
         <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">志望動機・自己PR</label>
-        <textarea rows="4" placeholder="応募のきっかけや、自己PRをご記入ください"
+        <textarea name="message" rows="4" placeholder="応募のきっかけや、自己PRをご記入ください"
           class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition resize-none"></textarea>
       </div>
       <button type="submit" id="submitBtn"
@@ -191,20 +182,13 @@ import Layout from '../layouts/Layout.astro';
       document.getElementById('entryForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = document.getElementById('submitBtn');
+        const errBox = document.getElementById('formError');
         btn.textContent = '送信中...';
         btn.disabled = true;
+        errBox.classList.add('hidden');
 
-        const f = e.target;
-        const data = {
-          name:     f.querySelector('[placeholder="橋本 章平"]').value,
-          kana:     f.querySelector('[placeholder="ハシモト ショウヘイ"]').value,
-          email:    f.querySelector('[type="email"]').value,
-          tel:      f.querySelector('[type="tel"]').value,
-          age:      f.querySelector('[type="number"]').value,
-          position: f.querySelectorAll('select')[0].value,
-          type:     f.querySelectorAll('select')[1].value,
-          message:  f.querySelector('textarea').value,
-        };
+        const f = new FormData(e.target);
+        const data = Object.fromEntries(f.entries());
 
         try {
           const params = new URLSearchParams(data);
@@ -217,7 +201,8 @@ import Layout from '../layouts/Layout.astro';
         } catch {
           btn.textContent = 'エントリーする →';
           btn.disabled = false;
-          alert('送信に失敗しました。時間をおいて再度お試しください。');
+          errBox.classList.remove('hidden');
+          errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       });
     </script>

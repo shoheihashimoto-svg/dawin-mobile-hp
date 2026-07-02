@@ -1,20 +1,8 @@
----
+﻿---
 import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="中村 翔 インタビュー" description="スタッフ・中村翔のインタビュー。「お客様にお兄さんでよかったと言われた瞬間が忘れられない」。仲間と一緒に成長できるダウインの現場から。">
 
-<style>
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  .hero-bg {
-    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
-    background-size: 400% 400%;
-    animation: gradientShift 10s ease infinite;
-  }
-</style>
 
 <!-- Hero -->
 <section class="hero-bg relative py-28 px-6 text-white overflow-hidden">
@@ -22,6 +10,13 @@ import Layout from '../../layouts/Layout.astro';
     style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
   </div>
   <div class="relative z-10 max-w-3xl mx-auto">
+    <nav class="text-xs text-blue-300/60 mb-4 flex items-center gap-1">
+      <a href="/" class="hover:text-blue-200 transition-colors">HOME</a>
+      <span>›</span>
+      <a href="/interview" class="hover:text-blue-200 transition-colors">INTERVIEW</a>
+      <span>›</span>
+      <span class="text-blue-200">中村 翔</span>
+    </nav>
     <a href="/interview" class="text-blue-300 text-xs font-bold tracking-widest uppercase hover:text-white transition-colors">← INTERVIEW 一覧に戻る</a>
     <div class="mt-6 flex items-center gap-5">
       <div class="w-20 h-20 rounded-full bg-white/10 flex-shrink-0 border-2 border-blue-400 flex items-center justify-center">

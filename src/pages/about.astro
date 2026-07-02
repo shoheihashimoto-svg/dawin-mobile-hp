@@ -3,23 +3,6 @@ import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="ABOUT">
 
-<style>
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  @keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .hero-bg {
-    background: linear-gradient(135deg, #0f0c29, #1a1a6e, #0d47a1, #1565c0, #0f0c29);
-    background-size: 400% 400%;
-    animation: gradientShift 10s ease infinite;
-  }
-  .ticker-track { animation: ticker 20s linear infinite; }
-</style>
 
 <!-- Hero -->
 <section class="hero-bg relative py-32 px-6 text-white text-center overflow-hidden">
@@ -111,43 +94,36 @@ import Layout from '../layouts/Layout.astro';
     <div class="grid md:grid-cols-3 gap-6">
       {[
         {
-          svg: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
-          iconBg: 'bg-blue-600',
           title: 'Challenge',
           label: '挑戦',
           body: '現状に満足せず、常に上を目指す。失敗を恐れず、まず動く。その繰り返しが成長をつくる。',
-          bg: 'bg-blue-50',
-          hover: 'bg-blue-600',
+          accent: 'border-blue-600',
+          hoverBg: 'bg-blue-600',
+          titleColor: 'text-blue-600',
         },
         {
-          svg: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z',
-          iconBg: 'bg-indigo-600',
           title: 'Teamwork',
           label: 'チームワーク',
           body: '隣の仲間を全力で思いやる。一人の成功よりチームの成功を喜べる文化を大切にしている。',
-          bg: 'bg-indigo-50',
-          hover: 'bg-indigo-600',
+          accent: 'border-indigo-600',
+          hoverBg: 'bg-indigo-600',
+          titleColor: 'text-indigo-600',
         },
         {
-          svg: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
-          iconBg: 'bg-purple-600',
           title: 'Growth',
           label: '成長',
           body: '入社後の育成に本気で向き合う。スタッフ全員が「なりたい自分」に近づける環境をつくる。',
-          bg: 'bg-purple-50',
-          hover: 'bg-purple-600',
+          accent: 'border-purple-600',
+          hoverBg: 'bg-purple-600',
+          titleColor: 'text-purple-600',
         },
       ].map((v) => (
-        <div class={`group relative overflow-hidden rounded-2xl ${v.bg} p-8 text-center cursor-default h-64 flex flex-col items-center justify-center`}>
-          <div class={`w-16 h-16 ${v.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:-translate-y-1`}>
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={v.svg} />
-            </svg>
-          </div>
-          <p class="text-blue-600 text-xs font-bold tracking-widest uppercase mb-1">{v.title}</p>
-          <h3 class="text-xl font-black">{v.label}</h3>
-          <div class={`absolute inset-0 ${v.hover} text-white flex flex-col items-center justify-center p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-2xl`}>
-            <h3 class="text-lg font-bold mb-4">{v.label}</h3>
+        <div class={`tap-card group relative overflow-hidden rounded-2xl border-t-4 ${v.accent} bg-gray-50 p-8 cursor-pointer flex flex-col items-center justify-center min-h-52 text-center`}>
+          <p class={`${v.titleColor} text-xs font-bold tracking-widest uppercase mb-2`}>{v.title}</p>
+          <h3 class="text-2xl font-black text-gray-900">{v.label}</h3>
+          <div class={`card-overlay absolute inset-0 ${v.hoverBg} text-white flex flex-col justify-center p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-2xl`}>
+            <p class="text-xs font-bold tracking-widest uppercase mb-3 text-white/60">{v.title}</p>
+            <h3 class="text-2xl font-black mb-4">{v.label}</h3>
             <p class="text-sm text-white/80 leading-relaxed">{v.body}</p>
           </div>
         </div>
@@ -155,6 +131,17 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll('.tap-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const overlay = card.querySelector('.card-overlay');
+      const isOpen = !overlay.classList.contains('translate-y-full');
+      document.querySelectorAll('.card-overlay').forEach(o => o.classList.add('translate-y-full'));
+      if (!isOpen) overlay.classList.remove('translate-y-full');
+    });
+  });
+</script>
 
 <!-- CTA -->
 <section class="relative py-28 px-6 overflow-hidden text-center">
