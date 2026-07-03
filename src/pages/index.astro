@@ -4,77 +4,477 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="HOME">
 
 <style>
-  .gradient-text {
-    background: linear-gradient(90deg, #60a5fa, #a78bfa, #60a5fa);
-    background-size: 200% auto;
-    animation: gradientShift 3s linear infinite;
+  /* ================= INTRO ================= */
+  #intro { clip-path: polygon(50% -130%, 230% 50%, 50% 230%, -130% 50%); }
+  #intro.exit { animation: irisOut 1s cubic-bezier(0.76, 0, 0.24, 1) forwards; }
+  @keyframes irisOut { to { clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%); } }
+  #intro.exit .intro-stage { animation: stageOut 1s cubic-bezier(0.76, 0, 0.24, 1) forwards; }
+  @keyframes stageOut { to { transform: scale(0.9); opacity: 0.4; } }
+
+  .i-beam { transform-origin: center; animation: beamIn 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both; }
+  @keyframes beamIn {
+    0%   { transform: scaleX(0); opacity: 0; }
+    40%  { transform: scaleX(1); opacity: 1; }
+    100% { transform: scaleX(1); opacity: 0; }
+  }
+
+  .i-shard-l { animation: shardInL 0.8s cubic-bezier(0.55, 0, 0.85, 0.4) 0.15s both, shardVanish 0.3s ease-out 0.92s both; }
+  .i-shard-r { animation: shardInR 0.8s cubic-bezier(0.55, 0, 0.85, 0.4) 0.15s both, shardVanish 0.3s ease-out 0.92s both; }
+  @keyframes shardInL {
+    0%   { transform: translate(calc(-50% - 46vw), -50%) rotate(-80deg); opacity: 0; }
+    18%  { opacity: 1; }
+    100% { transform: translate(calc(-50% - 26px), -50%) rotate(0deg); opacity: 1; }
+  }
+  @keyframes shardInR {
+    0%   { transform: translate(calc(-50% + 46vw), -50%) rotate(80deg); opacity: 0; }
+    18%  { opacity: 1; }
+    100% { transform: translate(calc(-50% + 26px), -50%) rotate(0deg); opacity: 1; }
+  }
+  @keyframes shardVanish {
+    0%   { opacity: 1; filter: brightness(1); }
+    50%  { opacity: 1; filter: brightness(3.5); }
+    100% { opacity: 0; filter: brightness(5); }
+  }
+
+  .i-flash { animation: flashBurst 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both; }
+  @keyframes flashBurst {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.15); }
+    18%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(2.8); }
+  }
+  .i-ring   { animation: ringOut 1s cubic-bezier(0.16, 1, 0.3, 1) 0.95s both; }
+  .i-ring-2 { animation: ringOut 1.25s cubic-bezier(0.16, 1, 0.3, 1) 1.1s both; }
+  @keyframes ringOut {
+    0%   { opacity: 0.9; transform: translate(-50%, -50%) scale(0.12); }
+    100% { opacity: 0;   transform: translate(-50%, -50%) scale(3.6); }
+  }
+  .i-ray-h { animation: rayH 1.3s cubic-bezier(0.16, 1, 0.3, 1) 1.02s both; }
+  @keyframes rayH {
+    0%   { transform: translate(-50%, -50%) scaleX(0); opacity: 0; }
+    25%  { opacity: 0.9; }
+    100% { transform: translate(-50%, -50%) scaleX(1); opacity: 0; }
+  }
+  .i-ray-v { animation: rayV 1.3s cubic-bezier(0.16, 1, 0.3, 1) 1.08s both; }
+  @keyframes rayV {
+    0%   { transform: translate(-50%, -50%) rotate(90deg) scaleX(0); opacity: 0; }
+    25%  { opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) rotate(90deg) scaleX(1); opacity: 0; }
+  }
+
+  .i-gem { animation: gemIn 1s cubic-bezier(0.22, 1.2, 0.36, 1) 1s both; }
+  @keyframes gemIn {
+    0%   { opacity: 0; transform: scale(0.2) rotate(-140deg); }
+    45%  { opacity: 1; }
+    70%  { transform: scale(1.07) rotate(7deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  .i-line-1 .i-line-in { animation: lineUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) 1.8s both; }
+  .i-line-2 .i-line-in { animation: lineUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) 2.05s both; }
+  @keyframes lineUp { from { transform: translateY(115%); } to { transform: translateY(0); } }
+  .i-jp { animation: jpIn 1.1s cubic-bezier(0.22, 1, 0.36, 1) 2.45s both; }
+  @keyframes jpIn {
+    from { opacity: 0; letter-spacing: 1.1em; }
+    to   { opacity: 1; letter-spacing: 0.5em; }
+  }
+
+  /* ================= HERO ================= */
+  .rise { animation: riseUp 1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  @keyframes riseUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .rise-1 { animation-delay: 0.15s; }
+  .rise-2 { animation-delay: 0.7s; }
+  .rise-3 { animation-delay: 0.85s; }
+  .rise-4 { animation-delay: 1s; }
+
+  .hl-1 { animation: lineUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both; }
+  .hl-2 { animation: lineUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both; }
+  .hl-3 { animation: lineUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both; }
+
+  .fade-in { animation: fadeIn 1.2s ease 1.4s both; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .shine-text {
+    background: linear-gradient(105deg, #3b82f6 0%, #93c5fd 25%, #f0f9ff 50%, #93c5fd 75%, #3b82f6 100%);
+    background-size: 220% auto;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    color: transparent;
+    animation: sheen 5.5s linear infinite;
   }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes sheen { to { background-position: -220% center; } }
+
+  .gem-wrap {
+    animation: gemEnter 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both,
+               gemFloat 9s ease-in-out 2.4s infinite;
   }
-  .fade-up { animation: fadeUp 0.8s ease forwards; }
-  .fade-up-1 { animation-delay: 0.1s; opacity: 0; }
-  .fade-up-2 { animation-delay: 0.3s; opacity: 0; }
-  .fade-up-3 { animation-delay: 0.5s; opacity: 0; }
-  .fade-up-4 { animation-delay: 0.7s; opacity: 0; }
+  @keyframes gemEnter {
+    from { opacity: 0; transform: translateY(46px) scale(0.88); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes gemFloat {
+    0%, 100% { transform: translateY(0) rotate(0.5deg); }
+    50%      { transform: translateY(-16px) rotate(-0.5deg); }
+  }
+
+  .gem-glow { animation: glowPulse 6s ease-in-out infinite; }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.25; transform: translateY(-50%) scale(0.9); }
+    50%      { opacity: 0.55; transform: translateY(-50%) scale(1.08); }
+  }
+
+  .shaft { animation: shaftSway 16s ease-in-out infinite alternate; }
+  @keyframes shaftSway {
+    from { transform: rotate(20deg) translateX(-40px); opacity: 0.5; }
+    to   { transform: rotate(25deg) translateX(40px);  opacity: 1; }
+  }
+
+  .spark { position: absolute; border-radius: 9999px; background: #bfdbfe; animation: twinkle 5.5s ease-in-out infinite; }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+    50%      { opacity: 0.7; transform: translateY(-20px) scale(1); }
+  }
+
+  .spin-slow { animation: spinSlow 90s linear infinite; }
+  @keyframes spinSlow { to { transform: rotate(360deg); } }
+
+  .scroll-dot { animation: scrollDot 2.4s cubic-bezier(0.76, 0, 0.24, 1) infinite; }
+  @keyframes scrollDot {
+    0%   { transform: translateY(0); opacity: 0; }
+    15%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(44px); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #intro { display: none !important; }
+    * { animation-duration: 0.001s !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; }
+  }
 </style>
 
-<!-- Hero -->
-<section class="hero-bg relative min-h-screen flex items-center justify-center text-white overflow-hidden">
+<!-- ===== INTRO OVERLAY ===== -->
+<div id="intro" class="fixed inset-0 z-[200] bg-gray-950 overflow-hidden select-none pointer-events-none" aria-hidden="true">
+  <div class="intro-stage absolute inset-0 flex flex-col items-center justify-center">
 
-  <!-- 背景の装飾 -->
-  <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-3xl"></div>
+    <!-- 衝突ステージ -->
+    <div class="relative w-full h-60 md:h-72 flex items-center justify-center mb-8">
+      <!-- 光の軌道線 -->
+      <div class="i-beam absolute inset-x-0 top-1/2 h-px" style="background:linear-gradient(90deg, transparent, rgba(147,197,253,0.7), transparent);"></div>
+
+      <!-- 原石（左） -->
+      <div class="i-shard-l absolute left-1/2 top-1/2">
+        <svg viewBox="0 0 120 140" class="w-16 h-20 md:w-20 md:h-24">
+          <defs>
+            <linearGradient id="i-sh-a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
+            <linearGradient id="i-sh-b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#1e40af"/></linearGradient>
+          </defs>
+          <polygon points="14,74 42,10 104,26 110,88 58,132" fill="url(#i-sh-a)"/>
+          <polygon points="42,10 104,26 66,70" fill="url(#i-sh-b)" opacity="0.9"/>
+          <polygon points="14,74 66,70 58,132" fill="#172554"/>
+          <polygon points="66,70 110,88 58,132" fill="url(#i-sh-b)" opacity="0.55"/>
+          <polygon points="14,74 42,10 66,70" fill="#1d4ed8" opacity="0.7"/>
+          <polygon points="14,74 42,10 104,26 110,88 58,132" fill="none" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
+        </svg>
+      </div>
+      <!-- 原石（右） -->
+      <div class="i-shard-r absolute left-1/2 top-1/2">
+        <svg viewBox="0 0 120 140" class="w-16 h-20 md:w-20 md:h-24 -scale-x-100">
+          <polygon points="14,74 42,10 104,26 110,88 58,132" fill="url(#i-sh-a)"/>
+          <polygon points="42,10 104,26 66,70" fill="url(#i-sh-b)" opacity="0.9"/>
+          <polygon points="14,74 66,70 58,132" fill="#172554"/>
+          <polygon points="66,70 110,88 58,132" fill="url(#i-sh-b)" opacity="0.55"/>
+          <polygon points="14,74 42,10 66,70" fill="#1d4ed8" opacity="0.7"/>
+          <polygon points="14,74 42,10 104,26 110,88 58,132" fill="none" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <!-- 衝突の閃光 -->
+      <div class="i-flash absolute left-1/2 top-1/2 w-72 h-72 rounded-full" style="background:radial-gradient(circle, rgba(240,249,255,0.95), rgba(96,165,250,0.4) 40%, transparent 70%);"></div>
+      <div class="i-ring absolute left-1/2 top-1/2 w-40 h-40 rounded-full border border-blue-200/70"></div>
+      <div class="i-ring-2 absolute left-1/2 top-1/2 w-40 h-40 rounded-full border border-blue-400/40"></div>
+      <div class="i-ray-h absolute left-1/2 top-1/2 w-[110vw] h-px" style="background:linear-gradient(90deg, transparent, rgba(224,242,254,0.9), transparent);"></div>
+      <div class="i-ray-v absolute left-1/2 top-1/2 w-[70vh] h-px" style="background:linear-gradient(90deg, transparent, rgba(224,242,254,0.7), transparent);"></div>
+
+      <!-- 誕生するダイヤ -->
+      <div class="i-gem relative">
+        <svg viewBox="0 0 400 480" class="w-36 h-44 md:w-44 md:h-52 drop-shadow-[0_0_40px_rgba(59,130,246,0.45)]">
+          <defs>
+            <linearGradient id="i-tbl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0f9ff"/><stop offset="1" stop-color="#93c5fd"/></linearGradient>
+            <linearGradient id="i-star-l" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#93c5fd"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+            <linearGradient id="i-star-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0f2fe"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
+            <linearGradient id="i-crown-c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+            <linearGradient id="i-crown-cl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d4ed8"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
+            <linearGradient id="i-crown-cr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+            <linearGradient id="i-corner-l" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e40af"/><stop offset="1" stop-color="#172554"/></linearGradient>
+            <linearGradient id="i-corner-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1e40af"/></linearGradient>
+            <linearGradient id="i-girdle" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1e3a8a"/><stop offset="0.5" stop-color="#bfdbfe"/><stop offset="1" stop-color="#1e40af"/></linearGradient>
+            <linearGradient id="i-pav-ol" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
+            <linearGradient id="i-pav-l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e40af"/><stop offset="1" stop-color="#172554"/></linearGradient>
+            <linearGradient id="i-pav-cl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
+            <linearGradient id="i-pav-cr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+            <linearGradient id="i-pav-r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#172554"/></linearGradient>
+            <linearGradient id="i-pav-or" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
+            <linearGradient id="i-shimmer" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="white" stop-opacity="0"/><stop offset="0.5" stop-color="white" stop-opacity="0.4"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
+            <filter id="i-f" x="-30%" y="-20%" width="160%" height="140%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+              <feColorMatrix in="b" type="matrix" values="0 0 0 0 0.15 0 0 0 0 0.35 0 0 0 0 1 0 0 0 1.6 0" result="cb"/>
+              <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <clipPath id="i-clip"><polygon points="128,16 272,16 394,170 388,184 200,472 12,184 6,170"/></clipPath>
+          </defs>
+          <g clip-path="url(#i-clip)" filter="url(#i-f)">
+            <polygon points="128,16 272,16 235,88 165,88" fill="url(#i-tbl)"/>
+            <polygon points="128,16 165,88 102,170" fill="url(#i-star-l)"/>
+            <polygon points="272,16 298,170 235,88" fill="url(#i-star-r)"/>
+            <polygon points="165,88 235,88 200,170" fill="url(#i-crown-c)"/>
+            <polygon points="165,88 200,170 102,170" fill="url(#i-crown-cl)"/>
+            <polygon points="235,88 298,170 200,170" fill="url(#i-crown-cr)"/>
+            <polygon points="6,170 128,16 102,170" fill="url(#i-corner-l)"/>
+            <polygon points="394,170 272,16 298,170" fill="url(#i-corner-r)"/>
+            <polygon points="6,170 394,170 388,184 12,184" fill="url(#i-girdle)" opacity="0.9"/>
+            <polygon points="12,184 60,184 200,472" fill="url(#i-pav-ol)"/>
+            <polygon points="60,184 104,184 200,472" fill="url(#i-pav-l)"/>
+            <polygon points="104,184 200,184 200,472" fill="url(#i-pav-cl)"/>
+            <polygon points="200,184 296,184 200,472" fill="url(#i-pav-cr)"/>
+            <polygon points="296,184 340,184 200,472" fill="url(#i-pav-r)"/>
+            <polygon points="340,184 388,184 200,472" fill="url(#i-pav-or)"/>
+            <line x1="6" y1="170" x2="394" y2="170" stroke="#93c5fd" stroke-width="0.8" opacity="0.5"/>
+            <line x1="12" y1="184" x2="388" y2="184" stroke="#93c5fd" stroke-width="0.6" opacity="0.35"/>
+            <line x1="200" y1="184" x2="200" y2="472" stroke="#60a5fa" stroke-width="0.5" opacity="0.3"/>
+          </g>
+          <g clip-path="url(#i-clip)">
+            <rect x="0" y="0" width="150" height="480" fill="url(#i-shimmer)" transform="translate(-420 0)">
+              <animateTransform attributeName="transform" type="translate" values="-420 0;820 0" dur="1.3s" begin="2s" repeatCount="1" fill="freeze"/>
+            </rect>
+          </g>
+          <polygon points="128,16 272,16 394,170 388,184 200,472 12,184 6,170" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.5"/>
+          <line x1="128" y1="16" x2="272" y2="16" stroke="#e0f2fe" stroke-width="2.5" opacity="0.9"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- コピー -->
+    <div class="i-line-1 overflow-hidden px-4">
+      <p class="i-line-in text-2xl md:text-4xl font-black uppercase tracking-[0.18em] text-white text-center">Sharpen each other.</p>
+    </div>
+    <div class="i-line-2 overflow-hidden px-4 mt-2 pb-1">
+      <p class="i-line-in shine-text text-2xl md:text-4xl font-black uppercase tracking-[0.18em] text-center">Shine together.</p>
+    </div>
+    <p class="i-jp mt-7 text-xs md:text-sm font-semibold text-blue-200/80 text-center">削り合い、輝いていけ。</p>
+
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="relative min-h-screen flex items-center text-white overflow-hidden bg-gray-950">
+
+  <!-- 背景レイヤー -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <!-- ダイヤ背後の光彩 -->
+    <div class="gem-glow absolute right-[4%] top-1/2 w-[640px] h-[640px] rounded-full blur-[150px]" style="background:radial-gradient(circle, rgba(37,99,235,0.3), rgba(30,58,138,0.12) 55%, transparent 75%);"></div>
+    <div class="absolute -left-24 top-[16%] w-96 h-96 bg-indigo-700/10 rounded-full blur-[110px]"></div>
+    <!-- ライトシャフト -->
+    <div class="shaft absolute -top-[30%] left-[16%] w-[26rem] h-[130vh] blur-3xl" style="background:linear-gradient(to bottom, rgba(96,165,250,0.1), rgba(96,165,250,0.02) 55%, transparent);"></div>
+    <div class="shaft absolute -top-[30%] left-[46%] w-[18rem] h-[130vh] blur-3xl" style="background:linear-gradient(to bottom, rgba(147,197,253,0.07), transparent 60%); animation-delay:-8s;"></div>
+    <!-- グリッド -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 80% 70% at 50% 45%, black, transparent);-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 45%, black, transparent);"></div>
+    <!-- 巨大ワイヤーフレーム・ダイヤ -->
+    <svg viewBox="0 0 400 480" class="spin-slow absolute -left-52 -bottom-72 w-[42rem] h-[50rem] opacity-[0.05]">
+      <polygon points="112,10 288,10 400,175 200,470 0,175" fill="none" stroke="#60a5fa" stroke-width="1"/>
+      <line x1="0" y1="175" x2="400" y2="175" stroke="#60a5fa" stroke-width="0.6"/>
+      <line x1="112" y1="10" x2="200" y2="470" stroke="#60a5fa" stroke-width="0.4"/>
+      <line x1="288" y1="10" x2="200" y2="470" stroke="#60a5fa" stroke-width="0.4"/>
+    </svg>
+    <!-- 微粒子 -->
+    <span class="spark w-1 h-1" style="left:12%; top:32%;"></span>
+    <span class="spark w-1.5 h-1.5" style="left:26%; top:68%; animation-delay:1.4s;"></span>
+    <span class="spark w-1 h-1" style="left:55%; top:20%; animation-delay:2.8s;"></span>
+    <span class="spark w-1 h-1" style="left:70%; top:78%; animation-delay:2s;"></span>
+    <span class="spark w-1.5 h-1.5" style="left:88%; top:30%; animation-delay:3.6s;"></span>
   </div>
 
-  <!-- グリッド線の背景 -->
-  <div class="absolute inset-0 opacity-5"
-    style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
-  </div>
+  <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-28 pb-28 md:py-28">
+    <div class="grid lg:grid-cols-12 gap-14 lg:gap-8 items-center">
 
-  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
-    <p class="fade-up fade-up-1 text-blue-300 font-bold tracking-[0.3em] text-xs uppercase mb-8">
-      DAWIN MOBILE DIVISION
-    </p>
+      <!-- 左：コピー -->
+      <div class="order-2 lg:order-1 lg:col-span-7">
+        <div class="rise rise-1 flex items-center gap-4 mb-8">
+          <span class="w-12 h-px bg-gradient-to-r from-blue-400 to-transparent"></span>
+          <p class="text-blue-400/80 font-bold tracking-[0.4em] text-xs uppercase">Dawin Mobile Division</p>
+        </div>
+        <h1 class="font-black tracking-tight mb-8">
+          <span class="block overflow-hidden pb-[0.14em] -mb-[0.14em]">
+            <span class="hl-1 block leading-none text-white text-[clamp(3rem,8vw,6.5rem)]">Sharpen</span>
+          </span>
+          <span class="block overflow-hidden pb-[0.14em] -mb-[0.14em]">
+            <span class="hl-2 block leading-none text-white text-[clamp(3rem,8vw,6.5rem)]">each other.</span>
+          </span>
+          <span class="block overflow-hidden pb-[0.16em] -mb-[0.1em] mt-1">
+            <span class="hl-3 shine-text block leading-none text-[clamp(3rem,8vw,6.5rem)]">Shine together.</span>
+          </span>
+        </h1>
+        <p class="rise rise-2 text-blue-200/90 font-semibold text-base md:text-lg tracking-[0.45em] mb-7">削り合い、輝いていけ。</p>
+        <p class="rise rise-3 text-gray-400 text-base leading-relaxed mb-11 max-w-md">
+          挑戦を楽しみ、仲間を大切にする人たちが集まるチーム。<br />あなたの「成長したい」を、ここで形にしませんか。
+        </p>
+        <div class="rise rise-4 flex flex-col sm:flex-row gap-4">
+          <a href="/recruit"
+            class="group relative overflow-hidden rounded-full bg-white px-10 py-4 text-center text-lg font-black text-blue-950 transition-all duration-500 hover:-translate-y-0.5 hover:shadow-[0_0_50px_rgba(96,165,250,0.55)]">
+            <span class="relative z-10">採用情報を見る →</span>
+            <span class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-blue-200/70 to-transparent transition-transform duration-700 group-hover:translate-x-full"></span>
+          </a>
+          <a href="/interview"
+            class="rounded-full border border-blue-300/30 px-10 py-4 text-center text-lg font-bold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200/80 hover:bg-blue-400/10">
+            社員の声を聞く
+          </a>
+        </div>
+      </div>
 
-    <h1 class="fade-up fade-up-2 font-black leading-[1.1] mb-8">
-      <span class="block text-5xl md:text-8xl mb-2">自ら掴んだ</span>
-      <span class="block text-5xl md:text-8xl mb-2">チャンスが、</span>
-      <span class="gradient-text block text-4xl md:text-6xl">
-        自分を変える。
-      </span>
-    </h1>
+      <!-- 右：ダイヤモンド -->
+      <div class="order-1 lg:order-2 lg:col-span-5 flex justify-center">
+        <div class="gem-wrap relative w-60 md:w-80 lg:w-[24rem]">
+          <p class="hidden lg:block absolute -right-10 top-6 [writing-mode:vertical-rl] text-[10px] font-semibold uppercase tracking-[0.55em] text-blue-300/50">Diamond cuts diamond</p>
+          <svg viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto drop-shadow-[0_0_45px_rgba(59,130,246,0.35)]">
+            <defs>
+              <linearGradient id="g-tbl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0f9ff"/><stop offset="1" stop-color="#93c5fd"/></linearGradient>
+              <linearGradient id="g-star-l" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#93c5fd"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+              <linearGradient id="g-star-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0f2fe"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
+              <linearGradient id="g-crown-c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+              <linearGradient id="g-crown-cl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d4ed8"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
+              <linearGradient id="g-crown-cr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+              <linearGradient id="g-corner-l" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e40af"/><stop offset="1" stop-color="#172554"/></linearGradient>
+              <linearGradient id="g-corner-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1e40af"/></linearGradient>
+              <linearGradient id="g-girdle" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1e3a8a"/><stop offset="0.5" stop-color="#bfdbfe"/><stop offset="1" stop-color="#1e40af"/></linearGradient>
+              <linearGradient id="g-pav-ol" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
+              <linearGradient id="g-pav-l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e40af"/><stop offset="1" stop-color="#172554"/></linearGradient>
+              <linearGradient id="g-pav-cl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
+              <linearGradient id="g-pav-cr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+              <linearGradient id="g-pav-r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#172554"/></linearGradient>
+              <linearGradient id="g-pav-or" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
+              <linearGradient id="g-shimmer" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="white" stop-opacity="0"/><stop offset="0.5" stop-color="white" stop-opacity="0.3"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
+              <linearGradient id="g-refl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b82f6" stop-opacity="0.3"/><stop offset="1" stop-color="#3b82f6" stop-opacity="0"/></linearGradient>
+              <filter id="g-f" x="-30%" y="-20%" width="160%" height="140%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="b"/>
+                <feColorMatrix in="b" type="matrix" values="0 0 0 0 0.15 0 0 0 0 0.35 0 0 0 0 1 0 0 0 1.6 0" result="cb"/>
+                <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <clipPath id="g-clip"><polygon points="128,16 272,16 394,170 388,184 200,472 12,184 6,170"/></clipPath>
+            </defs>
 
-    <p class="fade-up fade-up-3 text-blue-100/80 text-base md:text-xl leading-relaxed mb-12 max-w-xl mx-auto">
-      挑戦を楽しみ、仲間を大切にする人たちが集まるチーム。<br />
-      あなたの「成長したい」を、ここで形にしませんか。
-    </p>
+            <!-- 反射 -->
+            <ellipse cx="200" cy="502" rx="150" ry="16" fill="#2563eb" opacity="0.18"/>
+            <polygon points="200,482 328,556 72,556" fill="url(#g-refl)"/>
 
-    <div class="fade-up fade-up-4 flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="/recruit"
-        class="group relative overflow-hidden bg-white text-blue-900 font-black px-10 py-4 rounded-full text-lg transition-all duration-300 hover:shadow-[0_0_40px_rgba(96,165,250,0.5)]">
-        <span class="relative z-10">採用情報を見る →</span>
-        <div class="absolute inset-0 bg-blue-50 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-      </a>
-      <a href="/interview"
-        class="border-2 border-white/40 text-white font-bold px-10 py-4 rounded-full text-lg hover:bg-white/10 hover:border-white transition-all duration-300">
-        社員の声を聞く
-      </a>
+            <!-- ファセット -->
+            <g clip-path="url(#g-clip)" filter="url(#g-f)">
+              <!-- クラウン（上部8面） -->
+              <polygon points="128,16 272,16 235,88 165,88" fill="url(#g-tbl)"/>
+              <polygon points="128,16 165,88 102,170" fill="url(#g-star-l)"/>
+              <polygon points="272,16 298,170 235,88" fill="url(#g-star-r)"/>
+              <polygon points="165,88 235,88 200,170" fill="url(#g-crown-c)"/>
+              <polygon points="165,88 200,170 102,170" fill="url(#g-crown-cl)"/>
+              <polygon points="235,88 298,170 200,170" fill="url(#g-crown-cr)"/>
+              <polygon points="6,170 128,16 102,170" fill="url(#g-corner-l)"/>
+              <polygon points="394,170 272,16 298,170" fill="url(#g-corner-r)"/>
+              <!-- ガードル（腰帯） -->
+              <polygon points="6,170 394,170 388,184 12,184" fill="url(#g-girdle)" opacity="0.9"/>
+              <!-- パビリオン（下部6面） -->
+              <polygon points="12,184 60,184 200,472" fill="url(#g-pav-ol)"/>
+              <polygon points="60,184 104,184 200,472" fill="url(#g-pav-l)"/>
+              <polygon points="104,184 200,184 200,472" fill="url(#g-pav-cl)"/>
+              <polygon points="200,184 296,184 200,472" fill="url(#g-pav-cr)"/>
+              <polygon points="296,184 340,184 200,472" fill="url(#g-pav-r)"/>
+              <polygon points="340,184 388,184 200,472" fill="url(#g-pav-or)"/>
+              <!-- エッジライン -->
+              <line x1="6" y1="170" x2="394" y2="170" stroke="#93c5fd" stroke-width="0.8" opacity="0.5"/>
+              <line x1="12" y1="184" x2="388" y2="184" stroke="#93c5fd" stroke-width="0.6" opacity="0.35"/>
+              <line x1="128" y1="16" x2="102" y2="170" stroke="#bfdbfe" stroke-width="0.6" opacity="0.35"/>
+              <line x1="272" y1="16" x2="298" y2="170" stroke="#bfdbfe" stroke-width="0.6" opacity="0.35"/>
+              <line x1="165" y1="88" x2="235" y2="88" stroke="#bfdbfe" stroke-width="0.5" opacity="0.3"/>
+              <line x1="128" y1="16" x2="165" y2="88" stroke="#bfdbfe" stroke-width="0.5" opacity="0.3"/>
+              <line x1="272" y1="16" x2="235" y2="88" stroke="#bfdbfe" stroke-width="0.5" opacity="0.3"/>
+              <line x1="60" y1="184" x2="200" y2="472" stroke="#60a5fa" stroke-width="0.5" opacity="0.25"/>
+              <line x1="104" y1="184" x2="200" y2="472" stroke="#60a5fa" stroke-width="0.5" opacity="0.25"/>
+              <line x1="200" y1="184" x2="200" y2="472" stroke="#60a5fa" stroke-width="0.5" opacity="0.3"/>
+              <line x1="296" y1="184" x2="200" y2="472" stroke="#60a5fa" stroke-width="0.5" opacity="0.25"/>
+              <line x1="340" y1="184" x2="200" y2="472" stroke="#60a5fa" stroke-width="0.5" opacity="0.25"/>
+            </g>
+
+            <!-- 内部のファイア（分散光） -->
+            <g clip-path="url(#g-clip)">
+              <polygon points="150,220 172,206 158,352" fill="#67e8f9">
+                <animate attributeName="opacity" values="0.06;0.35;0.06" dur="6s" repeatCount="indefinite"/>
+              </polygon>
+              <polygon points="252,236 270,224 240,382" fill="#a78bfa">
+                <animate attributeName="opacity" values="0.3;0.05;0.3" dur="7s" repeatCount="indefinite"/>
+              </polygon>
+              <polygon points="194,196 206,196 200,438" fill="#e0f2fe">
+                <animate attributeName="opacity" values="0.08;0.45;0.08" dur="5s" repeatCount="indefinite"/>
+              </polygon>
+            </g>
+
+            <!-- シマー（周回する光の帯） -->
+            <g clip-path="url(#g-clip)">
+              <rect x="0" y="0" width="150" height="480" fill="url(#g-shimmer)" transform="translate(-420 0)">
+                <animateTransform attributeName="transform" type="translate" values="-420 0;820 0" dur="4.5s" begin="1.8s" repeatCount="indefinite"/>
+              </rect>
+            </g>
+
+            <!-- 輪郭・テーブルハイライト -->
+            <polygon points="128,16 272,16 394,170 388,184 200,472 12,184 6,170" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.4"/>
+            <line x1="128" y1="16" x2="272" y2="16" stroke="#e0f2fe" stroke-width="2.5" opacity="0.9"/>
+
+            <!-- スパークル（4点星） -->
+            <g transform="translate(128,16)"><path d="M0,-16 C1.5,-3 3,-1.5 16,0 C3,1.5 1.5,3 0,16 C-1.5,3 -3,1.5 -16,0 C-3,-1.5 -1.5,-3 0,-16 Z" fill="#f0f9ff" opacity="0">
+              <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="0.8s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="scale" values="0.2;0.2;1;0.2;0.2" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="0.8s" repeatCount="indefinite"/>
+            </path></g>
+            <g transform="translate(272,16)"><path d="M0,-16 C1.5,-3 3,-1.5 16,0 C3,1.5 1.5,3 0,16 C-1.5,3 -3,1.5 -16,0 C-3,-1.5 -1.5,-3 0,-16 Z" fill="#f0f9ff" opacity="0">
+              <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="2.4s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="scale" values="0.2;0.2;0.8;0.2;0.2" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="2.4s" repeatCount="indefinite"/>
+            </path></g>
+            <g transform="translate(390,172)"><path d="M0,-16 C1.5,-3 3,-1.5 16,0 C3,1.5 1.5,3 0,16 C-1.5,3 -3,1.5 -16,0 C-3,-1.5 -1.5,-3 0,-16 Z" fill="#bfdbfe" opacity="0">
+              <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="3.6s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="scale" values="0.2;0.2;0.7;0.2;0.2" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="3.6s" repeatCount="indefinite"/>
+            </path></g>
+            <g transform="translate(10,172)"><path d="M0,-16 C1.5,-3 3,-1.5 16,0 C3,1.5 1.5,3 0,16 C-1.5,3 -3,1.5 -16,0 C-3,-1.5 -1.5,-3 0,-16 Z" fill="#bfdbfe" opacity="0">
+              <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="4.8s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="scale" values="0.2;0.2;0.7;0.2;0.2" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="4.8s" repeatCount="indefinite"/>
+            </path></g>
+            <g transform="translate(200,468)"><path d="M0,-16 C1.5,-3 3,-1.5 16,0 C3,1.5 1.5,3 0,16 C-1.5,3 -3,1.5 -16,0 C-3,-1.5 -1.5,-3 0,-16 Z" fill="#f0f9ff" opacity="0">
+              <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="5.8s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="scale" values="0.2;0.2;0.9;0.2;0.2" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="5.8s" repeatCount="indefinite"/>
+            </path></g>
+          </svg>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <!-- スクロール -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-blue-300/60">
-    <span class="text-xs tracking-widest">SCROLL</span>
-    <div class="w-px h-12 bg-gradient-to-b from-blue-300/60 to-transparent"></div>
+  <div class="fade-in absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-blue-300/60">
+    <span class="text-[10px] tracking-[0.4em] font-semibold">SCROLL</span>
+    <div class="relative w-px h-14 overflow-hidden bg-blue-300/15">
+      <div class="scroll-dot absolute left-0 top-0 w-px h-4 bg-gradient-to-b from-transparent via-blue-200 to-blue-300"></div>
+    </div>
   </div>
 </section>
+
+<script>
+  const intro = document.getElementById('intro') as HTMLElement;
+  if (sessionStorage.getItem('intro-shown')) {
+    intro.style.display = 'none';
+  } else {
+    sessionStorage.setItem('intro-shown', '1');
+    setTimeout(() => {
+      intro.classList.add('exit');
+      setTimeout(() => { intro.style.display = 'none'; }, 1050);
+    }, 3800);
+  }
+</script>
 
 <!-- 数字で見るダウイン -->
 <section class="bg-gray-950 text-white py-20 px-6">
