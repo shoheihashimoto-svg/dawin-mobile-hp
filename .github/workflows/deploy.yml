@@ -26,9 +26,13 @@ jobs:
           sudo apt-get install -y lftp
           lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" ftp://sv35.xserver.jp <<'EOF'
           set ftp:ssl-allow no
-          set net:timeout 60
-          set net:max-retries 3
-          set mirror:parallel-transfer-count 2
-          mirror --reverse --delete --parallel=2 dist/ ./
+          set ftp:passive-mode true
+          set ftp:use-feat no
+          set net:timeout 120
+          set net:max-retries 5
+          set net:reconnect-interval-base 5
+          set net:reconnect-interval-multiplier 1
+          set mirror:parallel-transfer-count 1
+          mirror --reverse --delete --parallel=1 --continue dist/ ./
           quit
           EOF
