@@ -546,8 +546,12 @@ import Layout from '../layouts/Layout.astro';
       const worldH    = 2 * Math.tan((camera.fov * Math.PI / 180) / 2) * camera.position.z;
       const pxToWorld = worldH / wRect.height;
       const canvasCY  = wRect.top + wRect.height / 2;
-      gemYMax = -(hl1.getBoundingClientRect().top      - canvasCY) * pxToWorld;
-      gemYMin = -(rise2.getBoundingClientRect().bottom - canvasCY) * pxToWorld;
+      const rawMax = -(hl1.getBoundingClientRect().top      - canvasCY) * pxToWorld;
+      const rawMin = -(rise2.getBoundingClientRect().bottom - canvasCY) * pxToWorld;
+      // ジェム実寸（クラウン0.30 + パビリオン0.84）でキャンバス端クリップを防ぐ
+      const half = worldH / 2;
+      gemYMax = Math.min(rawMax, half - 0.30 - 0.15);
+      gemYMin = Math.max(rawMin, -(half - 0.84 - 0.15));
     }
 
     function resize() {
