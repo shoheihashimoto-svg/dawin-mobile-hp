@@ -27,8 +27,10 @@ const members = [
     kana: '',
     role: 'スタッフ',
     year: 'Staff',
-    quote: '未経験でも、ここなら成長できると思った。',
+    quote: 'モバイルを辞めるつもりだったのに、ここに来たら、また好きになれた。',
     color: 'from-blue-900 to-cyan-700',
+    photo: '/kihara.jpg',
+    photoPos: '50% 20%',
   },
   {
     id: 'nakamura',
@@ -36,8 +38,10 @@ const members = [
     kana: '',
     role: 'スタッフ',
     year: 'Staff',
-    quote: '一緒に楽しみながら頑張りましょう！成功するまでサポートします。',
+    quote: 'いつの間にか、ここが自分の場所になってた。アルバイトから正社員へ、最古参スタッフが語る。',
     color: 'from-slate-800 to-blue-800',
+    photo: '/nakamura.jpg',
+    photoPos: '50% 12%',
   },
   {
     id: 'takahashi',
@@ -65,6 +69,8 @@ const members = [
     year: 'Staff',
     quote: '自分を変えたい、挑戦したいと思っているなら、ぜひここへ。',
     color: 'from-cyan-900 to-blue-800',
+    photo: '/oba.jpg',
+    photoPos: '50% 15%',
   },
   {
     id: 'takata',
@@ -101,7 +107,7 @@ const members = [
           <!-- 写真エリア -->
           <div class="h-48 relative overflow-hidden">
             {m.photo ? (
-              <img src={m.photo} alt={m.name} class="absolute inset-0 w-full h-full object-cover" style="object-position: 50% 30%;" />
+              <img src={m.photo} alt={m.name} class="absolute inset-0 w-full h-full object-cover" style={`object-position: ${m.photoPos ?? '50% 30%'};`} />
             ) : (
               <div class="absolute inset-0 flex items-center justify-center">
                 <div class="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center">
