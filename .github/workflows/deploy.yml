@@ -20,10 +20,12 @@ jobs:
 
       - run: npm run build
 
-      - uses: SamKirkland/FTP-Deploy-Action@v4
-        with:
-          server: sv35.xserver.jp
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: ./
+      - name: FTP Deploy
+        run: |
+          sudo apt-get install -y lftp
+          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" ftp://sv35.xserver.jp <<'EOF'
+          set ftp:ssl-allow no
+          set net:timeout 30
+          mirror --reverse --delete --verbose dist/ ./
+          quit
+          EOF
