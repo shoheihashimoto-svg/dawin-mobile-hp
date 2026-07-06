@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -22,17 +22,16 @@ jobs:
       - run: npm run build
 
       - name: FTP Deploy
-        run: |
-          sudo apt-get install -y lftp
-          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" ftp://sv35.xserver.jp <<'EOF'
-          set ftp:ssl-allow no
-          set ftp:passive-mode true
-          set ftp:use-feat no
-          set net:timeout 120
-          set net:max-retries 5
-          set net:reconnect-interval-base 5
-          set net:reconnect-interval-multiplier 1
-          set mirror:parallel-transfer-count 1
-          mirror --reverse --delete --parallel=1 --continue dist/ ./
-          quit
-          EOF
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: sv35.xserver.jp
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./
+          protocol: ftp
+          port: 21
+          dangerous-clean-slate: false
+          log-level: standard
+          timeout: 60000
+          retry-count: 3
