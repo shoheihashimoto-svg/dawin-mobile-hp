@@ -28,7 +28,7 @@ jobs:
           set ftp:ssl-allow no
           set net:timeout 60
           set net:max-retries 3
-          set mirror:parallel-transfer-count 4
-          mirror --reverse --delete --parallel=4 dist/ ./
+          set mirror:parallel-transfer-count 2
+          mirror --reverse --delete --parallel=2 dist/ ./
           quit
           EOF
