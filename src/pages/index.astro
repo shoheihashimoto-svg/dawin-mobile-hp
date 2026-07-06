@@ -496,8 +496,9 @@ import Layout from '../layouts/Layout.astro';
 
   (function initGem() {
     const canvas = document.getElementById('gem-canvas') as HTMLCanvasElement;
-    // WebGL非対応デバイスはSVGフォールバックを表示して終了
-    if (!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))) {
+    // WebGL非対応確認は一時キャンバスで行う（本番canvasでgetContextするとThree.jsがwebgl2を取得できなくなる）
+    const _t = document.createElement('canvas');
+    if (!(_t.getContext('webgl2') || _t.getContext('webgl') || _t.getContext('experimental-webgl'))) {
       (document.getElementById('gem-fallback') as HTMLElement).style.display = 'flex';
       canvas.style.display = 'none';
       return;
