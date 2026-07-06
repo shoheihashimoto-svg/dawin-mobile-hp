@@ -70,22 +70,29 @@ import Layout from '../layouts/Layout.astro';
       </div>
       <div class="border border-white/10 rounded-2xl overflow-hidden"
         style="display: grid; grid-template-columns: 7rem 1fr;">
-        {[
-          { label: '会社名', value: '株式会社ダウイン モバイル事業部' },
-          { label: '所在地', value: '【東京】港区西麻布1-14-1 井門西麻布ビル3F\n\n【福岡】博多区博多駅南1-3-8 博多パールビル605' },
-          { label: 'グループ', value: 'QLSホールディングス（東証グロース）' },
-          { label: 'チーム規模', value: '社員16名 ＋ アルバイト27名' },
-          { label: '事業内容', value: 'モバイルイベント企画・運営・派遣' },
-        ].map((item, i) => (
-          <>
-            <div class={`bg-blue-600 text-white text-xs font-bold px-4 py-4 flex items-center border-b border-blue-500 ${i === 4 ? 'border-b-0' : ''}`}>
-              {item.label}
-            </div>
-            <div class={`px-5 py-4 text-sm text-gray-300 whitespace-pre-line border-b border-white/10 ${i % 2 === 0 ? 'bg-white/5' : 'bg-white/[0.02]'} ${i === 4 ? 'border-b-0' : ''}`}>
-              {item.value}
-            </div>
-          </>
-        ))}
+        {(() => {
+          const rows = [
+            { label: '会社名',     value: '株式会社ダウイン' },
+            { label: '本社所在地', value: '〒661-0976\n兵庫県尼崎市潮江1丁目20番1号\nアミング潮江イースト20-1号棟201C号' },
+            { label: '資本金',     value: '9,900万円' },
+            { label: '従業員数',   value: '301名（2024年6月1日現在）' },
+            { label: 'グループ',   value: '株式会社QLSホールディングス\n（東証グロース市場　証券コード7075）' },
+            { label: '事業部所在地', value: '【東京】港区西麻布1-14-1 井門西麻布ビル3F\n\n【福岡】博多区博多駅南1-3-8 博多パールビル605' },
+            { label: '事業部規模', value: '社員16名 ＋ アルバイト27名' },
+            { label: '事業内容',   value: 'モバイルイベント企画・運営・派遣' },
+          ];
+          const last = rows.length - 1;
+          return rows.map((item, i) => (
+            <>
+              <div class={`bg-blue-600 text-white text-xs font-bold px-4 py-4 flex items-center border-b border-blue-500 ${i === last ? 'border-b-0' : ''}`}>
+                {item.label}
+              </div>
+              <div class={`px-5 py-4 text-sm text-gray-300 whitespace-pre-line border-b border-white/10 ${i % 2 === 0 ? 'bg-white/5' : 'bg-white/[0.02]'} ${i === last ? 'border-b-0' : ''}`}>
+                {item.value}
+              </div>
+            </>
+          ));
+        })()}
       </div>
     </div>
   </div>
