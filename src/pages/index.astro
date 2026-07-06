@@ -535,6 +535,21 @@ import Layout from '../layouts/Layout.astro';
     gem.rotation.y = Math.PI / 8;
     scene.add(gem);
 
+    // ── 浮遊Y範囲を「Sharpen」〜「削り合い」テキスト位置にDOMで合わせる ──
+    let gemYMin = -0.25, gemYMax = 0.20;
+    function calcGemYBounds() {
+      const hl1   = document.querySelector('.hl-1')   as HTMLElement | null;
+      const rise2 = document.querySelector('.rise-2') as HTMLElement | null;
+      if (!hl1 || !rise2) return;
+      const wRect = wrapper.getBoundingClientRect();
+      if (wRect.height < 10) return;
+      const worldH    = 2 * Math.tan((camera.fov * Math.PI / 180) / 2) * camera.position.z;
+      const pxToWorld = worldH / wRect.height;
+      const canvasCY  = wRect.top + wRect.height / 2;
+      gemYMax = -(hl1.getBoundingClientRect().top      - canvasCY) * pxToWorld;
+      gemYMin = -(rise2.getBoundingClientRect().bottom - canvasCY) * pxToWorld;
+    }
+
     function resize() {
       const w = wrapper.clientWidth;
       const h = wrapper.clientHeight || w * 1.33;
@@ -545,23 +560,6 @@ import Layout from '../layouts/Layout.astro';
     }
     resize();
     new ResizeObserver(resize).observe(wrapper);
-
-    // ── 浮遊Y範囲を「Sharpen」〜「削り合い」テキスト位置にDOMで合わせる ──
-    let gemYMin = -0.25, gemYMax = 0.20;
-    function calcGemYBounds() {
-      const hl1   = document.querySelector('.hl-1')   as HTMLElement | null;
-      const rise2 = document.querySelector('.rise-2') as HTMLElement | null;
-      if (!hl1 || !rise2) return;
-      const wRect = wrapper.getBoundingClientRect();
-      if (wRect.height < 10) return;
-      // canvasが映す世界空間の高さ（FOV + カメラ距離から算出）
-      const worldH    = 2 * Math.tan((camera.fov * Math.PI / 180) / 2) * camera.position.z;
-      const pxToWorld = worldH / wRect.height;
-      const canvasCY  = wRect.top + wRect.height / 2;
-      gemYMax = -(hl1.getBoundingClientRect().top      - canvasCY) * pxToWorld;
-      gemYMin = -(rise2.getBoundingClientRect().bottom - canvasCY) * pxToWorld;
-    }
-    calcGemYBounds();
 
     let mx = 0, my = 0;
     window.addEventListener('mousemove', e => {
