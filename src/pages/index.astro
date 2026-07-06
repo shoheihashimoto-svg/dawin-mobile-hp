@@ -108,7 +108,7 @@ import Layout from '../layouts/Layout.astro';
 </div>
 
 <!-- ===== HERO ===== -->
-<section class="relative min-h-screen flex items-center text-white overflow-hidden bg-gray-950">
+<section id="hero-section" class="relative min-h-[100svh] flex items-center text-white overflow-hidden bg-gray-950">
   <canvas id="hero-stars" class="absolute inset-0 w-full h-full pointer-events-none" style="opacity:0.45;" aria-hidden="true"></canvas>
 
   <!-- 背景レイヤー -->
@@ -169,7 +169,7 @@ import Layout from '../layouts/Layout.astro';
         <p class="rise rise-3 text-gray-400 text-base leading-relaxed mb-11 max-w-md">
           挑戦を楽しみ、仲間を大切にする人たちが集まるチーム。<br />あなたの「成長したい」を、ここで形にしませんか。
         </p>
-        <div class="rise rise-4 flex flex-col sm:flex-row gap-4">
+        <div class="rise rise-4 flex flex-col sm:flex-row sm:flex-wrap gap-4">
           <a href="/recruit"
             class="group relative overflow-hidden rounded-full bg-white px-10 py-4 text-center text-lg font-black text-blue-950 transition-all duration-500 hover:-translate-y-0.5 hover:shadow-[0_0_50px_rgba(96,165,250,0.55)]">
             <span class="relative z-10">採用情報を見る →</span>
@@ -179,6 +179,11 @@ import Layout from '../layouts/Layout.astro';
             class="rounded-full border border-blue-300/30 px-10 py-4 text-center text-lg font-bold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200/80 hover:bg-blue-400/10">
             社員の声を聞く
           </a>
+          <!-- TODO: LINE公式アカウントURLに変更 -->
+          <a href="/contact"
+            class="rounded-full border border-green-400/35 bg-green-500/8 px-10 py-4 text-center text-lg font-bold text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-green-400/65 hover:bg-green-500/18">
+            LINEでカジュアル相談（履歴書不要）
+          </a>
         </div>
       </div>
 
@@ -186,6 +191,21 @@ import Layout from '../layouts/Layout.astro';
       <div class="order-1 lg:order-2 lg:col-span-5 flex justify-center items-center">
         <div class="gem-wrap relative" style="width:clamp(14rem,38vw,22rem);aspect-ratio:3/4;">
           <canvas id="gem-canvas" class="absolute inset-0 w-full h-full"></canvas>
+          <!-- WebGL非対応デバイス用フォールバック -->
+          <div id="gem-fallback" class="absolute inset-0 hidden items-center justify-center">
+            <svg viewBox="0 0 200 240" class="w-2/3 opacity-60" aria-hidden="true">
+              <defs>
+                <linearGradient id="gfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.7"/>
+                  <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.3"/>
+                </linearGradient>
+              </defs>
+              <polygon points="100,8 192,78 100,232 8,78" fill="url(#gfGrad)" stroke="#60a5fa" stroke-width="1.5"/>
+              <polygon points="100,8 150,78 100,148 50,78" fill="none" stroke="#93c5fd" stroke-width="0.8" opacity="0.6"/>
+              <line x1="8" y1="78" x2="192" y2="78" stroke="#60a5fa" stroke-width="0.8" opacity="0.5"/>
+              <line x1="100" y1="8" x2="100" y2="232" stroke="#60a5fa" stroke-width="0.5" opacity="0.3"/>
+            </svg>
+          </div>
           <p class="hidden lg:block absolute -right-10 top-6 [writing-mode:vertical-rl] text-[10px] font-semibold uppercase tracking-[0.55em] text-blue-300/40">Diamond cuts diamond</p>
           <!-- スパークル（12個・各周期2倍で密度を維持） -->
           <svg class="star-flare w-4 h-4" style="left:18%;top:22%;--sd:5.8s;--ss:0.0s"  viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="white"/></svg>
@@ -474,78 +494,92 @@ import Layout from '../layouts/Layout.astro';
   }
 
   // ── HERO GEM ─────────────────────────────────────
-  const canvas = document.getElementById('gem-canvas') as HTMLCanvasElement;
-  const wrapper = canvas.parentElement as HTMLElement;
+  // ヒーローセクションが画面外のときrAFを停止してCPU/GPUを節約
+  let heroVisible = true;
+  new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; }, { threshold: 0 })
+    .observe(document.getElementById('hero-section')!);
 
-  const renderer = buildRenderer(canvas);
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-  camera.position.set(0, 0.1, 4.8);
-  camera.lookAt(0, -0.1, 0);
-  buildEnv(renderer, scene);
+  (function initGem() {
+    const canvas = document.getElementById('gem-canvas') as HTMLCanvasElement;
+    // WebGL非対応デバイスはSVGフォールバックを表示して終了
+    if (!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))) {
+      (document.getElementById('gem-fallback') as HTMLElement).style.display = 'flex';
+      canvas.style.display = 'none';
+      return;
+    }
+    const wrapper = canvas.parentElement as HTMLElement;
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-  const lA = new THREE.PointLight(0x60a5fa, 16, 20);
-  lA.position.set(3, 3, 4);
-  scene.add(lA);
-  const lB = new THREE.PointLight(0xbfdbfe, 8, 15);
-  lB.position.set(-3, 2, -2);
-  scene.add(lB);
-  const lC = new THREE.PointLight(0x2563eb, 7, 18);
-  lC.position.set(0, -5, 2);
-  scene.add(lC);
-  // 高速周回フラッシュ光（輝度パルス）
-  const lD = new THREE.PointLight(0x6699ff, 20, 10);
-  lD.position.set(2, 1, 3);
-  scene.add(lD);
-  // 補助アクセント光
-  const lE = new THREE.PointLight(0x93c5fd, 9, 16);
-  lE.position.set(-1, -3, 3);
-  scene.add(lE);
+    const renderer = buildRenderer(canvas);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+    camera.position.set(0, 0.1, 4.8);
+    camera.lookAt(0, -0.1, 0);
+    buildEnv(renderer, scene);
 
-  const gem = new THREE.Mesh(buildDiamond(), buildMaterial());
-  gem.rotation.y = Math.PI / 8;
-  scene.add(gem);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+    const lA = new THREE.PointLight(0x60a5fa, 16, 20);
+    lA.position.set(3, 3, 4);
+    scene.add(lA);
+    const lB = new THREE.PointLight(0xbfdbfe, 8, 15);
+    lB.position.set(-3, 2, -2);
+    scene.add(lB);
+    const lC = new THREE.PointLight(0x2563eb, 7, 18);
+    lC.position.set(0, -5, 2);
+    scene.add(lC);
+    // 高速周回フラッシュ光（輝度パルス）
+    const lD = new THREE.PointLight(0x6699ff, 20, 10);
+    lD.position.set(2, 1, 3);
+    scene.add(lD);
+    // 補助アクセント光
+    const lE = new THREE.PointLight(0x93c5fd, 9, 16);
+    lE.position.set(-1, -3, 3);
+    scene.add(lE);
 
-  function resize() {
-    const w = wrapper.clientWidth;
-    const h = wrapper.clientHeight || w * 1.33;
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-  }
-  resize();
-  new ResizeObserver(resize).observe(wrapper);
+    const gem = new THREE.Mesh(buildDiamond(), buildMaterial());
+    gem.rotation.y = Math.PI / 8;
+    scene.add(gem);
 
-  let mx = 0, my = 0;
-  window.addEventListener('mousemove', e => {
-    mx =  (e.clientX / window.innerWidth  - 0.5);
-    my = -(e.clientY / window.innerHeight - 0.5);
-  });
+    function resize() {
+      const w = wrapper.clientWidth;
+      const h = wrapper.clientHeight || w * 1.33;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    new ResizeObserver(resize).observe(wrapper);
 
-  let t = 0;
-  (function loop() {
-    requestAnimationFrame(loop);
-    t += 0.008;
-    gem.rotation.y += 0.005 + mx * 0.018;
-    gem.rotation.x  = 0.30 + my * 0.10 + Math.sin(t * 0.47) * 0.07;
-    gem.rotation.z  = Math.sin(t * 0.33) * 0.05;
-    // 非整数比の周波数を重ねてランダムな浮遊感を作る（X は端切れ防止で狭め・左寄り）
-    gem.position.x  = Math.sin(t * 0.29) * 0.09 + Math.cos(t * 0.17) * 0.06 - 0.06;
-    gem.position.y  = Math.sin(t * 0.53) * 0.16 + Math.cos(t * 0.37) * 0.10 - 0.08;
-    gem.position.z  = Math.sin(t * 0.41) * 0.10 + Math.cos(t * 0.23) * 0.07;
-    lA.position.x   = Math.cos(t * 0.5) * 4;
-    lA.position.z   = Math.sin(t * 0.5) * 4;
-    lC.position.x   = Math.sin(t * 0.3) * 3;
-    // lD: 高速周回 + 輝度パルス
-    lD.position.x   = Math.cos(t * 1.5 + 1) * 3.5;
-    lD.position.y   = Math.sin(t * 1.1) * 2;
-    lD.position.z   = Math.sin(t * 1.5 + 1) * 3.5;
-    lD.intensity    = 16 + Math.sin(t * 3.2) * 10;
-    // lE: 緩やかな補助周回
-    lE.position.x   = Math.sin(t * 0.6 + 3) * 3;
-    lE.position.z   = Math.cos(t * 0.6 + 3) * 2;
-    renderer.render(scene, camera);
+    let mx = 0, my = 0;
+    window.addEventListener('mousemove', e => {
+      mx =  (e.clientX / window.innerWidth  - 0.5);
+      my = -(e.clientY / window.innerHeight - 0.5);
+    });
+
+    let t = 0;
+    (function loop() {
+      requestAnimationFrame(loop);
+      if (!heroVisible) return;
+      t += 0.008;
+      gem.rotation.y += 0.005 + mx * 0.018;
+      gem.rotation.x  = 0.30 + my * 0.10 + Math.sin(t * 0.47) * 0.07;
+      gem.rotation.z  = Math.sin(t * 0.33) * 0.05;
+      // 非整数比の周波数を重ねてランダムな浮遊感を作る（X は端切れ防止で狭め・左寄り）
+      gem.position.x  = Math.sin(t * 0.29) * 0.09 + Math.cos(t * 0.17) * 0.06 - 0.06;
+      gem.position.y  = Math.sin(t * 0.53) * 0.16 + Math.cos(t * 0.37) * 0.10 - 0.08;
+      gem.position.z  = Math.sin(t * 0.41) * 0.10 + Math.cos(t * 0.23) * 0.07;
+      lA.position.x   = Math.cos(t * 0.5) * 4;
+      lA.position.z   = Math.sin(t * 0.5) * 4;
+      lC.position.x   = Math.sin(t * 0.3) * 3;
+      // lD: 高速周回 + 輝度パルス
+      lD.position.x   = Math.cos(t * 1.5 + 1) * 3.5;
+      lD.position.y   = Math.sin(t * 1.1) * 2;
+      lD.position.z   = Math.sin(t * 1.5 + 1) * 3.5;
+      lD.intensity    = 16 + Math.sin(t * 3.2) * 10;
+      // lE: 緩やかな補助周回
+      lE.position.x   = Math.sin(t * 0.6 + 3) * 3;
+      lE.position.z   = Math.cos(t * 0.6 + 3) * 2;
+      renderer.render(scene, camera);
+    })();
   })();
 
   // ── HERO STARS (ambient background) ──────────────
@@ -588,6 +622,7 @@ import Layout from '../layouts/Layout.astro';
 
     (function hLoop() {
       requestAnimationFrame(hLoop);
+      if (!heroVisible) return;
       const now=performance.now(), ms=now-hst0, dt=Math.min((now-hsprev)/1000,0.05);
       hsprev=now;
       const HW=hs.clientWidth, HH=hs.clientHeight;
@@ -752,6 +787,17 @@ import Layout from '../layouts/Layout.astro';
   });
 </script>
 
+<!-- CULTURE 導線 -->
+<div class="bg-white py-10 px-6 border-t border-gray-100">
+  <div class="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
+    <p class="text-gray-500 text-sm shrink-0">「どんな職場？」もっと知りたい方は</p>
+    <a href="/culture"
+      class="inline-block border-2 border-blue-200 text-blue-600 font-bold px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 whitespace-nowrap">
+      CULTURE — チームの文化・働き方 →
+    </a>
+  </div>
+</div>
+
 <!-- なぜダイヤモンドなのか -->
 <section class="bg-gray-950 text-white py-24 px-6">
   <div class="max-w-4xl mx-auto">
@@ -840,10 +886,17 @@ import Layout from '../layouts/Layout.astro';
     <p class="text-blue-100/80 text-lg mb-12 max-w-xl mx-auto">
       隣の仲間を全力で思いやる環境で、<br />新しい自分にアップデートしよう。
     </p>
-    <a href="/recruit"
-      class="inline-block bg-white text-blue-900 font-black text-xl px-14 py-5 rounded-full hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] hover:scale-105 transition-all duration-300">
-      採用エントリーはこちら →
-    </a>
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <a href="/recruit"
+        class="inline-block bg-white text-blue-900 font-black text-xl px-14 py-5 rounded-full hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] hover:scale-105 transition-all duration-300">
+        採用エントリーはこちら →
+      </a>
+      <!-- TODO: LINE公式アカウントURLに変更 -->
+      <a href="/contact"
+        class="inline-block border-2 border-green-400/50 text-green-200 font-bold text-base px-10 py-4 rounded-full hover:border-green-400 hover:text-green-100 hover:bg-green-500/10 transition-all duration-300">
+        LINEでカジュアル相談（履歴書不要）
+      </a>
+    </div>
   </div>
 </section>
 
