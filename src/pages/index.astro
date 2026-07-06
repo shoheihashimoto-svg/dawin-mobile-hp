@@ -5,78 +5,7 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
   /* ================= INTRO ================= */
-  #intro { clip-path: polygon(50% -130%, 230% 50%, 50% 230%, -130% 50%); }
-  #intro.exit { animation: irisOut 1s cubic-bezier(0.76, 0, 0.24, 1) forwards; }
-  @keyframes irisOut { to { clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%); } }
-  #intro.exit .intro-stage { animation: stageOut 1s cubic-bezier(0.76, 0, 0.24, 1) forwards; }
-  @keyframes stageOut { to { transform: scale(0.9); opacity: 0.4; } }
-
-  .i-beam { transform-origin: center; animation: beamIn 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both; }
-  @keyframes beamIn {
-    0%   { transform: scaleX(0); opacity: 0; }
-    40%  { transform: scaleX(1); opacity: 1; }
-    100% { transform: scaleX(1); opacity: 0; }
-  }
-
-  .i-shard-l { animation: shardInL 0.8s cubic-bezier(0.55, 0, 0.85, 0.4) 0.15s both, shardVanish 0.3s ease-out 0.92s both; }
-  .i-shard-r { animation: shardInR 0.8s cubic-bezier(0.55, 0, 0.85, 0.4) 0.15s both, shardVanish 0.3s ease-out 0.92s both; }
-  @keyframes shardInL {
-    0%   { transform: translate(calc(-50% - 46vw), -50%) rotate(-80deg); opacity: 0; }
-    18%  { opacity: 1; }
-    100% { transform: translate(calc(-50% - 26px), -50%) rotate(0deg); opacity: 1; }
-  }
-  @keyframes shardInR {
-    0%   { transform: translate(calc(-50% + 46vw), -50%) rotate(80deg); opacity: 0; }
-    18%  { opacity: 1; }
-    100% { transform: translate(calc(-50% + 26px), -50%) rotate(0deg); opacity: 1; }
-  }
-  @keyframes shardVanish {
-    0%   { opacity: 1; filter: brightness(1); }
-    50%  { opacity: 1; filter: brightness(3.5); }
-    100% { opacity: 0; filter: brightness(5); }
-  }
-
-  .i-flash { animation: flashBurst 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both; }
-  @keyframes flashBurst {
-    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.15); }
-    18%  { opacity: 1; }
-    100% { opacity: 0; transform: translate(-50%, -50%) scale(2.8); }
-  }
-  .i-ring   { animation: ringOut 1s cubic-bezier(0.16, 1, 0.3, 1) 0.95s both; }
-  .i-ring-2 { animation: ringOut 1.25s cubic-bezier(0.16, 1, 0.3, 1) 1.1s both; }
-  @keyframes ringOut {
-    0%   { opacity: 0.9; transform: translate(-50%, -50%) scale(0.12); }
-    100% { opacity: 0;   transform: translate(-50%, -50%) scale(3.6); }
-  }
-  .i-ray-h { animation: rayH 1.3s cubic-bezier(0.16, 1, 0.3, 1) 1.02s both; }
-  @keyframes rayH {
-    0%   { transform: translate(-50%, -50%) scaleX(0); opacity: 0; }
-    25%  { opacity: 0.9; }
-    100% { transform: translate(-50%, -50%) scaleX(1); opacity: 0; }
-  }
-  .i-ray-v { animation: rayV 1.3s cubic-bezier(0.16, 1, 0.3, 1) 1.08s both; }
-  @keyframes rayV {
-    0%   { transform: translate(-50%, -50%) rotate(90deg) scaleX(0); opacity: 0; }
-    25%  { opacity: 0.7; }
-    100% { transform: translate(-50%, -50%) rotate(90deg) scaleX(1); opacity: 0; }
-  }
-
-  .i-gem { animation: gemIn 1s cubic-bezier(0.22, 1.2, 0.36, 1) 1s both; }
-  @keyframes gemIn {
-    0%   { opacity: 0; transform: scale(0.2) rotate(-140deg); }
-    45%  { opacity: 1; }
-    70%  { transform: scale(1.07) rotate(7deg); }
-    100% { opacity: 1; transform: scale(1) rotate(0deg); }
-  }
-
-  .i-line-1 .i-line-in { animation: lineUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) 1.8s both; }
-  .i-line-2 .i-line-in { animation: lineUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) 2.05s both; }
   @keyframes lineUp { from { transform: translateY(115%); } to { transform: translateY(0); } }
-  .i-jp { animation: jpIn 1.1s cubic-bezier(0.22, 1, 0.36, 1) 2.45s both; }
-  @keyframes jpIn {
-    from { opacity: 0; letter-spacing: 1.1em; }
-    to   { opacity: 1; letter-spacing: 0.5em; }
-  }
 
   /* ================= HERO ================= */
   .rise { animation: riseUp 1s cubic-bezier(0.22, 1, 0.36, 1) both; }
@@ -91,14 +20,21 @@ import Layout from '../layouts/Layout.astro';
 
   .hl-1 { animation: lineUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both; }
   .hl-2 { animation: lineUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both; }
-  .hl-3 { animation: lineUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both; }
+  /* hl-3 だけ overflow-hidden 不要のフェード付きバリアント */
+  .hl-3 { animation: lineUpFade 1s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both; }
+  @keyframes lineUpFade {
+    from { transform: translateY(110%); opacity: 0; }
+    18%  { opacity: 1; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
 
   .fade-in { animation: fadeIn 1.2s ease 1.4s both; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
   .shine-text {
     background: linear-gradient(105deg, #3b82f6 0%, #93c5fd 25%, #f0f9ff 50%, #93c5fd 75%, #3b82f6 100%);
-    background-size: 220% auto;
+    background-size: 220% 150%;
+    background-position: 0 center;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -107,22 +43,17 @@ import Layout from '../layouts/Layout.astro';
   @keyframes sheen { to { background-position: -220% center; } }
 
   .gem-wrap {
-    animation: gemEnter 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both,
-               gemFloat 9s ease-in-out 2.4s infinite;
+    animation: gemEnter 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
   }
   @keyframes gemEnter {
     from { opacity: 0; transform: translateY(46px) scale(0.88); }
     to   { opacity: 1; transform: translateY(0) scale(1); }
   }
-  @keyframes gemFloat {
-    0%, 100% { transform: translateY(0) rotate(0.5deg); }
-    50%      { transform: translateY(-16px) rotate(-0.5deg); }
-  }
 
   .gem-glow { animation: glowPulse 6s ease-in-out infinite; }
   @keyframes glowPulse {
-    0%, 100% { opacity: 0.25; transform: translateY(-50%) scale(0.9); }
-    50%      { opacity: 0.55; transform: translateY(-50%) scale(1.08); }
+    0%, 100% { opacity: 0.3; transform: translateY(-50%) scale(0.9); }
+    50%      { opacity: 0.65; transform: translateY(-50%) scale(1.1); }
   }
 
   .shaft { animation: shaftSway 16s ease-in-out infinite alternate; }
@@ -135,6 +66,16 @@ import Layout from '../layouts/Layout.astro';
   @keyframes twinkle {
     0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
     50%      { opacity: 0.7; transform: translateY(-20px) scale(1); }
+  }
+
+  /* 4点スター スパークル */
+  .star-flare {
+    position: absolute; pointer-events: none;
+    animation: starFlare var(--sd, 3.2s) var(--ss, 0s) ease-in-out infinite;
+  }
+  @keyframes starFlare {
+    0%,100% { opacity:0; transform: scale(0.3) rotate(0deg); }
+    45%,55% { opacity:1; transform: scale(1)   rotate(45deg); }
   }
 
   .spin-slow { animation: spinSlow 90s linear infinite; }
@@ -152,128 +93,29 @@ import Layout from '../layouts/Layout.astro';
     #intro { display: none !important; }
     * { animation-duration: 0.001s !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; }
   }
+
+  .hex-card {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  }
+
 </style>
 
 <!-- ===== INTRO OVERLAY ===== -->
-<div id="intro" class="fixed inset-0 z-[200] bg-gray-950 overflow-hidden select-none pointer-events-none" aria-hidden="true">
-  <div class="intro-stage absolute inset-0 flex flex-col items-center justify-center">
-
-    <!-- 衝突ステージ -->
-    <div class="relative w-full h-60 md:h-72 flex items-center justify-center mb-8">
-      <!-- 光の軌道線 -->
-      <div class="i-beam absolute inset-x-0 top-1/2 h-px" style="background:linear-gradient(90deg, transparent, rgba(147,197,253,0.7), transparent);"></div>
-
-      <!-- 原石（左） -->
-      <div class="i-shard-l absolute left-1/2 top-1/2">
-        <svg viewBox="0 0 120 140" class="w-16 h-20 md:w-20 md:h-24">
-          <defs>
-            <linearGradient id="i-sh-a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
-            <linearGradient id="i-sh-b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#1e40af"/></linearGradient>
-          </defs>
-          <polygon points="14,74 42,10 104,26 110,88 58,132" fill="url(#i-sh-a)"/>
-          <polygon points="42,10 104,26 66,70" fill="url(#i-sh-b)" opacity="0.9"/>
-          <polygon points="14,74 66,70 58,132" fill="#172554"/>
-          <polygon points="66,70 110,88 58,132" fill="url(#i-sh-b)" opacity="0.55"/>
-          <polygon points="14,74 42,10 66,70" fill="#1d4ed8" opacity="0.7"/>
-          <polygon points="14,74 42,10 104,26 110,88 58,132" fill="none" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
-        </svg>
-      </div>
-      <!-- 原石（右） -->
-      <div class="i-shard-r absolute left-1/2 top-1/2">
-        <svg viewBox="0 0 120 140" class="w-16 h-20 md:w-20 md:h-24 -scale-x-100">
-          <polygon points="14,74 42,10 104,26 110,88 58,132" fill="url(#i-sh-a)"/>
-          <polygon points="42,10 104,26 66,70" fill="url(#i-sh-b)" opacity="0.9"/>
-          <polygon points="14,74 66,70 58,132" fill="#172554"/>
-          <polygon points="66,70 110,88 58,132" fill="url(#i-sh-b)" opacity="0.55"/>
-          <polygon points="14,74 42,10 66,70" fill="#1d4ed8" opacity="0.7"/>
-          <polygon points="14,74 42,10 104,26 110,88 58,132" fill="none" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
-        </svg>
-      </div>
-
-      <!-- 衝突の閃光 -->
-      <div class="i-flash absolute left-1/2 top-1/2 w-72 h-72 rounded-full" style="background:radial-gradient(circle, rgba(240,249,255,0.95), rgba(96,165,250,0.4) 40%, transparent 70%);"></div>
-      <div class="i-ring absolute left-1/2 top-1/2 w-40 h-40 rounded-full border border-blue-200/70"></div>
-      <div class="i-ring-2 absolute left-1/2 top-1/2 w-40 h-40 rounded-full border border-blue-400/40"></div>
-      <div class="i-ray-h absolute left-1/2 top-1/2 w-[110vw] h-px" style="background:linear-gradient(90deg, transparent, rgba(224,242,254,0.9), transparent);"></div>
-      <div class="i-ray-v absolute left-1/2 top-1/2 w-[70vh] h-px" style="background:linear-gradient(90deg, transparent, rgba(224,242,254,0.7), transparent);"></div>
-
-      <!-- 誕生するダイヤ -->
-      <div class="i-gem relative">
-        <svg viewBox="0 0 400 480" class="w-36 h-44 md:w-44 md:h-52 drop-shadow-[0_0_40px_rgba(59,130,246,0.45)]">
-          <defs>
-            <linearGradient id="i-tbl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0f9ff"/><stop offset="1" stop-color="#93c5fd"/></linearGradient>
-            <linearGradient id="i-star-l" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#93c5fd"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
-            <linearGradient id="i-star-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0f2fe"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
-            <linearGradient id="i-crown-c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
-            <linearGradient id="i-crown-cl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d4ed8"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
-            <linearGradient id="i-crown-cr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
-            <linearGradient id="i-corner-l" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e40af"/><stop offset="1" stop-color="#172554"/></linearGradient>
-            <linearGradient id="i-corner-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1e40af"/></linearGradient>
-            <linearGradient id="i-girdle" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1e3a8a"/><stop offset="0.5" stop-color="#bfdbfe"/><stop offset="1" stop-color="#1e40af"/></linearGradient>
-            <linearGradient id="i-pav-ol" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
-            <linearGradient id="i-pav-l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e40af"/><stop offset="1" stop-color="#172554"/></linearGradient>
-            <linearGradient id="i-pav-cl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
-            <linearGradient id="i-pav-cr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
-            <linearGradient id="i-pav-r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#172554"/></linearGradient>
-            <linearGradient id="i-pav-or" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
-            <linearGradient id="i-shimmer" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="white" stop-opacity="0"/><stop offset="0.5" stop-color="white" stop-opacity="0.4"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
-            <filter id="i-f" x="-30%" y="-20%" width="160%" height="140%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
-              <feColorMatrix in="b" type="matrix" values="0 0 0 0 0.15 0 0 0 0 0.35 0 0 0 0 1 0 0 0 1.6 0" result="cb"/>
-              <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <clipPath id="i-clip"><polygon points="128,16 272,16 394,170 388,184 200,472 12,184 6,170"/></clipPath>
-          </defs>
-          <g clip-path="url(#i-clip)" filter="url(#i-f)">
-            <polygon points="128,16 272,16 235,88 165,88" fill="url(#i-tbl)"/>
-            <polygon points="128,16 165,88 102,170" fill="url(#i-star-l)"/>
-            <polygon points="272,16 298,170 235,88" fill="url(#i-star-r)"/>
-            <polygon points="165,88 235,88 200,170" fill="url(#i-crown-c)"/>
-            <polygon points="165,88 200,170 102,170" fill="url(#i-crown-cl)"/>
-            <polygon points="235,88 298,170 200,170" fill="url(#i-crown-cr)"/>
-            <polygon points="6,170 128,16 102,170" fill="url(#i-corner-l)"/>
-            <polygon points="394,170 272,16 298,170" fill="url(#i-corner-r)"/>
-            <polygon points="6,170 394,170 388,184 12,184" fill="url(#i-girdle)" opacity="0.9"/>
-            <polygon points="12,184 60,184 200,472" fill="url(#i-pav-ol)"/>
-            <polygon points="60,184 104,184 200,472" fill="url(#i-pav-l)"/>
-            <polygon points="104,184 200,184 200,472" fill="url(#i-pav-cl)"/>
-            <polygon points="200,184 296,184 200,472" fill="url(#i-pav-cr)"/>
-            <polygon points="296,184 340,184 200,472" fill="url(#i-pav-r)"/>
-            <polygon points="340,184 388,184 200,472" fill="url(#i-pav-or)"/>
-            <line x1="6" y1="170" x2="394" y2="170" stroke="#93c5fd" stroke-width="0.8" opacity="0.5"/>
-            <line x1="12" y1="184" x2="388" y2="184" stroke="#93c5fd" stroke-width="0.6" opacity="0.35"/>
-            <line x1="200" y1="184" x2="200" y2="472" stroke="#60a5fa" stroke-width="0.5" opacity="0.3"/>
-          </g>
-          <g clip-path="url(#i-clip)">
-            <rect x="0" y="0" width="150" height="480" fill="url(#i-shimmer)" transform="translate(-420 0)">
-              <animateTransform attributeName="transform" type="translate" values="-420 0;820 0" dur="1.3s" begin="2s" repeatCount="1" fill="freeze"/>
-            </rect>
-          </g>
-          <polygon points="128,16 272,16 394,170 388,184 200,472 12,184 6,170" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.5"/>
-          <line x1="128" y1="16" x2="272" y2="16" stroke="#e0f2fe" stroke-width="2.5" opacity="0.9"/>
-        </svg>
-      </div>
-    </div>
-
-    <!-- コピー -->
-    <div class="i-line-1 overflow-hidden px-4">
-      <p class="i-line-in text-2xl md:text-4xl font-black uppercase tracking-[0.18em] text-white text-center">Sharpen each other.</p>
-    </div>
-    <div class="i-line-2 overflow-hidden px-4 mt-2 pb-1">
-      <p class="i-line-in shine-text text-2xl md:text-4xl font-black uppercase tracking-[0.18em] text-center">Shine together.</p>
-    </div>
-    <p class="i-jp mt-7 text-xs md:text-sm font-semibold text-blue-200/80 text-center">削り合い、輝いていけ。</p>
-
-  </div>
+<div id="intro" class="fixed inset-0 z-[200] bg-gray-950 overflow-hidden select-none cursor-pointer" aria-hidden="true">
+  <canvas id="intro-gem-canvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+  <div id="intro-white" class="absolute inset-0 bg-white pointer-events-none" style="opacity:0;"></div>
+  <button id="intro-skip-btn" class="absolute bottom-8 right-8 z-10 text-white/35 text-[11px] font-bold tracking-[0.3em] uppercase hover:text-white/70 transition-colors pointer-events-none" style="opacity:0;transition:opacity 0.6s;" aria-label="スキップ">SKIP →</button>
 </div>
 
 <!-- ===== HERO ===== -->
 <section class="relative min-h-screen flex items-center text-white overflow-hidden bg-gray-950">
+  <canvas id="hero-stars" class="absolute inset-0 w-full h-full pointer-events-none" style="opacity:0.45;" aria-hidden="true"></canvas>
 
   <!-- 背景レイヤー -->
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <!-- ダイヤ背後の光彩 -->
-    <div class="gem-glow absolute right-[4%] top-1/2 w-[640px] h-[640px] rounded-full blur-[150px]" style="background:radial-gradient(circle, rgba(37,99,235,0.3), rgba(30,58,138,0.12) 55%, transparent 75%);"></div>
+    <div class="gem-glow absolute right-[4%] top-1/2 w-[640px] h-[640px] rounded-full blur-[130px]" style="background:radial-gradient(circle, rgba(59,130,246,0.5), rgba(37,99,235,0.25) 45%, rgba(30,58,138,0.08) 70%, transparent 85%);"></div>
+    <div class="absolute right-[18%] top-[35%] w-64 h-64 rounded-full blur-[80px]" style="background:radial-gradient(circle, rgba(125,211,252,0.2), transparent 70%);"></div>
     <div class="absolute -left-24 top-[16%] w-96 h-96 bg-indigo-700/10 rounded-full blur-[110px]"></div>
     <!-- ライトシャフト -->
     <div class="shaft absolute -top-[30%] left-[16%] w-[26rem] h-[130vh] blur-3xl" style="background:linear-gradient(to bottom, rgba(96,165,250,0.1), rgba(96,165,250,0.02) 55%, transparent);"></div>
@@ -288,11 +130,19 @@ import Layout from '../layouts/Layout.astro';
       <line x1="288" y1="10" x2="200" y2="470" stroke="#60a5fa" stroke-width="0.4"/>
     </svg>
     <!-- 微粒子 -->
-    <span class="spark w-1 h-1" style="left:12%; top:32%;"></span>
+    <span class="spark w-1 h-1"   style="left:12%; top:32%;"></span>
     <span class="spark w-1.5 h-1.5" style="left:26%; top:68%; animation-delay:1.4s;"></span>
-    <span class="spark w-1 h-1" style="left:55%; top:20%; animation-delay:2.8s;"></span>
-    <span class="spark w-1 h-1" style="left:70%; top:78%; animation-delay:2s;"></span>
+    <span class="spark w-1 h-1"   style="left:55%; top:20%; animation-delay:2.8s;"></span>
+    <span class="spark w-1 h-1"   style="left:70%; top:78%; animation-delay:2s;"></span>
     <span class="spark w-1.5 h-1.5" style="left:88%; top:30%; animation-delay:3.6s;"></span>
+    <span class="spark w-0.5 h-0.5" style="left:5%;  top:14%; animation-delay:0.8s;"></span>
+    <span class="spark w-1 h-1"   style="left:38%; top:8%;  animation-delay:4.2s;"></span>
+    <span class="spark w-0.5 h-0.5" style="left:77%; top:13%; animation-delay:1.9s;"></span>
+    <span class="spark w-0.5 h-0.5" style="left:8%;  top:58%; animation-delay:3.1s;"></span>
+    <span class="spark w-1 h-1"   style="left:92%; top:55%; animation-delay:0.5s;"></span>
+    <span class="spark w-0.5 h-0.5" style="left:18%; top:85%; animation-delay:2.4s;"></span>
+    <span class="spark w-1.5 h-1.5" style="left:82%; top:82%; animation-delay:4.8s;"></span>
+    <span class="spark w-0.5 h-0.5" style="left:48%; top:88%; animation-delay:1.1s;"></span>
   </div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-28 pb-28 md:py-28">
@@ -311,8 +161,8 @@ import Layout from '../layouts/Layout.astro';
           <span class="block overflow-hidden pb-[0.14em] -mb-[0.14em]">
             <span class="hl-2 block leading-none text-white text-[clamp(3rem,8vw,6.5rem)]">each other.</span>
           </span>
-          <span class="block overflow-hidden pb-[0.16em] -mb-[0.1em] mt-1">
-            <span class="hl-3 shine-text block leading-none text-[clamp(3rem,8vw,6.5rem)]">Shine together.</span>
+          <span class="block mt-1">
+            <span class="hl-3 shine-text block leading-none pb-[0.15em] text-[clamp(3rem,8vw,6.5rem)]">Shine together.</span>
           </span>
         </h1>
         <p class="rise rise-2 text-blue-200/90 font-semibold text-base md:text-lg tracking-[0.45em] mb-7">削り合い、輝いていけ。</p>
@@ -332,122 +182,24 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <!-- 右：ダイヤモンド -->
-      <div class="order-1 lg:order-2 lg:col-span-5 flex justify-center">
-        <div class="gem-wrap relative w-60 md:w-80 lg:w-[24rem]">
-          <p class="hidden lg:block absolute -right-10 top-6 [writing-mode:vertical-rl] text-[10px] font-semibold uppercase tracking-[0.55em] text-blue-300/50">Diamond cuts diamond</p>
-          <svg viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto drop-shadow-[0_0_45px_rgba(59,130,246,0.35)]">
-            <defs>
-              <linearGradient id="g-tbl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0f9ff"/><stop offset="1" stop-color="#93c5fd"/></linearGradient>
-              <linearGradient id="g-star-l" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#93c5fd"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
-              <linearGradient id="g-star-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0f2fe"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
-              <linearGradient id="g-crown-c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
-              <linearGradient id="g-crown-cl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d4ed8"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
-              <linearGradient id="g-crown-cr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
-              <linearGradient id="g-corner-l" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e40af"/><stop offset="1" stop-color="#172554"/></linearGradient>
-              <linearGradient id="g-corner-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1e40af"/></linearGradient>
-              <linearGradient id="g-girdle" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1e3a8a"/><stop offset="0.5" stop-color="#bfdbfe"/><stop offset="1" stop-color="#1e40af"/></linearGradient>
-              <linearGradient id="g-pav-ol" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
-              <linearGradient id="g-pav-l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e40af"/><stop offset="1" stop-color="#172554"/></linearGradient>
-              <linearGradient id="g-pav-cl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
-              <linearGradient id="g-pav-cr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
-              <linearGradient id="g-pav-r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#172554"/></linearGradient>
-              <linearGradient id="g-pav-or" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
-              <linearGradient id="g-shimmer" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="white" stop-opacity="0"/><stop offset="0.5" stop-color="white" stop-opacity="0.3"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
-              <linearGradient id="g-refl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b82f6" stop-opacity="0.3"/><stop offset="1" stop-color="#3b82f6" stop-opacity="0"/></linearGradient>
-              <filter id="g-f" x="-30%" y="-20%" width="160%" height="140%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="b"/>
-                <feColorMatrix in="b" type="matrix" values="0 0 0 0 0.15 0 0 0 0 0.35 0 0 0 0 1 0 0 0 1.6 0" result="cb"/>
-                <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <clipPath id="g-clip"><polygon points="128,16 272,16 394,170 388,184 200,472 12,184 6,170"/></clipPath>
-            </defs>
-
-            <!-- 反射 -->
-            <ellipse cx="200" cy="502" rx="150" ry="16" fill="#2563eb" opacity="0.18"/>
-            <polygon points="200,482 328,556 72,556" fill="url(#g-refl)"/>
-
-            <!-- ファセット -->
-            <g clip-path="url(#g-clip)" filter="url(#g-f)">
-              <!-- クラウン（上部8面） -->
-              <polygon points="128,16 272,16 235,88 165,88" fill="url(#g-tbl)"/>
-              <polygon points="128,16 165,88 102,170" fill="url(#g-star-l)"/>
-              <polygon points="272,16 298,170 235,88" fill="url(#g-star-r)"/>
-              <polygon points="165,88 235,88 200,170" fill="url(#g-crown-c)"/>
-              <polygon points="165,88 200,170 102,170" fill="url(#g-crown-cl)"/>
-              <polygon points="235,88 298,170 200,170" fill="url(#g-crown-cr)"/>
-              <polygon points="6,170 128,16 102,170" fill="url(#g-corner-l)"/>
-              <polygon points="394,170 272,16 298,170" fill="url(#g-corner-r)"/>
-              <!-- ガードル（腰帯） -->
-              <polygon points="6,170 394,170 388,184 12,184" fill="url(#g-girdle)" opacity="0.9"/>
-              <!-- パビリオン（下部6面） -->
-              <polygon points="12,184 60,184 200,472" fill="url(#g-pav-ol)"/>
-              <polygon points="60,184 104,184 200,472" fill="url(#g-pav-l)"/>
-              <polygon points="104,184 200,184 200,472" fill="url(#g-pav-cl)"/>
-              <polygon points="200,184 296,184 200,472" fill="url(#g-pav-cr)"/>
-              <polygon points="296,184 340,184 200,472" fill="url(#g-pav-r)"/>
-              <polygon points="340,184 388,184 200,472" fill="url(#g-pav-or)"/>
-              <!-- エッジライン -->
-              <line x1="6" y1="170" x2="394" y2="170" stroke="#93c5fd" stroke-width="0.8" opacity="0.5"/>
-              <line x1="12" y1="184" x2="388" y2="184" stroke="#93c5fd" stroke-width="0.6" opacity="0.35"/>
-              <line x1="128" y1="16" x2="102" y2="170" stroke="#bfdbfe" stroke-width="0.6" opacity="0.35"/>
-              <line x1="272" y1="16" x2="298" y2="170" stroke="#bfdbfe" stroke-width="0.6" opacity="0.35"/>
-              <line x1="165" y1="88" x2="235" y2="88" stroke="#bfdbfe" stroke-width="0.5" opacity="0.3"/>
-              <line x1="128" y1="16" x2="165" y2="88" stroke="#bfdbfe" stroke-width="0.5" opacity="0.3"/>
-              <line x1="272" y1="16" x2="235" y2="88" stroke="#bfdbfe" stroke-width="0.5" opacity="0.3"/>
-              <line x1="60" y1="184" x2="200" y2="472" stroke="#60a5fa" stroke-width="0.5" opacity="0.25"/>
-              <line x1="104" y1="184" x2="200" y2="472" stroke="#60a5fa" stroke-width="0.5" opacity="0.25"/>
-              <line x1="200" y1="184" x2="200" y2="472" stroke="#60a5fa" stroke-width="0.5" opacity="0.3"/>
-              <line x1="296" y1="184" x2="200" y2="472" stroke="#60a5fa" stroke-width="0.5" opacity="0.25"/>
-              <line x1="340" y1="184" x2="200" y2="472" stroke="#60a5fa" stroke-width="0.5" opacity="0.25"/>
-            </g>
-
-            <!-- 内部のファイア（分散光） -->
-            <g clip-path="url(#g-clip)">
-              <polygon points="150,220 172,206 158,352" fill="#67e8f9">
-                <animate attributeName="opacity" values="0.06;0.35;0.06" dur="6s" repeatCount="indefinite"/>
-              </polygon>
-              <polygon points="252,236 270,224 240,382" fill="#a78bfa">
-                <animate attributeName="opacity" values="0.3;0.05;0.3" dur="7s" repeatCount="indefinite"/>
-              </polygon>
-              <polygon points="194,196 206,196 200,438" fill="#e0f2fe">
-                <animate attributeName="opacity" values="0.08;0.45;0.08" dur="5s" repeatCount="indefinite"/>
-              </polygon>
-            </g>
-
-            <!-- シマー（周回する光の帯） -->
-            <g clip-path="url(#g-clip)">
-              <rect x="0" y="0" width="150" height="480" fill="url(#g-shimmer)" transform="translate(-420 0)">
-                <animateTransform attributeName="transform" type="translate" values="-420 0;820 0" dur="4.5s" begin="1.8s" repeatCount="indefinite"/>
-              </rect>
-            </g>
-
-            <!-- 輪郭・テーブルハイライト -->
-            <polygon points="128,16 272,16 394,170 388,184 200,472 12,184 6,170" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.4"/>
-            <line x1="128" y1="16" x2="272" y2="16" stroke="#e0f2fe" stroke-width="2.5" opacity="0.9"/>
-
-            <!-- スパークル（4点星） -->
-            <g transform="translate(128,16)"><path d="M0,-16 C1.5,-3 3,-1.5 16,0 C3,1.5 1.5,3 0,16 C-1.5,3 -3,1.5 -16,0 C-3,-1.5 -1.5,-3 0,-16 Z" fill="#f0f9ff" opacity="0">
-              <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="0.8s" repeatCount="indefinite"/>
-              <animateTransform attributeName="transform" type="scale" values="0.2;0.2;1;0.2;0.2" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="0.8s" repeatCount="indefinite"/>
-            </path></g>
-            <g transform="translate(272,16)"><path d="M0,-16 C1.5,-3 3,-1.5 16,0 C3,1.5 1.5,3 0,16 C-1.5,3 -3,1.5 -16,0 C-3,-1.5 -1.5,-3 0,-16 Z" fill="#f0f9ff" opacity="0">
-              <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="2.4s" repeatCount="indefinite"/>
-              <animateTransform attributeName="transform" type="scale" values="0.2;0.2;0.8;0.2;0.2" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="2.4s" repeatCount="indefinite"/>
-            </path></g>
-            <g transform="translate(390,172)"><path d="M0,-16 C1.5,-3 3,-1.5 16,0 C3,1.5 1.5,3 0,16 C-1.5,3 -3,1.5 -16,0 C-3,-1.5 -1.5,-3 0,-16 Z" fill="#bfdbfe" opacity="0">
-              <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="3.6s" repeatCount="indefinite"/>
-              <animateTransform attributeName="transform" type="scale" values="0.2;0.2;0.7;0.2;0.2" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="3.6s" repeatCount="indefinite"/>
-            </path></g>
-            <g transform="translate(10,172)"><path d="M0,-16 C1.5,-3 3,-1.5 16,0 C3,1.5 1.5,3 0,16 C-1.5,3 -3,1.5 -16,0 C-3,-1.5 -1.5,-3 0,-16 Z" fill="#bfdbfe" opacity="0">
-              <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="4.8s" repeatCount="indefinite"/>
-              <animateTransform attributeName="transform" type="scale" values="0.2;0.2;0.7;0.2;0.2" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="4.8s" repeatCount="indefinite"/>
-            </path></g>
-            <g transform="translate(200,468)"><path d="M0,-16 C1.5,-3 3,-1.5 16,0 C3,1.5 1.5,3 0,16 C-1.5,3 -3,1.5 -16,0 C-3,-1.5 -1.5,-3 0,-16 Z" fill="#f0f9ff" opacity="0">
-              <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="5.8s" repeatCount="indefinite"/>
-              <animateTransform attributeName="transform" type="scale" values="0.2;0.2;0.9;0.2;0.2" keyTimes="0;0.4;0.5;0.6;1" dur="5.2s" begin="5.8s" repeatCount="indefinite"/>
-            </path></g>
-          </svg>
+      <!-- 右：ダイヤモンド（Three.js） -->
+      <div class="order-1 lg:order-2 lg:col-span-5 flex justify-center items-center">
+        <div class="gem-wrap relative" style="width:clamp(14rem,38vw,22rem);aspect-ratio:3/4;">
+          <canvas id="gem-canvas" class="absolute inset-0 w-full h-full"></canvas>
+          <p class="hidden lg:block absolute -right-10 top-6 [writing-mode:vertical-rl] text-[10px] font-semibold uppercase tracking-[0.55em] text-blue-300/40">Diamond cuts diamond</p>
+          <!-- スパークル（12個・各周期2倍で密度を維持） -->
+          <svg class="star-flare w-4 h-4" style="left:18%;top:22%;--sd:5.8s;--ss:0.0s"  viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="white"/></svg>
+          <svg class="star-flare w-3 h-3" style="left:72%;top:16%;--sd:7.0s;--ss:1.6s"  viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="#bfdbfe"/></svg>
+          <svg class="star-flare w-5 h-5" style="left:80%;top:52%;--sd:5.2s;--ss:2.8s"  viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="white"/></svg>
+          <svg class="star-flare w-3 h-3" style="left:10%;top:60%;--sd:8.2s;--ss:0.8s"  viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="#93c5fd"/></svg>
+          <svg class="star-flare w-4 h-4" style="left:55%;top:78%;--sd:6.0s;--ss:4.2s"  viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="white"/></svg>
+          <svg class="star-flare w-2 h-2" style="left:38%;top:10%;--sd:7.6s;--ss:3.4s"  viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="#e0f2fe"/></svg>
+          <svg class="star-flare w-3 h-3" style="left:88%;top:28%;--sd:6.4s;--ss:5.2s"  viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="white"/></svg>
+          <svg class="star-flare w-2 h-2" style="left:4%;top:38%;--sd:5.6s;--ss:2.2s"   viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="#bfdbfe"/></svg>
+          <svg class="star-flare w-4 h-4" style="left:62%;top:88%;--sd:7.2s;--ss:6.0s"  viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="white"/></svg>
+          <svg class="star-flare w-2 h-2" style="left:28%;top:72%;--sd:6.8s;--ss:1.0s"  viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="#93c5fd"/></svg>
+          <svg class="star-flare w-3 h-3" style="left:90%;top:72%;--sd:8.0s;--ss:4.8s"  viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="white"/></svg>
+          <svg class="star-flare w-2 h-2" style="left:46%;top:42%;--sd:5.4s;--ss:7.4s"  viewBox="0 0 20 20"><path d="M10 0L11.2 8.8 20 10l-8.8 1.2L10 20 8.8 11.2 0 10l8.8-1.2Z" fill="#e0f2fe"/></svg>
         </div>
       </div>
 
@@ -464,16 +216,412 @@ import Layout from '../layouts/Layout.astro';
 </section>
 
 <script>
+  import * as THREE from 'three';
+  import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+  // ── Shared: Brilliant-cut Diamond Geometry ──────
+  function buildDiamond(): THREE.BufferGeometry {
+    // N=8: ラウンドブリリアントカット 57-58面
+    // クラウン(33): テーブル1 + カイト8 + スター8 + アッパーハーフ16
+    // パビリオン(24): ロワーハーフ16 + メイン8
+    const N=8, GR=1.0, TR=0.54, CH=0.30, PH=0.84;
+    const pos: number[] = [], nor: number[] = [];
+
+    function tri(v0: number[], v1: number[], v2: number[]) {
+      const ax=v1[0]-v0[0],ay=v1[1]-v0[1],az=v1[2]-v0[2];
+      const bx=v2[0]-v0[0],by=v2[1]-v0[1],bz=v2[2]-v0[2];
+      let nx=ay*bz-az*by,ny=az*bx-ax*bz,nz=ax*by-ay*bx;
+      const l=Math.sqrt(nx*nx+ny*ny+nz*nz)||1;
+      nx/=l;ny/=l;nz/=l;
+      pos.push(...v0,...v1,...v2);
+      nor.push(nx,ny,nz,nx,ny,nz,nx,ny,nz);
+    }
+    function quad(a:number[],b:number[],c:number[],d:number[]){tri(a,b,c);tri(a,c,d);}
+    const ang=(i:number,n:number,off=0)=>(i/n+off)*Math.PI*2;
+
+    function mkRing(r:number, h:number):[number[][],number[][]] {
+      const M:number[][]=[], B:number[][]=[];
+      for(let i=0;i<N;i++){
+        M.push([r*Math.cos(ang(i,N)), h, r*Math.sin(ang(i,N))]);
+        B.push([r*Math.cos(ang(i,N,0.5/N)), h, r*Math.sin(ang(i,N,0.5/N))]);
+      }
+      return [M,B];
+    }
+    function zone(aM:number[][], aB:number[][], bM:number[][], bB:number[][]) {
+      for(let i=0;i<N;i++) quad(aM[i], aB[i], bB[i], bM[i]);
+      for(let i=0;i<N;i++) quad(aB[i], aM[(i+1)%N], bM[(i+1)%N], bB[i]);
+    }
+
+    const [tM,tB] = mkRing(TR,   CH);    // テーブルリング
+    const [cM,cB] = mkRing(0.84, 0.10);  // クラウン中間リング（アッパーハーフ境界）
+    const [gM,gB] = mkRing(GR,   0);     // ガードル
+    const [pM,pB] = mkRing(0.65,-0.40);  // パビリオンリング（ロワーハーフ境界）
+    const tC=[0,CH,0], cu=[0,-PH,0];
+
+    // テーブル（法線+Y, 1面）
+    for(let i=0;i<N;i++) tri(tC, tM[(i+1)%N], tM[i]);
+    // カイト8 + スター8（上クラウン）
+    for(let i=0;i<N;i++) quad(tM[i], tM[(i+1)%N], cB[i], cM[i]);
+    for(let i=0;i<N;i++) tri(tM[(i+1)%N], cM[(i+1)%N], cB[i]);
+    // アッパーハーフ16（下クラウン）
+    zone(cM, cB, gM, gB);
+    // ロワーハーフ16（上パビリオン）
+    zone(gM, gB, pM, pB);
+    // パビリオンメイン8（収束）
+    for(let i=0;i<N;i++) quad(cu, pB[(i-1+N)%N], pM[i], pB[i]);
+    const geo=new THREE.BufferGeometry();
+    geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+    geo.setAttribute('normal',new THREE.Float32BufferAttribute(nor,3));
+    return geo;
+  }
+
+  // ── Shared: Material factory ─────────────────────
+  function buildMaterial(): THREE.MeshPhysicalMaterial {
+    return new THREE.MeshPhysicalMaterial({
+      color:              new THREE.Color(0xe6f2ff),  // 薄青（中間）
+      transmission:       0.99,
+      ior:                2.42,
+      roughness:          0.0,
+      metalness:          0.0,
+      thickness:          1.3,
+      envMapIntensity:    8.5,
+      clearcoat:          1.0,
+      clearcoatRoughness: 0.0,
+      attenuationColor:   new THREE.Color(0x9fcfff),  // 中間の青
+      attenuationDistance:10.0,
+      dispersion:         3,
+      transparent:        true,
+    });
+  }
+
+  // ── Shared: Renderer factory ─────────────────────
+  function buildRenderer(canvas: HTMLCanvasElement): THREE.WebGLRenderer {
+    const r = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    r.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    r.toneMapping = THREE.ACESFilmicToneMapping;
+    r.toneMappingExposure = 2.2;
+    return r;
+  }
+
+  function buildEnv(renderer: THREE.WebGLRenderer, scene: THREE.Scene) {
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+    pmrem.dispose();
+  }
+
+  // ── INTRO GEM ────────────────────────────────────
   const intro = document.getElementById('intro') as HTMLElement;
-  if (sessionStorage.getItem('intro-shown')) {
+  const isMobile = window.innerWidth < 768;
+  const skipIntro = sessionStorage.getItem('intro-shown')
+                 || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                 || isMobile;
+
+  if (skipIntro) {
     intro.style.display = 'none';
   } else {
     sessionStorage.setItem('intro-shown', '1');
-    setTimeout(() => {
-      intro.classList.add('exit');
-      setTimeout(() => { intro.style.display = 'none'; }, 1050);
-    }, 3800);
+
+    const introCanvas = document.getElementById('intro-gem-canvas') as HTMLCanvasElement;
+    const ctx2d       = introCanvas.getContext('2d')!;
+    const dpr         = Math.min(devicePixelRatio, 2);
+    const IW = window.innerWidth, IH = window.innerHeight;
+
+    introCanvas.width  = IW * dpr;
+    introCanvas.height = IH * dpr;
+    ctx2d.scale(dpr, dpr);
+
+    interface IStar { x:number;y:number;vx:number;vy:number;age:number;maxAge:number;trail:[number,number][];w:number; }
+
+    const iStars:IStar[]=[];
+
+    // Stars: 30% inner→out, 70% edge→across
+    function spawnStar() {
+      const inner = Math.random() < 0.30;
+      let x=0, y=0, vx=0, vy=0;
+      const spr = 0.55;
+
+      if (inner) {
+        // spawn near center, burst outward
+        x = IW*(0.22+Math.random()*0.56);
+        y = IH*(0.22+Math.random()*0.56);
+        const a = Math.random()*Math.PI*2;
+        const spd2 = 160+Math.random()*260;
+        vx=Math.cos(a)*spd2; vy=Math.sin(a)*spd2;
+        iStars.push({ x,y,vx,vy,age:0, maxAge:0.45+Math.random()*0.65, trail:[], w:0.6+Math.random()*1.8 });
+        return;
+      }
+
+      const side = Math.floor(Math.random()*4);
+      const spd  = 380 + Math.random()*520;
+      if (side===0) {
+        x=Math.random()*IW; y=-12;
+        const a=Math.PI/2+(Math.random()-.5)*spr;
+        vx=Math.cos(a)*spd; vy=Math.sin(a)*spd;
+      } else if (side===1) {
+        x=IW+12; y=Math.random()*IH;
+        const a=Math.PI+(Math.random()-.5)*spr;
+        vx=Math.cos(a)*spd; vy=Math.sin(a)*spd;
+      } else if (side===2) {
+        x=Math.random()*IW; y=IH+12;
+        const a=-Math.PI/2+(Math.random()-.5)*spr;
+        vx=Math.cos(a)*spd; vy=Math.sin(a)*spd;
+      } else {
+        x=-12; y=Math.random()*IH;
+        const a=(Math.random()-.5)*spr;
+        vx=Math.cos(a)*spd; vy=Math.sin(a)*spd;
+      }
+      iStars.push({ x,y,vx,vy,age:0, maxAge:0.32+Math.random()*0.55, trail:[], w:0.7+Math.random()*2.2 });
+    }
+
+    // Delay hero CSS animations so elements stay dark until the dissolve completes.
+    const iBase = 1.6;
+    const iDelays: Record<string,number> = {
+      'hl-1':0.25, 'hl-2':0.40, 'hl-3':0.55,
+      'rise-1':0.15, 'rise-2':0.70, 'rise-3':0.85, 'rise-4':1.00,
+      'fade-in':1.40, 'gem-wrap':0.45,
+    };
+    Object.entries(iDelays).forEach(([cls,d]) => {
+      document.querySelectorAll('.'+cls).forEach(el =>
+        ((el as HTMLElement).style.animationDelay = `${(d+iBase).toFixed(2)}s`)
+      );
+    });
+
+    // Timeline (ms)
+    // 0–2400:  shooting stars fly across the dark screen
+    // 2400–3200: stars fade out, canvas darkens
+    // 3200–6000: intro overlay slowly dissolves → hero text & gem emerge from darkness
+    const iP4=1600, iFE=3000;
+    let iT0=performance.now(), iPrev=iT0, iRaf2:number, iDone=false;
+    let iNxtS=0;
+
+    function doSkip() {
+      if (iDone) return;
+      iDone=true;
+      cancelAnimationFrame(iRaf2);
+      intro.style.transition='opacity 0.25s';
+      intro.style.opacity='0';
+      setTimeout(()=>{ intro.style.display='none'; }, 260);
+      Object.entries(iDelays).forEach(([cls,d]) => {
+        document.querySelectorAll('.'+cls).forEach(el =>
+          ((el as HTMLElement).style.animationDelay = `${(d*0.15+0.04).toFixed(2)}s`)
+        );
+      });
+    }
+    intro.addEventListener('click', doSkip);
+    intro.addEventListener('touchstart', doSkip, {passive:true});
+
+    ctx2d.fillStyle='rgb(3,7,18)'; ctx2d.fillRect(0,0,IW,IH);
+
+    function iLoop2() {
+      iRaf2=requestAnimationFrame(iLoop2);
+      const now=performance.now(), ms=now-iT0, dt=Math.min((now-iPrev)/1000,0.05);
+      iPrev=now;
+
+      // Spawn stars — active until 2400 ms, tapering off
+      if (ms<1200 && ms>iNxtS) {
+        spawnStar();
+        iNxtS=ms+(ms<300 ? 40+Math.random()*35 : ms<700 ? 65+Math.random()*45 : 110+Math.random()*70);
+      }
+
+      // Update stars
+      for (let i=iStars.length-1;i>=0;i--) {
+        const s=iStars[i]; s.age+=dt; s.x+=s.vx*dt; s.y+=s.vy*dt;
+        s.trail.push([s.x,s.y]);
+        if(s.trail.length>22) s.trail.shift();
+        if(s.age>s.maxAge) iStars.splice(i,1);
+      }
+
+      // Trail fade: normal pace early, then speed up to clear canvas for the dissolve
+      const fillA = ms<1100 ? 0.18 : Math.min(0.18+(ms-1100)/700*0.60, 0.78);
+      ctx2d.fillStyle=`rgba(3,7,18,${fillA})`; ctx2d.fillRect(0,0,IW,IH);
+
+      // Global dim from 2000 ms → fully invisible by 3400 ms
+      const sFade = ms<1000 ? 1 : Math.max(1-(ms-1000)/700, 0);
+
+      if (sFade>0) for (const s of iStars) {
+        const a=(1-s.age/s.maxAge)*sFade;
+        if(s.trail.length<2) continue;
+        // trail
+        for (let i=1;i<s.trail.length;i++) {
+          const t=i/s.trail.length;
+          ctx2d.beginPath();
+          ctx2d.strokeStyle=`rgba(190,225,255,${a*t*0.7})`;
+          ctx2d.lineWidth=s.w*t*0.85;
+          ctx2d.moveTo(s.trail[i-1][0],s.trail[i-1][1]);
+          ctx2d.lineTo(s.trail[i][0],s.trail[i][1]);
+          ctx2d.stroke();
+        }
+        // head bloom
+        const hg=ctx2d.createRadialGradient(s.x,s.y,0,s.x,s.y,s.w*3.5);
+        hg.addColorStop(0,  `rgba(255,255,255,${a*0.95})`);
+        hg.addColorStop(0.3,`rgba(200,230,255,${a*0.5})`);
+        hg.addColorStop(1,  'rgba(0,0,0,0)');
+        ctx2d.fillStyle=hg;
+        ctx2d.beginPath(); ctx2d.arc(s.x,s.y,s.w*3.5,0,Math.PI*2); ctx2d.fill();
+      }
+
+      // Dissolve intro overlay → hero emerges from darkness
+      if (ms>=iP4 && ms<iFE) {
+        intro.style.opacity=String(1-(ms-iP4)/(iFE-iP4));
+      } else if (ms>=iFE && !iDone) {
+        iDone=true; intro.style.display='none';
+        cancelAnimationFrame(iRaf2);
+      }
+    }
+    iLoop2();
+    const iSkipBtn = document.getElementById('intro-skip-btn') as HTMLElement;
+    if (iSkipBtn) setTimeout(()=>{ iSkipBtn.style.opacity='1'; }, 800);
   }
+
+  // ── HERO GEM ─────────────────────────────────────
+  const canvas = document.getElementById('gem-canvas') as HTMLCanvasElement;
+  const wrapper = canvas.parentElement as HTMLElement;
+
+  const renderer = buildRenderer(canvas);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+  camera.position.set(0, 0.1, 4.8);
+  camera.lookAt(0, -0.1, 0);
+  buildEnv(renderer, scene);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  const lA = new THREE.PointLight(0x93c5fd, 14, 20);
+  lA.position.set(3, 3, 4);
+  scene.add(lA);
+  const lB = new THREE.PointLight(0xe0f2fe, 8, 15);
+  lB.position.set(-3, 2, -2);
+  scene.add(lB);
+  const lC = new THREE.PointLight(0x818cf8, 6, 18);
+  lC.position.set(0, -5, 2);
+  scene.add(lC);
+  // 高速周回フラッシュ光（輝度パルス）
+  const lD = new THREE.PointLight(0xffffff, 20, 10);
+  lD.position.set(2, 1, 3);
+  scene.add(lD);
+  // 補助アクセント光
+  const lE = new THREE.PointLight(0xbae6fd, 9, 16);
+  lE.position.set(-1, -3, 3);
+  scene.add(lE);
+
+  const gem = new THREE.Mesh(buildDiamond(), buildMaterial());
+  gem.rotation.y = Math.PI / 8;
+  scene.add(gem);
+
+  function resize() {
+    const w = wrapper.clientWidth;
+    const h = wrapper.clientHeight || w * 1.33;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  new ResizeObserver(resize).observe(wrapper);
+
+  let mx = 0, my = 0;
+  window.addEventListener('mousemove', e => {
+    mx =  (e.clientX / window.innerWidth  - 0.5);
+    my = -(e.clientY / window.innerHeight - 0.5);
+  });
+
+  let t = 0;
+  (function loop() {
+    requestAnimationFrame(loop);
+    t += 0.008;
+    gem.rotation.y += 0.005 + mx * 0.018;
+    gem.rotation.x  = 0.30 + my * 0.10 + Math.sin(t * 0.47) * 0.07;
+    gem.rotation.z  = Math.sin(t * 0.33) * 0.05;
+    gem.position.y  = Math.sin(t * 0.7) * 0.07 - 0.08;
+    lA.position.x   = Math.cos(t * 0.5) * 4;
+    lA.position.z   = Math.sin(t * 0.5) * 4;
+    lC.position.x   = Math.sin(t * 0.3) * 3;
+    // lD: 高速周回 + 輝度パルス
+    lD.position.x   = Math.cos(t * 1.5 + 1) * 3.5;
+    lD.position.y   = Math.sin(t * 1.1) * 2;
+    lD.position.z   = Math.sin(t * 1.5 + 1) * 3.5;
+    lD.intensity    = 16 + Math.sin(t * 3.2) * 10;
+    // lE: 緩やかな補助周回
+    lE.position.x   = Math.sin(t * 0.6 + 3) * 3;
+    lE.position.z   = Math.cos(t * 0.6 + 3) * 2;
+    renderer.render(scene, camera);
+  })();
+
+  // ── HERO STARS (ambient background) ──────────────
+  (function() {
+    const hs = document.getElementById('hero-stars') as HTMLCanvasElement;
+    if (!hs) return;
+    const hx = hs.getContext('2d')!;
+    const hdpr = Math.min(devicePixelRatio, 2);
+
+    function hsResize() {
+      hs.width  = hs.clientWidth  * hdpr;
+      hs.height = hs.clientHeight * hdpr;
+      hx.setTransform(hdpr, 0, 0, hdpr, 0, 0);
+    }
+    hsResize();
+    new ResizeObserver(hsResize).observe(hs);
+
+    interface HStar { x:number;y:number;vx:number;vy:number;age:number;maxAge:number;trail:[number,number][];w:number; }
+    const hsl: HStar[] = [];
+    const hst0 = performance.now();
+    let hsprev = hst0, hsNext = 2500;
+
+    function spawnHS() {
+      const HW = hs.clientWidth, HH = hs.clientHeight;
+      const inner = Math.random() < 0.35;
+      const spd = 180 + Math.random() * 300;
+      let x=0,y=0,vx=0,vy=0;
+      if (inner) {
+        x=HW*(0.18+Math.random()*0.64); y=HH*(0.18+Math.random()*0.64);
+        const a=Math.random()*Math.PI*2; vx=Math.cos(a)*spd; vy=Math.sin(a)*spd;
+      } else {
+        const side=Math.floor(Math.random()*4);
+        if (side===0){ x=Math.random()*HW; y=-10; vx=(Math.random()-.5)*spd*0.6; vy=spd*0.9; }
+        else if(side===1){ x=HW+10; y=Math.random()*HH; vx=-spd*0.9; vy=(Math.random()-.5)*spd*0.6; }
+        else if(side===2){ x=Math.random()*HW; y=HH+10; vx=(Math.random()-.5)*spd*0.6; vy=-spd*0.9; }
+        else { x=-10; y=Math.random()*HH; vx=spd*0.9; vy=(Math.random()-.5)*spd*0.6; }
+      }
+      hsl.push({ x,y,vx,vy,age:0, maxAge:0.4+Math.random()*0.6, trail:[], w:0.5+Math.random()*1.6 });
+    }
+
+    (function hLoop() {
+      requestAnimationFrame(hLoop);
+      const now=performance.now(), ms=now-hst0, dt=Math.min((now-hsprev)/1000,0.05);
+      hsprev=now;
+      const HW=hs.clientWidth, HH=hs.clientHeight;
+
+      if (ms>hsNext) {
+        spawnHS();
+        if (Math.random()<0.28) spawnHS();
+        hsNext=ms+2000+Math.random()*3500;
+      }
+
+      for (let i=hsl.length-1;i>=0;i--) {
+        const s=hsl[i]; s.age+=dt; s.x+=s.vx*dt; s.y+=s.vy*dt;
+        s.trail.push([s.x,s.y]); if(s.trail.length>20) s.trail.shift();
+        if(s.age>s.maxAge) hsl.splice(i,1);
+      }
+
+      hx.clearRect(0,0,HW,HH);
+
+      for (const s of hsl) {
+        const a=1-s.age/s.maxAge; if(s.trail.length<2) continue;
+        for (let i=1;i<s.trail.length;i++) {
+          const t=i/s.trail.length;
+          hx.beginPath();
+          hx.strokeStyle=`rgba(190,225,255,${a*t*0.55})`;
+          hx.lineWidth=s.w*t*0.8;
+          hx.moveTo(s.trail[i-1][0],s.trail[i-1][1]);
+          hx.lineTo(s.trail[i][0],s.trail[i][1]);
+          hx.stroke();
+        }
+        const g=hx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.w*4);
+        g.addColorStop(0,`rgba(255,255,255,${a*0.88})`);
+        g.addColorStop(0.4,`rgba(190,225,255,${a*0.35})`);
+        g.addColorStop(1,'rgba(0,0,0,0)');
+        hx.fillStyle=g; hx.beginPath(); hx.arc(s.x,s.y,s.w*4,0,Math.PI*2); hx.fill();
+      }
+    })();
+  })();
 </script>
 
 <!-- 数字で見るダウイン -->
@@ -493,21 +641,22 @@ import Layout from '../layouts/Layout.astro';
           No.<span class="text-blue-400">1</span>
         </div>
         <div class="w-8 h-px bg-blue-500 mx-auto mb-3"></div>
-        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">全国イベント実績</p>
+        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">週間全国獲得実績</p>
+        <p class="text-gray-600 text-xs mt-2">※キャリア別週間獲得台数</p>
       </div>
       <div class="group rounded-2xl p-8 hover:bg-blue-600/20 transition-all duration-300">
         <div class="h-32 flex flex-col items-center justify-center text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
-          LIMIT<br /><span class="text-blue-400">LESS</span>
+          <span class="text-blue-400">480</span><span class="text-2xl text-white font-bold">+</span>
         </div>
         <div class="w-8 h-px bg-blue-500 mx-auto mb-3"></div>
-        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">広がる可能性</p>
+        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">年間イベント数</p>
       </div>
       <div class="group rounded-2xl p-8 hover:bg-blue-600/20 transition-all duration-300">
         <div class="h-32 flex flex-col items-center justify-center text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
-          ONLY <span class="text-blue-400">ONE</span>
+          <span class="text-blue-400">98</span><span class="text-2xl text-white font-bold">%</span>
         </div>
         <div class="w-8 h-px bg-blue-500 mx-auto mb-3"></div>
-        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">唯一無二の環境</p>
+        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">未経験入社率</p>
       </div>
     </div>
   </div>
@@ -524,50 +673,117 @@ import Layout from '../layouts/Layout.astro';
 
 <!-- 3つの強み -->
 <section class="py-24 px-6 bg-white">
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-5xl mx-auto">
     <p class="text-blue-600 font-bold text-center text-xs tracking-widest uppercase mb-4">Why DAWIN</p>
     <h2 class="text-3xl md:text-4xl font-black text-center mb-16">ダウインで働く3つの理由</h2>
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
 
-      <div class="tap-card group relative overflow-hidden rounded-2xl border-t-4 border-blue-600 bg-gray-50 p-8 cursor-pointer flex flex-col items-center justify-center text-center min-h-52">
-        <p class="text-blue-600 text-xs font-bold tracking-widest uppercase mb-2">Challenge</p>
-        <h3 class="text-2xl font-black text-gray-900">挑戦が評価される</h3>
-        <div class="card-overlay absolute inset-0 bg-blue-600 text-white flex flex-col justify-center p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-2xl">
-          <h3 class="text-lg font-bold mb-4 text-center">挑戦が評価される</h3>
-          <ul class="text-sm text-blue-100 space-y-2 text-left">
-            <li class="font-semibold">✓ 年齢・経歴より「今」の行動を評価</li>
-            <li class="font-semibold">✓ 頑張りが給与に直結するインセンティブ制度</li>
-            <li class="font-semibold">✓ 昇格の基準が明確で、努力が報われる</li>
-          </ul>
+      <div class="tap-card hex-card group relative overflow-hidden bg-gray-100 cursor-pointer flex items-center justify-center aspect-square">
+        <div class="w-[58%] text-center transition-all duration-200 group-hover:opacity-0 group-hover:scale-95">
+          <p class="text-blue-600 text-sm font-black tracking-[0.25em] uppercase">Income</p>
+        </div>
+        <div class="card-overlay absolute inset-0 bg-blue-600 text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
+          <div class="w-[64%] text-center">
+            <p class="text-[8px] font-bold tracking-widest uppercase mb-3 text-blue-200">Income</p>
+            <ul class="text-[11px] space-y-1.5 text-left leading-snug">
+              <li>✦ 月収42万円〜可</li>
+              <li>✦ 歩合＋等級制</li>
+              <li>✦ 昇格基準が明確</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div class="tap-card group relative overflow-hidden rounded-2xl border-t-4 border-indigo-600 bg-gray-50 p-8 cursor-pointer flex flex-col items-center justify-center text-center min-h-52">
-        <p class="text-indigo-600 text-xs font-bold tracking-widest uppercase mb-2">Teamwork</p>
-        <h3 class="text-2xl font-black text-gray-900">仲間との絆が深い</h3>
-        <div class="card-overlay absolute inset-0 bg-indigo-600 text-white flex flex-col justify-center p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-2xl">
-          <h3 class="text-lg font-bold mb-4 text-center">仲間との絆が深い</h3>
-          <ul class="text-sm text-indigo-100 space-y-2 text-left">
-            <li class="font-semibold">✓ 困ったときに本音で話せる風通しの良さ</li>
-            <li class="font-semibold">✓ 結婚・育児後も安心して続けられる環境</li>
-            <li class="font-semibold">✓ チームで助け合う文化が根付いている</li>
-          </ul>
+      <div class="tap-card hex-card group relative overflow-hidden bg-gray-100 cursor-pointer flex items-center justify-center aspect-square">
+        <div class="w-[58%] text-center transition-all duration-200 group-hover:opacity-0 group-hover:scale-95">
+          <p class="text-indigo-600 text-sm font-black tracking-[0.25em] uppercase">Team</p>
+        </div>
+        <div class="card-overlay absolute inset-0 bg-indigo-600 text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
+          <div class="w-[64%] text-center">
+            <p class="text-[8px] font-bold tracking-widest uppercase mb-3 text-indigo-200">Team</p>
+            <ul class="text-[11px] space-y-1.5 text-left leading-snug">
+              <li>✦ 平均26歳の職場</li>
+              <li>✦ 本音で相談できる</li>
+              <li>✦ 打ち上げも充実</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div class="tap-card group relative overflow-hidden rounded-2xl border-t-4 border-purple-600 bg-gray-50 p-8 cursor-pointer flex flex-col items-center justify-center text-center min-h-52">
-        <p class="text-purple-600 text-xs font-bold tracking-widest uppercase mb-2">Mobile</p>
-        <h3 class="text-2xl font-black text-gray-900">モバイル業界の最前線</h3>
-        <div class="card-overlay absolute inset-0 bg-purple-600 text-white flex flex-col justify-center p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-2xl">
-          <h3 class="text-lg font-bold mb-4 text-center">モバイル業界の最前線</h3>
-          <ul class="text-sm text-purple-100 space-y-2 text-left">
-            <li class="font-semibold">✓ 全国の商業施設でイベントを展開</li>
-            <li class="font-semibold">✓ 毎日、新しいお客様との出会いがある</li>
-            <li class="font-semibold">✓ 成果がその場で見えるやりがいのある仕事</li>
-          </ul>
+      <div class="tap-card hex-card group relative overflow-hidden bg-gray-100 cursor-pointer flex items-center justify-center aspect-square">
+        <div class="w-[58%] text-center transition-all duration-200 group-hover:opacity-0 group-hover:scale-95">
+          <p class="text-purple-600 text-sm font-black tracking-[0.25em] uppercase">Skill</p>
+        </div>
+        <div class="card-overlay absolute inset-0 bg-purple-600 text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
+          <div class="w-[64%] text-center">
+            <p class="text-[8px] font-bold tracking-widest uppercase mb-3 text-purple-200">Skill</p>
+            <ul class="text-[11px] space-y-1.5 text-left leading-snug">
+              <li>✦ 未経験入社98%</li>
+              <li>✦ 年480件で即実践</li>
+              <li>✦ 汎用スキルが育つ</li>
+            </ul>
+          </div>
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.tap-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const overlay = card.querySelector('.card-overlay');
+      const isOpen = !overlay.classList.contains('translate-y-full');
+      document.querySelectorAll('.card-overlay').forEach(o => o.classList.add('translate-y-full'));
+      document.querySelectorAll('.tap-card > div:first-child').forEach(f => {
+        (f as HTMLElement).style.opacity = '';
+        (f as HTMLElement).style.transform = '';
+      });
+      if (!isOpen) {
+        overlay.classList.remove('translate-y-full');
+        const front = card.querySelector(':scope > div:first-child') as HTMLElement;
+        if (front) { front.style.opacity = '0'; front.style.transform = 'scale(0.95)'; }
+      }
+    });
+  });
+</script>
+
+<!-- なぜダイヤモンドなのか -->
+<section class="bg-gray-950 text-white py-24 px-6">
+  <div class="max-w-4xl mx-auto">
+    <p class="text-blue-400 font-bold text-xs tracking-widest uppercase mb-6 text-center">Why Diamond</p>
+    <h2 class="text-3xl md:text-4xl font-black text-center mb-16 leading-tight">なぜ、ダイヤモンドなのか。</h2>
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="flex justify-center">
+        <svg viewBox="0 0 120 120" class="w-40 h-40 opacity-50" aria-hidden="true">
+          <polygon points="60,6 114,60 60,114 6,60" fill="none" stroke="#60a5fa" stroke-width="1.2"/>
+          <polygon points="60,22 98,60 60,98 22,60" fill="none" stroke="#93c5fd" stroke-width="0.7" opacity="0.6"/>
+          <polygon points="60,38 82,60 60,82 38,60" fill="none" stroke="#bfdbfe" stroke-width="0.4" opacity="0.35"/>
+          <line x1="6" y1="60" x2="114" y2="60" stroke="#60a5fa" stroke-width="0.5" opacity="0.35"/>
+          <line x1="60" y1="6" x2="60" y2="114" stroke="#60a5fa" stroke-width="0.5" opacity="0.35"/>
+          <line x1="6" y1="60" x2="60" y2="6" stroke="#93c5fd" stroke-width="0.4" opacity="0.25"/>
+          <line x1="60" y1="6" x2="114" y2="60" stroke="#93c5fd" stroke-width="0.4" opacity="0.25"/>
+          <line x1="114" y1="60" x2="60" y2="114" stroke="#93c5fd" stroke-width="0.4" opacity="0.25"/>
+          <line x1="60" y1="114" x2="6" y2="60" stroke="#93c5fd" stroke-width="0.4" opacity="0.25"/>
+        </svg>
+      </div>
+      <div>
+        <p class="text-gray-300 text-lg font-bold leading-relaxed mb-5">
+          ダイヤモンドは、原石のままでは輝かない。<br/>
+          削られ、磨かれることで、はじめて光を放つ。
+        </p>
+        <p class="text-gray-400 leading-relaxed mb-8">
+          私たちのチームもそれと同じだと思っています。現場でお客様と真剣に向き合う経験が、スタッフひとりひとりを磨く。仲間との切磋琢磨が、互いをさらに輝かせる。その積み重ねが、誰にも代えられない「輝き」になる。
+        </p>
+        <div class="border-l-4 border-blue-500 pl-6">
+          <p class="text-white font-bold leading-relaxed">
+            「ここにいる全員が、まだ磨かれていない原石。<br/>
+            削り合い、輝いていける場所でありたい。」
+          </p>
+          <p class="text-blue-400 text-sm mt-3 font-semibold">橋本 章平 / モバイル事業部 部長</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -582,7 +798,7 @@ import Layout from '../layouts/Layout.astro';
       {[
         { name: '橋本 章平', role: 'モバイル事業部長', tag: '挑戦×成長', href: '/interview/hashimoto', photo: '/hashimoto.jpg' },
         { name: '高橋 里佳', role: 'モバイルイベントスタッフ', tag: '楽しい×仲間', href: '/interview/takahashi', photo: null },
-        { name: '中村 翔', role: 'スタッフ', tag: '仲間×自発性', href: '/interview/nakamura', photo: null },
+        { name: '中村 翔', role: 'スタッフ', tag: '仲間×自発性', href: '/interview/nakamura', photo: '/nakamura.jpg' },
       ].map((p) => (
         <a href={p.href}
           class="group block bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-blue-500 hover:bg-gray-800 transition-all duration-300">
@@ -608,17 +824,6 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
 </section>
-
-<script>
-  document.querySelectorAll('.tap-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const overlay = card.querySelector('.card-overlay');
-      const isOpen = !overlay.classList.contains('translate-y-full');
-      document.querySelectorAll('.card-overlay').forEach(o => o.classList.add('translate-y-full'));
-      if (!isOpen) overlay.classList.remove('translate-y-full');
-    });
-  });
-</script>
 
 <!-- CTA -->
 <section class="relative py-28 px-6 overflow-hidden text-center">

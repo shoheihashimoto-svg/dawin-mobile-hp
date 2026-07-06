@@ -2,6 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="ABOUT">
+<style>
+  .diamond-card {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+</style>
 
 
 <!-- Hero -->
@@ -16,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
   <div class="relative z-10 max-w-3xl mx-auto">
     <p class="text-blue-300 font-bold tracking-[0.3em] text-xs uppercase mb-6">About Us</p>
     <h1 class="text-4xl md:text-6xl font-black mb-6">私たちについて</h1>
-    <p class="text-blue-100/80 text-lg">挑戦を楽しみ、仲間を大切にする。<br />それがダウイン モバイル事業部のスタイル。</p>
+    <p class="text-blue-100/80 text-lg">原石を削り合い、磨き合い、輝いていく。<br />それがダウイン モバイル事業部のスタイル。</p>
   </div>
 </section>
 
@@ -30,8 +35,8 @@ import Layout from '../layouts/Layout.astro';
       <span class="text-blue-400">隣の仲間を全力で思いやる。</span>」
     </p>
     <p class="text-gray-400 text-base leading-relaxed max-w-2xl mx-auto">
-      イベントの最前線で、スタッフひとりひとりが主役として活躍できる環境をつくる。
-      挑戦する人を応援し、成長を一緒に喜べるチームであり続けることが、私たちの使命です。
+      イベントの最前線で、原石のようなスタッフひとりひとりが磨かれ、輝いていける環境をつくる。
+      削り合い、高め合いながら、全員が「なりたい自分」に近づけるチームであり続けることが、私たちの使命です。
     </p>
   </div>
 </section>
@@ -91,40 +96,43 @@ import Layout from '../layouts/Layout.astro';
   <div class="max-w-4xl mx-auto">
     <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-4 text-center">Values</p>
     <h2 class="text-3xl font-black text-center mb-12">大切にしている価値観</h2>
-    <div class="grid md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
       {[
         {
           title: 'Challenge',
           label: '挑戦',
-          body: '現状に満足せず、常に上を目指す。失敗を恐れず、まず動く。その繰り返しが成長をつくる。',
-          accent: 'border-blue-600',
+          body: '原石の才能も、まず動かなければ磨かれない。失敗を恐れず前に出る姿勢が、輝きのはじまり。',
+          bg: 'bg-gray-50',
           hoverBg: 'bg-blue-600',
-          titleColor: 'text-blue-600',
+          labelColor: 'text-blue-600',
         },
         {
           title: 'Teamwork',
-          label: 'チームワーク',
-          body: '隣の仲間を全力で思いやる。一人の成功よりチームの成功を喜べる文化を大切にしている。',
-          accent: 'border-indigo-600',
+          label: '削り合い',
+          body: '仲間と切磋琢磨することで、互いの面が磨かれる。隣の輝きが、自分の輝きを増す。',
+          bg: 'bg-gray-50',
           hoverBg: 'bg-indigo-600',
-          titleColor: 'text-indigo-600',
+          labelColor: 'text-indigo-600',
         },
         {
           title: 'Growth',
-          label: '成長',
-          body: '入社後の育成に本気で向き合う。スタッフ全員が「なりたい自分」に近づける環境をつくる。',
-          accent: 'border-purple-600',
+          label: '輝きへ',
+          body: '原石のまま終わらせない。現場での経験と仲間の力で、全員が本来の輝きに近づいていける。',
+          bg: 'bg-gray-50',
           hoverBg: 'bg-purple-600',
-          titleColor: 'text-purple-600',
+          labelColor: 'text-purple-600',
         },
       ].map((v) => (
-        <div class={`tap-card group relative overflow-hidden rounded-2xl border-t-4 ${v.accent} bg-gray-50 p-8 cursor-pointer flex flex-col items-center justify-center min-h-52 text-center`}>
-          <p class={`${v.titleColor} text-xs font-bold tracking-widest uppercase mb-2`}>{v.title}</p>
-          <h3 class="text-2xl font-black text-gray-900">{v.label}</h3>
-          <div class={`card-overlay absolute inset-0 ${v.hoverBg} text-white flex flex-col justify-center p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-2xl`}>
-            <p class="text-xs font-bold tracking-widest uppercase mb-3 text-white/60">{v.title}</p>
-            <h3 class="text-2xl font-black mb-4">{v.label}</h3>
-            <p class="text-sm text-white/80 leading-relaxed">{v.body}</p>
+        <div class={`tap-card diamond-card group relative overflow-hidden ${v.bg} cursor-pointer flex items-center justify-center aspect-square`}>
+          <div class="w-[62%] text-center">
+            <p class={`${v.labelColor} text-[9px] font-bold tracking-widest uppercase mb-2`}>{v.title}</p>
+            <h3 class="text-base font-black text-gray-900 leading-tight">{v.label}</h3>
+          </div>
+          <div class={`card-overlay absolute inset-0 ${v.hoverBg} text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out`}>
+            <div class="w-[60%] text-center">
+              <p class="text-[9px] font-bold tracking-widest uppercase mb-2 text-white/50">{v.title}</p>
+              <p class="text-[10px] text-white/85 leading-relaxed">{v.body}</p>
+            </div>
           </div>
         </div>
       ))}
