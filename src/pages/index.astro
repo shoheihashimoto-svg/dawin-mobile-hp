@@ -676,6 +676,12 @@ import Layout from '../layouts/Layout.astro';
       }
     })();
   })();
+
+  // bfcache（ブラウザの戻る・進む）から復元されたとき
+  // WebGLコンテキストが失われているためリロードして再初期化する
+  window.addEventListener('pageshow', (e) => {
+    if ((e as PageTransitionEvent).persisted) location.reload();
+  });
 </script>
 
 <!-- 数字で見るダウイン -->
