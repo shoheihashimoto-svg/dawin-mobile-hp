@@ -43,7 +43,15 @@ import Layout from '../layouts/Layout.astro';
   @keyframes sheen { to { background-position: -220% center; } }
 
   .gem-wrap {
+    width: clamp(8rem, 70vw, 14rem);
+    aspect-ratio: 4/3;
     animation: gemEnter 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+  }
+  @media (min-width: 1024px) {
+    .gem-wrap {
+      width: clamp(9rem, 50vw, 22rem);
+      aspect-ratio: 3/4;
+    }
   }
   @keyframes gemEnter {
     from { opacity: 0; transform: translateY(46px) scale(0.88); }
@@ -182,9 +190,9 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <!-- 右：ダイヤモンド（Three.js） -->
-      <div class="order-2 lg:col-span-5 flex justify-center items-center">
-        <div class="gem-wrap relative" style="width:clamp(9rem,50vw,22rem);aspect-ratio:3/4;">
+      <!-- 右：ダイヤモンド（Three.js） / モバイルではテキストの上 -->
+      <div class="order-first lg:order-2 lg:col-span-5 flex justify-center items-center">
+        <div class="gem-wrap relative">
           <canvas id="gem-canvas" class="absolute inset-0 w-full h-full"></canvas>
           <!-- WebGL非対応デバイス用フォールバック -->
           <div id="gem-fallback" class="absolute inset-0 hidden items-center justify-center">
@@ -535,6 +543,9 @@ import Layout from '../layouts/Layout.astro';
     gem.rotation.y = Math.PI / 8;
     scene.add(gem);
 
+    // ── モバイル判定（横浮遊 / 縦浮遊の切り替え） ──
+    let isMobileGem = window.innerWidth < 1024;
+
     // ── 浮遊Y範囲を「Sharpen」〜「削り合い」テキスト位置にDOMで合わせる ──
     let gemYMin = -0.25, gemYMax = 0.20;
     function calcGemYBounds() {
@@ -560,7 +571,8 @@ import Layout from '../layouts/Layout.astro';
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
-      calcGemYBounds();
+      isMobileGem = window.innerWidth < 1024;
+      if (!isMobileGem) calcGemYBounds();
     }
     resize();
     new ResizeObserver(resize).observe(wrapper);
@@ -579,12 +591,18 @@ import Layout from '../layouts/Layout.astro';
       gem.rotation.y += 0.005 + mx * 0.018;
       gem.rotation.x  = 0.30 + my * 0.10 + Math.sin(t * 0.47) * 0.07;
       gem.rotation.z  = Math.sin(t * 0.33) * 0.05;
-      // X: 端切れ防止で狭め・左寄り
-      gem.position.x  = Math.sin(t * 0.29) * 0.09 + Math.cos(t * 0.17) * 0.06 - 0.06;
-      // Y: 浮遊オシレーターをテキスト範囲 [gemYMin, gemYMax] にリマップ
-      const yOsc = Math.sin(t * 0.53) * 0.16 + Math.cos(t * 0.37) * 0.10; // ±0.26
-      gem.position.y = (gemYMin + gemYMax) / 2 + (yOsc / 0.26) * (gemYMax - gemYMin) / 2;
-      gem.position.z  = Math.sin(t * 0.41) * 0.10 + Math.cos(t * 0.23) * 0.07;
+      if (isMobileGem) {
+        // モバイル：横浮遊
+        gem.position.x = Math.sin(t * 0.38) * 0.50 + Math.cos(t * 0.22) * 0.20;
+        gem.position.y = Math.sin(t * 0.29) * 0.06;
+        gem.position.z = Math.sin(t * 0.41) * 0.06 + Math.cos(t * 0.23) * 0.04;
+      } else {
+        // PC：縦浮遊
+        gem.position.x  = Math.sin(t * 0.29) * 0.09 + Math.cos(t * 0.17) * 0.06 - 0.06;
+        const yOsc = Math.sin(t * 0.53) * 0.16 + Math.cos(t * 0.37) * 0.10; // ±0.26
+        gem.position.y = (gemYMin + gemYMax) / 2 + (yOsc / 0.26) * (gemYMax - gemYMin) / 2;
+        gem.position.z  = Math.sin(t * 0.41) * 0.10 + Math.cos(t * 0.23) * 0.07;
+      }
       lA.position.x   = Math.cos(t * 0.5) * 4;
       lA.position.z   = Math.sin(t * 0.5) * 4;
       lC.position.x   = Math.sin(t * 0.3) * 3;
