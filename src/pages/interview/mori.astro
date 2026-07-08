@@ -19,9 +19,7 @@ import Layout from '../../layouts/Layout.astro';
     </nav>
     <a href="/interview" class="text-blue-300 text-xs font-bold tracking-widest uppercase hover:text-white transition-colors">← INTERVIEW 一覧に戻る</a>
     <div class="mt-6 flex items-center gap-5">
-      <div class="w-20 h-20 rounded-full bg-white/10 flex-shrink-0 border-2 border-blue-400 flex items-center justify-center">
-        <span class="text-3xl text-white/60 font-black">森</span>
-      </div>
+      <img src="/mori.jpg" alt="森 佳奈" class="w-20 h-20 rounded-full object-cover flex-shrink-0 border-2 border-blue-400" style="object-position: 50% 30%;" />
       <div>
         <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">仲間×自信</span>
         <h1 class="text-3xl md:text-4xl font-black mt-2">森 佳奈</h1>
@@ -34,6 +32,12 @@ import Layout from '../../layouts/Layout.astro';
 <!-- インタビュー本文 -->
 <article class="bg-white py-16 px-6">
   <div class="max-w-3xl mx-auto space-y-12">
+
+    <!-- メイン写真 -->
+    <div class="rounded-2xl overflow-hidden h-64 md:h-[520px]">
+      <img src="/mori-off.jpg" alt="森さんのオフショット" class="w-full h-full object-cover" style="object-position: 44% 46%;" />
+    </div>
+    <p class="text-xs text-gray-400 -mt-10 mb-10 text-center">お花見にて</p>
 
     <div class="bg-blue-50 rounded-2xl p-8">
       <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Q1</p>
