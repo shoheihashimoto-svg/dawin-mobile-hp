@@ -16,18 +16,18 @@ import Layout from '../layouts/Layout.astro';
   .who-shine {
     position: absolute;
     inset: -20px;
-    background: linear-gradient(var(--shine-angle, 108deg), transparent 35%, rgba(255,255,255,0) 44%, rgba(255,255,255,0.38) 50%, rgba(255,255,255,0) 56%, transparent 65%);
-    transform: var(--shine-from, translateX(-130%));
+    background: linear-gradient(108deg, transparent 35%, rgba(255,255,255,0) 44%, rgba(255,255,255,0.38) 50%, rgba(255,255,255,0) 56%, transparent 65%);
+    transform: translateX(-130%);
     animation: whoShine 10s ease-in-out infinite;
     pointer-events: none;
     z-index: 0;
   }
   @keyframes whoShine {
-    0%   { transform: var(--shine-from, translateX(-130%)); opacity: 0; }
+    0%   { transform: translateX(-130%); opacity: 0; }
     5%   { opacity: 1; }
-    38%  { transform: var(--shine-to, translateX(130%));   opacity: 1; }
+    38%  { transform: translateX(130%);  opacity: 1; }
     44%  { opacity: 0; }
-    100% { transform: var(--shine-to, translateX(130%));   opacity: 0; }
+    100% { transform: translateX(130%);  opacity: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     .who-card-wrap { animation: none; }
@@ -225,19 +225,10 @@ import Layout from '../layouts/Layout.astro';
     <script>
       // ── Who We Want カード：シャイン方向・タイミングをランダム化 ──
       (function () {
-        const dirs = [
-          { from: 'translate(-130%,-130%)', to: 'translate(130%,130%)',  angle: '45deg'  },
-          { from: 'translate(130%,-130%)',  to: 'translate(-130%,130%)', angle: '135deg' },
-        ];
         document.querySelectorAll('.who-card-wrap').forEach(wrap => {
           wrap.style.animationDelay = (Math.random() * 6).toFixed(2) + 's';
           const shine = wrap.querySelector('.who-shine');
-          if (!shine) return;
-          const d = dirs[Math.floor(Math.random() * dirs.length)];
-          shine.style.setProperty('--shine-angle', d.angle);
-          shine.style.setProperty('--shine-from',  d.from);
-          shine.style.setProperty('--shine-to',    d.to);
-          shine.style.animationDelay = (Math.random() * 10).toFixed(2) + 's';
+          if (shine) shine.style.animationDelay = (Math.random() * 10).toFixed(2) + 's';
         });
       })();
     </script>
