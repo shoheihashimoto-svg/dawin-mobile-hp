@@ -29,9 +29,22 @@ import Layout from '../layouts/Layout.astro';
     44%  { opacity: 0; }
     100% { transform: translateX(130%);  opacity: 0; }
   }
+  .who-label {
+    transition: color 0.4s, text-shadow 0.4s;
+  }
+  .who-label.glowing {
+    animation: whoLabelPulse 1.8s ease-in-out forwards;
+  }
+  @keyframes whoLabelPulse {
+    0%   { color: #60a5fa; text-shadow: none; }
+    25%  { color: #e0f2fe; text-shadow: 0 0 6px rgba(147,197,253,1), 0 0 18px rgba(96,165,250,0.8), 0 0 36px rgba(59,130,246,0.5); }
+    65%  { color: #e0f2fe; text-shadow: 0 0 6px rgba(147,197,253,1), 0 0 18px rgba(96,165,250,0.8), 0 0 36px rgba(59,130,246,0.5); }
+    100% { color: #60a5fa; text-shadow: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .who-card-wrap { animation: none; }
     .who-shine { animation: none; opacity: 0; }
+    .who-label.glowing { animation: none; }
   }
 </style>
 
@@ -66,7 +79,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="who-card-wrap">
           <div class="who-card group relative bg-white/5 hover:bg-blue-600 aspect-square flex flex-col items-center justify-center text-center transition-colors duration-500 cursor-default overflow-hidden">
             <div class="who-shine"></div>
-            <p class="text-blue-400 group-hover:text-blue-200 text-xs font-bold tracking-widest mb-3 transition-colors relative z-[1]">{t.sub}</p>
+            <p class="who-label text-blue-400 group-hover:text-blue-200 text-sm font-bold tracking-widest mb-3 transition-colors relative z-[1]">{t.sub}</p>
             <p class="text-2xl md:text-3xl font-black leading-snug whitespace-pre-line relative z-[1]">{t.keyword}</p>
           </div>
         </div>
@@ -225,11 +238,28 @@ import Layout from '../layouts/Layout.astro';
     <script>
       // ── Who We Want カード：シャイン方向・タイミングをランダム化 ──
       (function () {
+        // シャイン・グロータイミングのランダム化
         document.querySelectorAll('.who-card-wrap').forEach(wrap => {
           wrap.style.animationDelay = (Math.random() * 6).toFixed(2) + 's';
           const shine = wrap.querySelector('.who-shine');
           if (shine) shine.style.animationDelay = (Math.random() * 10).toFixed(2) + 's';
         });
+
+        // ラベル発光：1つずつランダムに、2つ同時には光らせない
+        const labels = Array.from(document.querySelectorAll('.who-label'));
+        let lastIdx = -1;
+        function glowNext() {
+          let idx;
+          do { idx = Math.floor(Math.random() * labels.length); } while (idx === lastIdx);
+          lastIdx = idx;
+          const lbl = labels[idx];
+          lbl.classList.add('glowing');
+          setTimeout(() => {
+            lbl.classList.remove('glowing');
+            setTimeout(glowNext, 800 + Math.random() * 2200);
+          }, 1800);
+        }
+        setTimeout(glowNext, 1200 + Math.random() * 2000);
       })();
     </script>
 
