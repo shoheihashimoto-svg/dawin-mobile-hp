@@ -16,18 +16,18 @@ import Layout from '../layouts/Layout.astro';
   .who-shine {
     position: absolute;
     inset: -20px;
-    background: linear-gradient(108deg, transparent 35%, rgba(255,255,255,0) 44%, rgba(255,255,255,0.38) 50%, rgba(255,255,255,0) 56%, transparent 65%);
-    transform: translateX(-130%);
-    animation: whoShine 7s ease-in-out infinite;
+    background: linear-gradient(var(--shine-angle, 108deg), transparent 35%, rgba(255,255,255,0) 44%, rgba(255,255,255,0.38) 50%, rgba(255,255,255,0) 56%, transparent 65%);
+    transform: var(--shine-from, translateX(-130%));
+    animation: whoShine 10s ease-in-out infinite;
     pointer-events: none;
     z-index: 0;
   }
   @keyframes whoShine {
-    0%   { transform: translateX(-130%); opacity: 0; }
+    0%   { transform: var(--shine-from, translateX(-130%)); opacity: 0; }
     5%   { opacity: 1; }
-    38%  { transform: translateX(130%);  opacity: 1; }
+    38%  { transform: var(--shine-to, translateX(130%));   opacity: 1; }
     44%  { opacity: 0; }
-    100% { transform: translateX(130%);  opacity: 0; }
+    100% { transform: var(--shine-to, translateX(130%));   opacity: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     .who-card-wrap { animation: none; }
@@ -62,10 +62,10 @@ import Layout from '../layouts/Layout.astro';
         { keyword: 'チームで\n勝ちたい', sub: 'TEAMWORK' },
         { keyword: '素直に\n学べる', sub: 'GROWTH' },
         { keyword: '仲間を\n大切にできる', sub: 'CARE' },
-      ].map((t, i) => (
-        <div class="who-card-wrap" style={`animation-delay: ${i * 1.0}s`}>
+      ].map((t) => (
+        <div class="who-card-wrap">
           <div class="who-card group relative bg-white/5 hover:bg-blue-600 aspect-square flex flex-col items-center justify-center text-center transition-colors duration-500 cursor-default overflow-hidden">
-            <div class="who-shine" style={`animation-delay: ${i * 1.15}s`}></div>
+            <div class="who-shine"></div>
             <p class="text-blue-400 group-hover:text-blue-200 text-xs font-bold tracking-widest mb-3 transition-colors relative z-[1]">{t.sub}</p>
             <p class="text-2xl md:text-3xl font-black leading-snug whitespace-pre-line relative z-[1]">{t.keyword}</p>
           </div>
@@ -221,6 +221,30 @@ import Layout from '../layouts/Layout.astro';
       </button>
       <p class="text-xs text-gray-600 text-center">送信後、3営業日以内にご連絡いたします。</p>
     </form>
+
+    <script>
+      // ── Who We Want カード：シャイン方向・タイミングをランダム化 ──
+      (function () {
+        const dirs = [
+          { from: 'translateX(-130%)',          to: 'translateX(130%)',           angle: '90deg'  },
+          { from: 'translateX(130%)',           to: 'translateX(-130%)',          angle: '90deg'  },
+          { from: 'translateY(-130%)',          to: 'translateY(130%)',           angle: '0deg'   },
+          { from: 'translateY(130%)',           to: 'translateY(-130%)',          angle: '180deg' },
+          { from: 'translate(-130%,-130%)',     to: 'translate(130%,130%)',       angle: '45deg'  },
+          { from: 'translate(130%,-130%)',      to: 'translate(-130%,130%)',      angle: '135deg' },
+        ];
+        document.querySelectorAll('.who-card-wrap').forEach(wrap => {
+          wrap.style.animationDelay = (Math.random() * 6).toFixed(2) + 's';
+          const shine = wrap.querySelector('.who-shine');
+          if (!shine) return;
+          const d = dirs[Math.floor(Math.random() * dirs.length)];
+          shine.style.setProperty('--shine-angle', d.angle);
+          shine.style.setProperty('--shine-from',  d.from);
+          shine.style.setProperty('--shine-to',    d.to);
+          shine.style.animationDelay = (Math.random() * 10).toFixed(2) + 's';
+        });
+      })();
+    </script>
 
     <script>
       document.getElementById('entryForm').addEventListener('submit', async (e) => {
