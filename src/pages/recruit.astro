@@ -33,7 +33,7 @@ import Layout from '../layouts/Layout.astro';
     transition: color 0.4s, text-shadow 0.4s;
   }
   .who-label.glowing {
-    animation: whoLabelPulse 1.8s ease-in-out forwards;
+    animation: whoLabelPulse 2.5s ease-in-out forwards;
   }
   @keyframes whoLabelPulse {
     0%   { color: #60a5fa; text-shadow: none; }
@@ -76,10 +76,10 @@ import Layout from '../layouts/Layout.astro';
         { keyword: '素直に\n学べる', sub: 'GROWTH' },
         { keyword: '仲間を\n大切にできる', sub: 'CARE' },
       ].map((t) => (
-        <div class="who-card-wrap">
-          <div class="who-card group relative bg-white/5 hover:bg-blue-600 aspect-square flex flex-col items-center justify-center text-center transition-colors duration-500 cursor-default overflow-hidden">
+        <div class="who-card-wrap aspect-square">
+          <div class="who-card group relative bg-white/5 hover:bg-blue-600 w-full h-full flex flex-col items-center justify-center text-center transition-colors duration-500 cursor-default overflow-hidden">
             <div class="who-shine"></div>
-            <p class="who-label text-blue-400 group-hover:text-blue-200 text-sm font-bold tracking-widest mb-3 transition-colors relative z-[1]">{t.sub}</p>
+            <p class="who-label text-blue-400 group-hover:text-blue-200 text-[16px] font-bold tracking-widest mb-3 transition-colors relative z-[1]">{t.sub}</p>
             <p class="text-2xl md:text-3xl font-black leading-snug whitespace-pre-line relative z-[1]">{t.keyword}</p>
           </div>
         </div>
@@ -257,7 +257,7 @@ import Layout from '../layouts/Layout.astro';
           setTimeout(() => {
             lbl.classList.remove('glowing');
             setTimeout(glowNext, 800 + Math.random() * 2200);
-          }, 1800);
+          }, 2500);
         }
         setTimeout(glowNext, 1200 + Math.random() * 2000);
       })();
