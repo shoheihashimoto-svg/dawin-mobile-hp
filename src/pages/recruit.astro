@@ -2,6 +2,38 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="RECRUIT">
+<style>
+  .who-card {
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  }
+  .who-card-wrap {
+    animation: whoAmbient 6s ease-in-out infinite;
+  }
+  @keyframes whoAmbient {
+    0%, 100% { filter: drop-shadow(0 0  0px rgba(59,130,246,0.0)); }
+    50%       { filter: drop-shadow(0 0 16px rgba(96,165,250,0.38)); }
+  }
+  .who-shine {
+    position: absolute;
+    inset: -20px;
+    background: linear-gradient(108deg, transparent 35%, rgba(255,255,255,0) 44%, rgba(255,255,255,0.38) 50%, rgba(255,255,255,0) 56%, transparent 65%);
+    transform: translateX(-130%);
+    animation: whoShine 7s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes whoShine {
+    0%   { transform: translateX(-130%); opacity: 0; }
+    5%   { opacity: 1; }
+    38%  { transform: translateX(130%);  opacity: 1; }
+    44%  { opacity: 0; }
+    100% { transform: translateX(130%);  opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .who-card-wrap { animation: none; }
+    .who-shine { animation: none; opacity: 0; }
+  }
+</style>
 
 
 <!-- Hero -->
@@ -22,7 +54,7 @@ import Layout from '../layouts/Layout.astro';
     <p class="text-blue-400 font-bold text-xs tracking-widest uppercase mb-4 text-center">Who We Want</p>
     <h2 class="text-4xl md:text-5xl font-black text-center mb-4">こんな人と<br class="md:hidden" />働きたい。</h2>
     <p class="text-gray-500 text-center text-sm mb-16">業界・職種未経験でも大歓迎です。</p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       {[
         { keyword: '自分を\n変えたい', sub: 'CHANGE' },
         { keyword: '諦めない', sub: 'NEVER GIVE UP' },
@@ -30,10 +62,13 @@ import Layout from '../layouts/Layout.astro';
         { keyword: 'チームで\n勝ちたい', sub: 'TEAMWORK' },
         { keyword: '素直に\n学べる', sub: 'GROWTH' },
         { keyword: '仲間を\n大切にできる', sub: 'CARE' },
-      ].map((t) => (
-        <div class="group relative bg-white/5 hover:bg-blue-600 rounded-2xl p-6 md:p-8 transition-all duration-300 cursor-default overflow-hidden text-center">
-          <p class="text-blue-400 group-hover:text-blue-200 text-xs font-bold tracking-widest mb-3 transition-colors">{t.sub}</p>
-          <p class="text-2xl md:text-3xl font-black leading-snug whitespace-pre-line">{t.keyword}</p>
+      ].map((t, i) => (
+        <div class="who-card-wrap" style={`animation-delay: ${i * 1.0}s`}>
+          <div class="who-card group relative bg-white/5 hover:bg-blue-600 aspect-square flex flex-col items-center justify-center text-center transition-colors duration-500 cursor-default overflow-hidden">
+            <div class="who-shine" style={`animation-delay: ${i * 1.15}s`}></div>
+            <p class="text-blue-400 group-hover:text-blue-200 text-xs font-bold tracking-widest mb-3 transition-colors relative z-[1]">{t.sub}</p>
+            <p class="text-2xl md:text-3xl font-black leading-snug whitespace-pre-line relative z-[1]">{t.keyword}</p>
+          </div>
         </div>
       ))}
     </div>
