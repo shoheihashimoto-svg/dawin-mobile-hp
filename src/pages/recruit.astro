@@ -226,12 +226,8 @@ import Layout from '../layouts/Layout.astro';
       // ── Who We Want カード：シャイン方向・タイミングをランダム化 ──
       (function () {
         const dirs = [
-          { from: 'translateX(-130%)',          to: 'translateX(130%)',           angle: '90deg'  },
-          { from: 'translateX(130%)',           to: 'translateX(-130%)',          angle: '90deg'  },
-          { from: 'translateY(-130%)',          to: 'translateY(130%)',           angle: '0deg'   },
-          { from: 'translateY(130%)',           to: 'translateY(-130%)',          angle: '180deg' },
-          { from: 'translate(-130%,-130%)',     to: 'translate(130%,130%)',       angle: '45deg'  },
-          { from: 'translate(130%,-130%)',      to: 'translate(-130%,130%)',      angle: '135deg' },
+          { from: 'translate(-130%,-130%)', to: 'translate(130%,130%)',  angle: '45deg'  },
+          { from: 'translate(130%,-130%)',  to: 'translate(-130%,130%)', angle: '135deg' },
         ];
         document.querySelectorAll('.who-card-wrap').forEach(wrap => {
           wrap.style.animationDelay = (Math.random() * 6).toFixed(2) + 's';
