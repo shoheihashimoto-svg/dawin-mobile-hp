@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogPost.astro
-title: "給料について、正直に話します。"
+title: "給料について"
 date: "2026-07-03"
 description: "「稼げるの？」という疑問に、数字を交えて答えます。インセンティブの仕組みも含めて、ぜんぶ書きます。"
 author: "橋本 章平"
