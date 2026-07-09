@@ -18,15 +18,17 @@ import Layout from '../layouts/Layout.astro';
     inset: -20px;
     background: linear-gradient(108deg, transparent 35%, rgba(255,255,255,0) 44%, rgba(255,255,255,0.38) 50%, rgba(255,255,255,0) 56%, transparent 65%);
     transform: translateX(-130%);
-    animation: whoShine 10s ease-in-out infinite;
+    opacity: 0;
     pointer-events: none;
     z-index: 0;
   }
+  .who-shine.shine-active {
+    animation: whoShine 3.5s ease-in-out forwards;
+  }
   @keyframes whoShine {
     0%   { transform: translateX(-130%); opacity: 0; }
-    5%   { opacity: 1; }
-    38%  { transform: translateX(130%);  opacity: 1; }
-    44%  { opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { transform: translateX(130%);  opacity: 1; }
     100% { transform: translateX(130%);  opacity: 0; }
   }
   .who-label {
@@ -238,20 +240,18 @@ import Layout from '../layouts/Layout.astro';
     <script>
       // ── Who We Want カード：シャイン方向・タイミングをランダム化 ──
       (function () {
-        // シャイン・グロータイミングのランダム化
+        // グロータイミングのランダム化（ambient）
         document.querySelectorAll('.who-card-wrap').forEach(wrap => {
           wrap.style.animationDelay = (Math.random() * 6).toFixed(2) + 's';
-          const shine = wrap.querySelector('.who-shine');
-          if (shine) shine.style.animationDelay = (Math.random() * 10).toFixed(2) + 's';
         });
 
-        // ラベル発光：1つずつランダムに、2つ同時には光らせない
+        // ラベル発光：1つずつランダム、同時発光なし
         const labels = Array.from(document.querySelectorAll('.who-label'));
-        let lastIdx = -1;
+        let lastLabelIdx = -1;
         function glowNext() {
           let idx;
-          do { idx = Math.floor(Math.random() * labels.length); } while (idx === lastIdx);
-          lastIdx = idx;
+          do { idx = Math.floor(Math.random() * labels.length); } while (idx === lastLabelIdx);
+          lastLabelIdx = idx;
           const lbl = labels[idx];
           lbl.classList.add('glowing');
           setTimeout(() => {
@@ -260,6 +260,25 @@ import Layout from '../layouts/Layout.astro';
           }, 2500);
         }
         setTimeout(glowNext, 1200 + Math.random() * 2000);
+
+        // 光の筋：1本ずつランダム、同時発光なし
+        const shines = Array.from(document.querySelectorAll('.who-shine'));
+        let lastShineIdx = -1;
+        function shineNext() {
+          let idx;
+          do { idx = Math.floor(Math.random() * shines.length); } while (idx === lastShineIdx);
+          lastShineIdx = idx;
+          const el = shines[idx];
+          el.classList.remove('shine-active');
+          void el.offsetWidth; // アニメーションリセット
+          el.classList.add('shine-active');
+          el.addEventListener('animationend', function handler() {
+            el.removeEventListener('animationend', handler);
+            el.classList.remove('shine-active');
+            setTimeout(shineNext, 800 + Math.random() * 2500);
+          }, { once: true });
+        }
+        setTimeout(shineNext, 800 + Math.random() * 2000);
       })();
     </script>
 
