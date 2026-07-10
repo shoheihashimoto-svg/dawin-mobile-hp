@@ -5,6 +5,7 @@ import Layout from '../layouts/Layout.astro';
 <style>
   .diamond-card {
     clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    position: relative;
   }
   .card-shine {
     position: absolute;
@@ -135,7 +136,7 @@ import Layout from '../layouts/Layout.astro';
   <div class="max-w-4xl mx-auto">
     <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-4 text-center">Values</p>
     <h2 class="text-2xl md:text-3xl font-black text-center mb-12">大切にしている価値観</h2>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 w-full sm:max-w-2xl mx-auto">
+    <div class="grid grid-cols-4 md:grid-cols-3 gap-3 md:gap-6 w-full sm:max-w-2xl mx-auto">
       {[
         {
           title: 'Challenge',
@@ -162,16 +163,18 @@ import Layout from '../layouts/Layout.astro';
           labelColor: 'text-purple-600',
         },
       ].map((v, i) => (
-        <div class="about-card-wrap aspect-square">
-          <div class={`tap-card diamond-card group relative overflow-hidden ${v.bg} cursor-pointer flex items-center justify-center w-full h-full`}>
-            <div class="card-shine" style={`animation-delay: ${i * 1.2}s`}></div>
-            <div class="w-[55%] relative z-[1] text-center">
-              <p class={`${v.labelColor} text-xs font-bold tracking-widest uppercase mb-2`}>{v.title}</p>
-              <h3 class="text-xl font-black text-gray-900 leading-tight">{v.label}</h3>
-            </div>
-            <div class={`card-overlay absolute inset-0 z-[2] ${v.hoverBg} text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out`}>
-              <div class="w-[52%] text-center">
+        <div class={`about-card-wrap aspect-square ${i === 2 ? 'col-start-2 col-span-2 md:col-start-auto md:col-span-1' : 'col-span-2 md:col-span-1'}`}>
+          <div class="diamond-card w-full h-full">
+            <div class={`tap-card group relative overflow-hidden ${v.bg} cursor-pointer flex items-center justify-center w-full h-full`}>
+              <div class="card-shine" style={`animation-delay: ${i * 1.2}s`}></div>
+              <div class="w-[55%] relative z-[1] text-center">
+                <p class={`${v.labelColor} text-xs font-bold tracking-widest uppercase mb-2`}>{v.title}</p>
+                <h3 class="text-xl font-black text-gray-900 leading-tight">{v.label}</h3>
+              </div>
+              <div class={`card-overlay absolute inset-0 z-[2] ${v.hoverBg} text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out`}>
+                <div class="w-[65%] text-center">
                   <p class="text-xs text-white/90 leading-relaxed">{v.body}</p>
+                </div>
               </div>
             </div>
           </div>
