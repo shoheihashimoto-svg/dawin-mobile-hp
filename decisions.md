@@ -11,8 +11,8 @@
 |---|---|---|
 | `photo` | アイコン（ヒーロー左の丸い写真） | `[id].astro` ヒーローセクション・`interview.astro` カード |
 | `photoPosition` | アイコン用 object-position | 同上 |
-| `mainPhoto` | メイン写真（Q1の上、横幅全体） | `[id].astro` メインセクション |
-| `mainPhotoPosition` | メイン写真用 object-position | 同上 |
+| `mainPhoto` | メイン写真（Q1の上、角丸・余白付き） | `[id].astro` メインセクション |
+| `mainCaption` | メイン写真の下のキャプション（例：「休日は子供と一緒に」） | 同上 |
 
 ### ルール
 - `photo` と `mainPhoto` は **必ず両方** セットする。片方だけの場合は公開しない。
@@ -24,7 +24,7 @@
 - [ ] `public/{id}.jpg` コピー済み
 - [ ] `public/{id}_main.jpg` コピー済み
 - [ ] `interview.astro` の `members` 配列に `photo`・`photoPos` 追加済み
-- [ ] `[id].astro` の `staffData` に `photo`・`photoPosition`・`mainPhoto`・`mainPhotoPosition` 追加済み
+- [ ] `[id].astro` の `staffData` に `photo`・`photoPosition`・`mainPhoto`・`mainCaption` 追加済み
 
 ### なぜこう決めたか
 毎回「一覧ページだけ追加」「詳細ページのメイン写真を忘れる」「1枚を使い回す」といったミスが繰り返されたため、
