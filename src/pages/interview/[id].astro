@@ -7,6 +7,8 @@ export function getStaticPaths() {
       name: '犬束 誠',
       role: 'エリアマネージャー（九州）',
       color: 'from-indigo-900 to-indigo-700',
+      photo: '/inataba.jpg',
+      photoPosition: '38% 28%',
       quote: 'チームがあるから、もっと頑張れる。',
       qa: [
         {
@@ -41,9 +43,15 @@ const { staff } = Astro.props;
   <div class="relative z-10 max-w-3xl mx-auto">
     <a href="/interview" class="text-blue-300 text-xs font-bold tracking-widest uppercase hover:text-white transition-colors">← INTERVIEW 一覧に戻る</a>
     <div class="mt-6 flex items-center gap-5">
-      <div class={`w-20 h-20 bg-gradient-to-br ${staff.color} rounded-full flex items-center justify-center text-3xl font-black flex-shrink-0`}>
-        {staff.name.charAt(0)}
-      </div>
+      {staff.photo ? (
+        <img src={staff.photo} alt={staff.name}
+          class="w-20 h-20 rounded-full object-cover flex-shrink-0"
+          style={`object-position: ${staff.photoPosition || '50% 30%'}`} />
+      ) : (
+        <div class={`w-20 h-20 bg-gradient-to-br ${staff.color} rounded-full flex items-center justify-center text-3xl font-black flex-shrink-0`}>
+          {staff.name.charAt(0)}
+        </div>
+      )}
       <div>
         <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">スタッフインタビュー</span>
         <h1 class="text-3xl md:text-4xl font-black mt-2">{staff.name}</h1>
