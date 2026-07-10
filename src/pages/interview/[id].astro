@@ -9,6 +9,8 @@ export function getStaticPaths() {
       color: 'from-indigo-900 to-indigo-700',
       photo: '/inataba.jpg',
       photoPosition: '38% 28%',
+      mainPhoto: '/inataba_main.jpg',
+      mainPhotoPosition: '50% 30%',
       quote: 'チームがあるから、もっと頑張れる。',
       qa: [
         {
@@ -62,11 +64,11 @@ const { staff } = Astro.props;
 </section>
 
 <!-- メイン写真 -->
-{staff.photo && (
+{(staff.mainPhoto || staff.photo) && (
   <div class="h-72 md:h-[480px] overflow-hidden">
-    <img src={staff.photo} alt={staff.name}
+    <img src={staff.mainPhoto || staff.photo} alt={staff.name}
       class="w-full h-full object-cover"
-      style={`object-position: ${staff.photoPosition || '50% 30%'}`} />
+      style={`object-position: ${staff.mainPhotoPosition || staff.photoPosition || '50% 30%'}`} />
   </div>
 )}
 
