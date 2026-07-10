@@ -67,7 +67,7 @@ const { staff } = Astro.props;
 {staff.mainPhoto && (
   <div class="bg-white py-8 px-6">
     <div class="max-w-3xl mx-auto">
-      <img src={staff.mainPhoto} alt={staff.name} class="w-full h-64 object-cover rounded-2xl block" style="object-position: 50% 48%" />
+      <img src={staff.mainPhoto} alt={staff.name} class="w-full h-auto rounded-2xl block" />
       {staff.mainCaption && (
         <p class="text-center text-sm text-gray-400 mt-3">{staff.mainCaption}</p>
       )}
