@@ -135,7 +135,7 @@ import Layout from '../layouts/Layout.astro';
   <div class="max-w-4xl mx-auto">
     <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-4 text-center">Values</p>
     <h2 class="text-2xl md:text-3xl font-black text-center mb-12">大切にしている価値観</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 w-full sm:max-w-2xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 w-full sm:max-w-2xl mx-auto">
       {[
         {
           title: 'Challenge',
@@ -171,8 +171,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <div class={`card-overlay absolute inset-0 z-[2] ${v.hoverBg} text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out`}>
               <div class="w-[52%] text-center">
-                <p class="text-xs font-bold tracking-widest uppercase mb-2 text-white/50">{v.title}</p>
-                <p class="text-xs text-white/90 leading-relaxed">{v.body}</p>
+                  <p class="text-xs text-white/90 leading-relaxed">{v.body}</p>
               </div>
             </div>
           </div>
