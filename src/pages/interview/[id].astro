@@ -10,7 +10,7 @@ export function getStaticPaths() {
       photo: '/inataba.jpg',
       photoPosition: '38% 28%',
       mainPhoto: '/inataba_main.jpg',
-      mainPhotoPosition: '50% 50%',
+      mainCaption: '休日は子供と一緒に',
       quote: 'チームがあるから、もっと頑張れる。',
       qa: [
         {
@@ -65,8 +65,13 @@ const { staff } = Astro.props;
 
 <!-- メイン写真（mainPhoto必須。decisions.md参照） -->
 {staff.mainPhoto && (
-  <div class="w-full">
-    <img src={staff.mainPhoto} alt={staff.name} class="w-full h-auto block" />
+  <div class="bg-white py-8 px-6">
+    <div class="max-w-3xl mx-auto">
+      <img src={staff.mainPhoto} alt={staff.name} class="w-full h-auto rounded-2xl block" />
+      {staff.mainCaption && (
+        <p class="text-center text-sm text-gray-400 mt-3">{staff.mainCaption}</p>
+      )}
+    </div>
   </div>
 )}
 
