@@ -130,6 +130,13 @@ import Layout from '../layouts/Layout.astro';
   @media (prefers-reduced-motion: reduce) {
     .hex-card .card-shine { animation: none; }
   }
+  .hex-card-wrap {
+    animation: hexCardAmbient 6s ease-in-out infinite;
+  }
+  @keyframes hexCardAmbient {
+    0%, 100% { filter: drop-shadow(0 0  0px rgba(59,130,246,0.0)); }
+    50%       { filter: drop-shadow(0 0 18px rgba(96,165,250,0.42)); }
+  }
 
   /* ── ダイヤモンド 線順光アニメーション ── */
   .why-diamond-wrap {
@@ -807,55 +814,61 @@ import Layout from '../layouts/Layout.astro';
   <div class="max-w-5xl mx-auto">
     <p class="text-blue-600 font-bold text-center text-xs tracking-widest uppercase mb-4">Why DAWIN</p>
     <h2 class="text-2xl md:text-4xl font-black text-center mb-16">ダウインで働く3つの理由</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-6 max-w-[200px] sm:max-w-2xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 w-full sm:max-w-2xl mx-auto">
 
-      <div class="tap-card hex-card group relative overflow-hidden bg-gray-100 cursor-pointer flex items-center justify-center aspect-square">
-        <div class="w-[58%] relative z-[1] text-center transition-all duration-200 group-hover:opacity-0 group-hover:scale-95">
-          <p class="text-blue-600 text-sm font-black tracking-[0.25em] uppercase">Income</p>
-        </div>
-        <div class="card-shine" style="animation-delay:0s"></div>
-        <div class="card-overlay absolute inset-0 z-[2] bg-blue-600 text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
-          <div class="w-[64%] text-center">
-            <p class="text-[8px] font-bold tracking-widest uppercase mb-3 text-blue-200">Income</p>
-            <ul class="text-[11px] space-y-1.5 text-left leading-snug">
-              <li>✦ 月収42万円〜可</li>
-              <li>✦ 歩合＋等級制</li>
-              <li>✦ 昇格基準が明確</li>
-            </ul>
+      <div class="hex-card-wrap aspect-square">
+        <div class="tap-card hex-card group relative overflow-hidden bg-gray-100 cursor-pointer flex items-center justify-center w-full h-full">
+          <div class="w-[58%] relative z-[1] text-center transition-all duration-200 group-hover:opacity-0 group-hover:scale-95">
+            <p class="text-blue-600 text-sm font-black tracking-[0.25em] uppercase">Income</p>
+          </div>
+          <div class="card-shine" style="animation-delay:0s"></div>
+          <div class="card-overlay absolute inset-0 z-[2] bg-blue-600 text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
+            <div class="w-[60%] text-center">
+              <p class="text-xs font-bold tracking-widest uppercase mb-3 text-blue-200">Income</p>
+              <ul class="text-xs space-y-1.5 text-left leading-snug">
+                <li>✦ 月収42万円〜可</li>
+                <li>✦ 歩合＋等級制</li>
+                <li>✦ 昇格基準が明確</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="tap-card hex-card group relative overflow-hidden bg-gray-100 cursor-pointer flex items-center justify-center aspect-square">
-        <div class="w-[58%] relative z-[1] text-center transition-all duration-200 group-hover:opacity-0 group-hover:scale-95">
-          <p class="text-indigo-600 text-sm font-black tracking-[0.25em] uppercase">Team</p>
-        </div>
-        <div class="card-shine" style="animation-delay:1.2s"></div>
-        <div class="card-overlay absolute inset-0 z-[2] bg-indigo-600 text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
-          <div class="w-[64%] text-center">
-            <p class="text-[8px] font-bold tracking-widest uppercase mb-3 text-indigo-200">Team</p>
-            <ul class="text-[11px] space-y-1.5 text-left leading-snug">
-              <li>✦ 平均26歳の職場</li>
-              <li>✦ 本音で相談できる</li>
-              <li>✦ 打ち上げも充実</li>
-            </ul>
+      <div class="hex-card-wrap aspect-square">
+        <div class="tap-card hex-card group relative overflow-hidden bg-gray-100 cursor-pointer flex items-center justify-center w-full h-full">
+          <div class="w-[58%] relative z-[1] text-center transition-all duration-200 group-hover:opacity-0 group-hover:scale-95">
+            <p class="text-indigo-600 text-sm font-black tracking-[0.25em] uppercase">Team</p>
+          </div>
+          <div class="card-shine" style="animation-delay:1.2s"></div>
+          <div class="card-overlay absolute inset-0 z-[2] bg-indigo-600 text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
+            <div class="w-[60%] text-center">
+              <p class="text-xs font-bold tracking-widest uppercase mb-3 text-indigo-200">Team</p>
+              <ul class="text-xs space-y-1.5 text-left leading-snug">
+                <li>✦ 平均26歳の職場</li>
+                <li>✦ 本音で相談できる</li>
+                <li>✦ 打ち上げも充実</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="tap-card hex-card group relative overflow-hidden bg-gray-100 cursor-pointer flex items-center justify-center aspect-square">
-        <div class="w-[58%] relative z-[1] text-center transition-all duration-200 group-hover:opacity-0 group-hover:scale-95">
-          <p class="text-purple-600 text-sm font-black tracking-[0.25em] uppercase">Skill</p>
-        </div>
-        <div class="card-shine" style="animation-delay:2.4s"></div>
-        <div class="card-overlay absolute inset-0 z-[2] bg-purple-600 text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
-          <div class="w-[64%] text-center">
-            <p class="text-[8px] font-bold tracking-widest uppercase mb-3 text-purple-200">Skill</p>
-            <ul class="text-[11px] space-y-1.5 text-left leading-snug">
-              <li>✦ 未経験入社98%</li>
-              <li>✦ 年480件で即実践</li>
-              <li>✦ 汎用スキルが育つ</li>
-            </ul>
+      <div class="hex-card-wrap aspect-square">
+        <div class="tap-card hex-card group relative overflow-hidden bg-gray-100 cursor-pointer flex items-center justify-center w-full h-full">
+          <div class="w-[58%] relative z-[1] text-center transition-all duration-200 group-hover:opacity-0 group-hover:scale-95">
+            <p class="text-purple-600 text-sm font-black tracking-[0.25em] uppercase">Skill</p>
+          </div>
+          <div class="card-shine" style="animation-delay:2.4s"></div>
+          <div class="card-overlay absolute inset-0 z-[2] bg-purple-600 text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
+            <div class="w-[60%] text-center">
+              <p class="text-xs font-bold tracking-widest uppercase mb-3 text-purple-200">Skill</p>
+              <ul class="text-xs space-y-1.5 text-left leading-snug">
+                <li>✦ 未経験入社98%</li>
+                <li>✦ 年480件で即実践</li>
+                <li>✦ 汎用スキルが育つ</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -865,6 +878,10 @@ import Layout from '../layouts/Layout.astro';
 </section>
 
 <script>
+  document.querySelectorAll('.hex-card-wrap').forEach(wrap => {
+    (wrap as HTMLElement).style.animationDelay = (Math.random() * 6).toFixed(2) + 's';
+  });
+
   document.querySelectorAll('.tap-card').forEach(card => {
     card.addEventListener('click', () => {
       const overlay = card.querySelector('.card-overlay');

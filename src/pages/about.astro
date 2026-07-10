@@ -31,6 +31,13 @@ import Layout from '../layouts/Layout.astro';
   @media (prefers-reduced-motion: reduce) {
     .card-shine { animation: none; }
   }
+  .about-card-wrap {
+    animation: aboutCardAmbient 6s ease-in-out infinite;
+  }
+  @keyframes aboutCardAmbient {
+    0%, 100% { filter: drop-shadow(0 0  0px rgba(59,130,246,0.0)); }
+    50%       { filter: drop-shadow(0 0 18px rgba(96,165,250,0.42)); }
+  }
 </style>
 
 
@@ -128,7 +135,7 @@ import Layout from '../layouts/Layout.astro';
   <div class="max-w-4xl mx-auto">
     <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-4 text-center">Values</p>
     <h2 class="text-2xl md:text-3xl font-black text-center mb-12">大切にしている価値観</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-6 max-w-[200px] sm:max-w-2xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 w-full sm:max-w-2xl mx-auto">
       {[
         {
           title: 'Challenge',
@@ -155,16 +162,18 @@ import Layout from '../layouts/Layout.astro';
           labelColor: 'text-purple-600',
         },
       ].map((v, i) => (
-        <div class={`tap-card diamond-card group relative overflow-hidden ${v.bg} cursor-pointer flex items-center justify-center aspect-square`}>
-          <div class="card-shine" style={`animation-delay: ${i * 1.2}s`}></div>
-          <div class="w-[62%] relative z-[1] text-center">
-            <p class={`${v.labelColor} text-[9px] font-bold tracking-widest uppercase mb-2`}>{v.title}</p>
-            <h3 class="text-base font-black text-gray-900 leading-tight">{v.label}</h3>
-          </div>
-          <div class={`card-overlay absolute inset-0 z-[2] ${v.hoverBg} text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out`}>
-            <div class="w-[60%] text-center">
-              <p class="text-[9px] font-bold tracking-widest uppercase mb-2 text-white/50">{v.title}</p>
-              <p class="text-[10px] text-white/85 leading-relaxed">{v.body}</p>
+        <div class="about-card-wrap aspect-square">
+          <div class={`tap-card diamond-card group relative overflow-hidden ${v.bg} cursor-pointer flex items-center justify-center w-full h-full`}>
+            <div class="card-shine" style={`animation-delay: ${i * 1.2}s`}></div>
+            <div class="w-[55%] relative z-[1] text-center">
+              <p class={`${v.labelColor} text-xs font-bold tracking-widest uppercase mb-2`}>{v.title}</p>
+              <h3 class="text-xl font-black text-gray-900 leading-tight">{v.label}</h3>
+            </div>
+            <div class={`card-overlay absolute inset-0 z-[2] ${v.hoverBg} text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out`}>
+              <div class="w-[52%] text-center">
+                <p class="text-xs font-bold tracking-widest uppercase mb-2 text-white/50">{v.title}</p>
+                <p class="text-xs text-white/90 leading-relaxed">{v.body}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -174,6 +183,10 @@ import Layout from '../layouts/Layout.astro';
 </section>
 
 <script>
+  document.querySelectorAll('.about-card-wrap').forEach(wrap => {
+    (wrap as HTMLElement).style.animationDelay = (Math.random() * 6).toFixed(2) + 's';
+  });
+
   document.querySelectorAll('.tap-card').forEach(card => {
     card.addEventListener('click', () => {
       const overlay = card.querySelector('.card-overlay');
