@@ -63,12 +63,12 @@ const { staff } = Astro.props;
   </div>
 </section>
 
-<!-- メイン写真 -->
-{(staff.mainPhoto || staff.photo) && (
+<!-- メイン写真（mainPhoto必須。decisions.md参照） -->
+{staff.mainPhoto && (
   <div class="h-72 md:h-[480px] overflow-hidden">
-    <img src={staff.mainPhoto || staff.photo} alt={staff.name}
+    <img src={staff.mainPhoto} alt={staff.name}
       class="w-full h-full object-cover"
-      style={`object-position: ${staff.mainPhotoPosition || staff.photoPosition || '50% 30%'}`} />
+      style={`object-position: ${staff.mainPhotoPosition || '50% 30%'}`} />
   </div>
 )}
 
