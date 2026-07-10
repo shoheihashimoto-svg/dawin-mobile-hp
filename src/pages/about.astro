@@ -142,40 +142,33 @@ import Layout from '../layouts/Layout.astro';
           title: 'Challenge',
           label: '挑戦',
           body: '原石の才能も、まず動かなければ磨かれない。失敗を恐れず前に出る姿勢が、輝きのはじまり。',
-          bg: 'bg-gray-50',
-          hoverBg: 'bg-blue-600',
-          labelColor: 'text-blue-600',
+          bg: 'bg-blue-600',
+          dimColor: 'text-blue-200',
         },
         {
           title: 'Teamwork',
           label: '削り合い',
           body: '仲間と切磋琢磨することで、互いの面が磨かれる。隣の輝きが、自分の輝きを増す。',
-          bg: 'bg-gray-50',
-          hoverBg: 'bg-indigo-600',
-          labelColor: 'text-indigo-600',
+          bg: 'bg-indigo-600',
+          dimColor: 'text-indigo-200',
         },
         {
           title: 'Growth',
           label: '輝きへ',
           body: '原石のまま終わらせない。現場での経験と仲間の力で、全員が本来の輝きに近づいていける。',
-          bg: 'bg-gray-50',
-          hoverBg: 'bg-purple-600',
-          labelColor: 'text-purple-600',
+          bg: 'bg-purple-600',
+          dimColor: 'text-purple-200',
         },
       ].map((v, i) => (
         <div class={`about-card-wrap aspect-square ${i === 2 ? 'col-start-2 col-span-2 md:col-start-auto md:col-span-1' : 'col-span-2 md:col-span-1'}`}>
-          <div class="diamond-card w-full h-full">
-            <div class={`tap-card group relative overflow-hidden ${v.bg} cursor-pointer flex items-center justify-center w-full h-full`}>
-              <div class="card-shine" style={`animation-delay: ${i * 1.2}s`}></div>
-              <div class="w-[55%] relative z-[1] text-center">
-                <p class={`${v.labelColor} text-xs font-bold tracking-widest uppercase mb-2`}>{v.title}</p>
-                <h3 class="text-xl font-black text-gray-900 leading-tight">{v.label}</h3>
-              </div>
-              <div class={`card-overlay absolute inset-0 z-[2] ${v.hoverBg} text-white flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out`}>
-                <div class="w-[65%] text-center">
-                  <p class="text-xs text-white/90 leading-relaxed">{v.body}</p>
-                </div>
-              </div>
+          <div class={`diamond-card w-full h-full ${v.bg} flex flex-col items-center justify-center gap-2`}>
+            <div class="text-center w-[56%] relative z-[1]">
+              <p class={`${v.dimColor} text-[9px] font-bold tracking-widest uppercase leading-none mb-1`}>{v.title}</p>
+              <p class="text-lg font-black text-white leading-tight">{v.label}</p>
+            </div>
+            <div class="w-[35%] h-px bg-white/25 flex-shrink-0 relative z-[1]"></div>
+            <div class="text-center w-[56%] relative z-[1]">
+              <p class="text-[8px] text-white/85 leading-relaxed">{v.body}</p>
             </div>
           </div>
         </div>
@@ -189,23 +182,12 @@ import Layout from '../layouts/Layout.astro';
     (wrap as HTMLElement).style.animationDelay = (Math.random() * 6).toFixed(2) + 's';
   });
 
-  document.querySelectorAll('.tap-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const overlay = card.querySelector('.card-overlay');
-      const isOpen = !overlay.classList.contains('translate-y-full');
-      document.querySelectorAll('.card-overlay').forEach(o => o.classList.add('translate-y-full'));
-      if (!isOpen) overlay.classList.remove('translate-y-full');
-    });
-  });
-
-  // ─ ①+② 星スパークル ─
+  // ─ 星スパークル ─
   (function() {
     const syms   = ['✦', '✧', '✦', '✧', '✦'];
-    const colors = ['#a5b4fc', '#c4b5fd', '#93c5fd', '#ddd6fe', '#818cf8'];
+    const colors = ['rgba(255,255,255,0.9)', 'rgba(255,255,255,0.6)', '#e0e7ff', '#c7d2fe', 'rgba(255,255,255,0.75)'];
 
     function spawnStar(card) {
-      const overlay = card.querySelector('.card-overlay');
-      if (overlay && !overlay.classList.contains('translate-y-full')) return;
       const el = document.createElement('span');
       const dur = (0.85 + Math.random() * 0.75).toFixed(2);
       const size = card.clientWidth || 180;
@@ -215,7 +197,7 @@ import Layout from '../layouts/Layout.astro';
         'position:absolute',
         'pointer-events:none',
         'opacity:0',
-        'z-index:1',
+        'z-index:3',
         'transform-origin:center',
         'line-height:1',
         `left:${(pad + Math.random() * (size - pad * 2)).toFixed(0)}px`,
