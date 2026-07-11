@@ -1,11 +1,11 @@
----
+﻿---
 import Layout from '../../layouts/Layout.astro';
 ---
 <Layout title="中村 翔 インタビュー" description="ダウイン最古参に近いスタッフ・中村翔のインタビュー。アルバイトから3年前に正社員へ。「ここは、居続けたくなる場所だった」。">
 
 
 <!-- Hero -->
-<section class="hero-bg relative py-28 px-6 text-white overflow-hidden">
+<section class="hero-bg relative py-14 px-6 text-white overflow-hidden">
   <div class="absolute inset-0 opacity-5"
     style="background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 60px 60px;">
   </div>
@@ -23,7 +23,7 @@ import Layout from '../../layouts/Layout.astro';
         <img src="/nakamura.jpg" alt="中村 翔" class="w-full h-full object-cover" style="object-position: 50% 12%;" />
       </div>
       <div>
-        <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">最古参スタッフ / アルバイト→3年前に正社員</span>
+        <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">最古参スタッフ / アルバイト→正社員に</span>
         <h1 class="text-3xl md:text-4xl font-black mt-2">中村 翔</h1>
         <p class="text-blue-200 text-sm mt-1">モバイルイベントスタッフ（正社員）</p>
       </div>
@@ -92,7 +92,7 @@ import Layout from '../../layouts/Layout.astro';
     <!-- プロフィール補足 -->
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
       {[
-        { label: 'CAREER', value: 'アルバイト→3年前に正社員' },
+        { label: 'CAREER', value: 'アルバイト→正社員に' },
         { label: 'OFF', value: 'Netflixでアニメ' },
         { label: 'WANT', value: '夢がある人と働きたい' },
       ].map((item) => (
