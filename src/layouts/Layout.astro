@@ -47,20 +47,29 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
       <a href="/" class="font-bold text-lg tracking-wide">
         <span class="text-blue-600">DAWIN</span> Mobile
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-        <a href="/about" class="hover:text-blue-600 transition-colors">ABOUT</a>
-        <a href="/interview" class="hover:text-blue-600 transition-colors">INTERVIEW</a>
-        <a href="/culture" class="hover:text-blue-600 transition-colors">CULTURE</a>
-        <a href="/blog" class="hover:text-blue-600 transition-colors">BLOG</a>
-        <a href="/recruit" class="hover:text-blue-600 transition-colors">RECRUIT</a>
-        <a href="/contact" class="hover:text-blue-600 transition-colors">CONTACT</a>
-      </nav>
-      <a href="https://lin.ee/Z7jiZg1" target="_blank" rel="noopener" class="hidden md:inline-block border border-green-500/50 text-green-600 text-sm font-bold px-5 py-2.5 rounded-full hover:bg-green-50 transition-colors">
-        応募前にLINEで相談
-      </a>
-      <a href="/recruit" class="bg-blue-600 text-white text-sm font-bold px-5 py-2.5 rounded-full hover:bg-blue-700 transition-colors">
-        エントリーはこちら →
-      </a>
+      <div class="flex items-center gap-2">
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+          <a href="/about" class="hover:text-blue-600 transition-colors">ABOUT</a>
+          <a href="/interview" class="hover:text-blue-600 transition-colors">INTERVIEW</a>
+          <a href="/culture" class="hover:text-blue-600 transition-colors">CULTURE</a>
+          <a href="/blog" class="hover:text-blue-600 transition-colors">BLOG</a>
+          <a href="/recruit" class="hover:text-blue-600 transition-colors">RECRUIT</a>
+          <a href="/contact" class="hover:text-blue-600 transition-colors">CONTACT</a>
+        </nav>
+        <a href="https://lin.ee/Z7jiZg1" target="_blank" rel="noopener" class="hidden md:inline-block border border-green-500/50 text-green-600 text-sm font-bold px-5 py-2.5 rounded-full hover:bg-green-50 transition-colors">
+          応募前にLINEで相談
+        </a>
+        <!-- ハンバーガーボタン（モバイルのみ） -->
+        <button id="ham-btn" class="md:hidden p-2 text-gray-600 hover:text-blue-600 transition-colors" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-drawer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <a href="/recruit" class="bg-blue-600 text-white text-sm font-bold px-4 py-2 md:px-5 md:py-2.5 rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap">
+          <span class="md:hidden">ENTRY</span>
+          <span class="hidden md:inline">エントリーはこちら →</span>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -82,6 +91,46 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
     <a href="/recruit" class="flex-1 py-3 text-center text-xs font-bold text-white bg-blue-600">ENTRY</a>
   </div>
 
+  <!-- モバイルドロワー（スマホのみ） -->
+  <div id="mobile-drawer" class="md:hidden fixed inset-0 z-[200] pointer-events-none" aria-hidden="true" role="dialog" aria-modal="true" aria-label="ナビゲーションメニュー">
+    <!-- 背景オーバーレイ -->
+    <div id="drawer-backdrop" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300"></div>
+    <!-- パネル（右からスライドイン） -->
+    <div id="drawer-panel" class="absolute top-0 right-0 h-full w-72 bg-white transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col">
+      <!-- パネルヘッダー -->
+      <div class="flex items-center justify-between px-6 h-16 border-b border-gray-100 flex-shrink-0">
+        <span class="font-bold text-lg"><span class="text-blue-600">DAWIN</span> Mobile</span>
+        <button id="drawer-close-btn" class="p-2 -mr-2 text-gray-400 hover:text-gray-700 transition-colors" aria-label="メニューを閉じる">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <!-- ナビリンク -->
+      <nav class="flex flex-col px-4 py-4 gap-0.5 flex-1 overflow-y-auto">
+        <a href="/" class="py-3 px-4 text-gray-600 font-bold text-sm tracking-widest hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors">HOME</a>
+        <a href="/about" class="py-3 px-4 text-gray-600 font-bold text-sm tracking-widest hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors">ABOUT</a>
+        <a href="/interview" class="py-3 px-4 text-gray-600 font-bold text-sm tracking-widest hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors">INTERVIEW</a>
+        <a href="/culture" class="py-3 px-4 text-gray-600 font-bold text-sm tracking-widest hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors">CULTURE</a>
+        <a href="/blog" class="flex items-center justify-between py-3 px-4 text-blue-600 font-bold text-sm tracking-widest bg-blue-50 rounded-xl">
+          BLOG
+          <span class="text-[9px] bg-blue-600 text-white px-2 py-0.5 rounded-full font-bold tracking-normal">NEW</span>
+        </a>
+        <a href="/recruit" class="py-3 px-4 text-gray-600 font-bold text-sm tracking-widest hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors">RECRUIT</a>
+        <a href="/contact" class="py-3 px-4 text-gray-600 font-bold text-sm tracking-widest hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors">CONTACT</a>
+      </nav>
+      <!-- 下部 CTA -->
+      <div class="px-4 pb-24 pt-4 border-t border-gray-100 flex flex-col gap-3 flex-shrink-0">
+        <a href="/recruit" class="block text-center bg-blue-600 text-white font-black text-sm px-6 py-4 rounded-2xl hover:bg-blue-700 transition-colors">
+          エントリーはこちら →
+        </a>
+        <a href="https://lin.ee/Z7jiZg1" target="_blank" rel="noopener" class="block text-center border border-green-500 text-green-600 font-bold text-sm px-6 py-3 rounded-2xl hover:bg-green-50 transition-colors">
+          LINEで相談する
+        </a>
+      </div>
+    </div>
+  </div>
+
   <main class="pt-16 pb-16 md:pb-0">
     <slot />
   </main>
@@ -101,5 +150,41 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
     <p class="text-xs text-gray-600">© 2026 DAWIN Co., Ltd. All rights reserved.</p>
   </footer>
 
+
+<script>
+  (function() {
+    const hamBtn   = document.getElementById('ham-btn');
+    const closeBtn = document.getElementById('drawer-close-btn');
+    const backdrop = document.getElementById('drawer-backdrop');
+    const panel    = document.getElementById('drawer-panel');
+    const drawer   = document.getElementById('mobile-drawer');
+    if (!hamBtn || !drawer) return;
+
+    function openDrawer() {
+      drawer.classList.remove('pointer-events-none');
+      drawer.setAttribute('aria-hidden', 'false');
+      backdrop!.classList.remove('opacity-0');
+      panel!.classList.remove('translate-x-full');
+      hamBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      backdrop!.classList.add('opacity-0');
+      panel!.classList.add('translate-x-full');
+      hamBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        drawer.classList.add('pointer-events-none');
+        drawer.setAttribute('aria-hidden', 'true');
+      }, 300);
+    }
+
+    hamBtn.addEventListener('click', openDrawer);
+    closeBtn!.addEventListener('click', closeDrawer);
+    backdrop!.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+  })();
+</script>
 </body>
 </html>
