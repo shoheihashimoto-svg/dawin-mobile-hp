@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogPost.astro
-title: この仕事で身につくもの
+title: 携帯販売バイトで身につくもの
 date: 2026-07-21
 description: スマホ販売のバイトって将来に何が残るの？接客力・数字感覚・自己管理力など、部長が実感をもとに正直に書きます。
 author: 橋本 章平

@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogPost.astro
-title: 応募する前に気になること
+title: 携帯販売バイトへの応募前によくある疑問
 date: 2026-07-14
 description: ノルマはあるの？スマホの知識がないと無理？初月の収入は？応募する前によく聞かれる疑問に、部長が正直に答えます。
 author: 橋本 章平
