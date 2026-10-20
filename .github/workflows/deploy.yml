@@ -34,4 +34,3 @@ jobs:
           dangerous-clean-slate: false
           log-level: standard
           timeout: 60000
-          retry-count: 3
