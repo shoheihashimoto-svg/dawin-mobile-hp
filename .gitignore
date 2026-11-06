@@ -21,3 +21,6 @@ Thumbs.db
 .vercel
 
 .vercel
+
+# Astro が自動で作る一時ファイル
+.astro/
