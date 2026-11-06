@@ -24,3 +24,5 @@ Thumbs.db
 
 # Astro が自動で作る一時ファイル
 .astro/
+# デプロイ用（FTPのサーバー名・ログインIDを含むので公開リポジトリに入れない）
+deploy.ps1
