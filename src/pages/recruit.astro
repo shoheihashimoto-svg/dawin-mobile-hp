@@ -39,24 +39,6 @@ import Layout from '../layouts/Layout.astro';
     0%, 100% { filter: drop-shadow(0 0  0px rgba(59,130,246,0.0)); }
     50%       { filter: drop-shadow(0 0 16px rgba(96,165,250,0.38)); }
   }
-  .who-shine {
-    position: absolute;
-    inset: -20px;
-    background: linear-gradient(108deg, transparent 35%, rgba(255,255,255,0) 44%, rgba(255,255,255,0.38) 50%, rgba(255,255,255,0) 56%, transparent 65%);
-    transform: translateX(-130%);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .who-shine.shine-active {
-    animation: whoShine 3.5s ease-in-out forwards;
-  }
-  @keyframes whoShine {
-    0%   { transform: translateX(-130%); opacity: 0; }
-    10%  { opacity: 1; }
-    90%  { transform: translateX(130%);  opacity: 1; }
-    100% { transform: translateX(130%);  opacity: 0; }
-  }
   .who-label {
     transition: color 0.4s, text-shadow 0.4s;
   }
@@ -71,7 +53,6 @@ import Layout from '../layouts/Layout.astro';
   }
   @media (prefers-reduced-motion: reduce) {
     .who-card-wrap { animation: none; }
-    .who-shine { animation: none; opacity: 0; }
     .who-label.glowing { animation: none; }
     .who-card:hover::before { animation: none; }
   }
@@ -107,7 +88,6 @@ import Layout from '../layouts/Layout.astro';
       ].map((t) => (
         <div class="who-card-wrap aspect-square">
           <div class="who-card group relative bg-white/5 w-full h-full flex flex-col items-center justify-center text-center transition-colors duration-500 cursor-default overflow-hidden">
-            <div class="who-shine"></div>
             <p class="who-label text-blue-400 group-hover:text-blue-200 text-[12px] md:text-[16px] font-bold tracking-widest mb-2 transition-colors relative z-[1]">{t.sub}</p>
             <p class="text-xl md:text-3xl font-black leading-snug whitespace-pre-line relative z-[1]">{t.keyword}</p>
           </div>
@@ -265,7 +245,7 @@ import Layout from '../layouts/Layout.astro';
     </form>
 
     <script>
-      // ── Who We Want カード：シャイン方向・タイミングをランダム化 ──
+      // ── Who We Want カード：ふわっと光る・ラベル発光のタイミングをランダム化 ──
       (function () {
         // グロータイミングのランダム化（ambient）
         document.querySelectorAll('.who-card-wrap').forEach(wrap => {
@@ -287,25 +267,6 @@ import Layout from '../layouts/Layout.astro';
           }, 2500);
         }
         setTimeout(glowNext, 1200 + Math.random() * 2000);
-
-        // 光の筋：1本ずつランダム、同時発光なし
-        const shines = Array.from(document.querySelectorAll('.who-shine'));
-        let lastShineIdx = -1;
-        function shineNext() {
-          let idx;
-          do { idx = Math.floor(Math.random() * shines.length); } while (idx === lastShineIdx);
-          lastShineIdx = idx;
-          const el = shines[idx];
-          el.classList.remove('shine-active');
-          void el.offsetWidth; // アニメーションリセット
-          el.classList.add('shine-active');
-          el.addEventListener('animationend', function handler() {
-            el.removeEventListener('animationend', handler);
-            el.classList.remove('shine-active');
-            setTimeout(shineNext, 800 + Math.random() * 2500);
-          }, { once: true });
-        }
-        setTimeout(shineNext, 800 + Math.random() * 2000);
       })();
     </script>
 
