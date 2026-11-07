@@ -3,7 +3,8 @@
 モバイル事業部の採用HP（Astro + Tailwind）。
 
 - **このリポジトリは公開（public）。** 鍵・個人情報・サーバーのログインIDを入れない
-- デプロイは手元の `deploy.ps1`（FTP。パスワードは実行時に入力）。サーバー名・IDを含むため Git には入れない（.gitignore）
+- **master に push すると、そのまま本番HPに公開される**（GitHub Actions `.github/workflows/deploy.yml` が build して Xserver に FTP で送る）。サーバー名は deploy.yml に書いてあり、FTP の ID・パスワードは GitHub の Secrets（`FTP_USERNAME`／`FTP_PASSWORD`）。クラウドで作業するときは master に push しない
+- 手元から出すときの `deploy.ps1`（パスワードは実行時に入力）は、ログインIDを含むため Git には入れない（.gitignore）
 - `.astro/` は Astro が自動で作る一時ファイル（Git に入れない）
 
 ## 共通ルール（橋本・全プロジェクト共通）
