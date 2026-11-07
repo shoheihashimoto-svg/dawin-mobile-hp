@@ -6,6 +6,32 @@ import Layout from '../layouts/Layout.astro';
   .who-card {
     clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
   }
+  /* マウスを置いたときのオーロラ（青・水色・紫・緑がゆっくり流れる） */
+  .who-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(60% 55% at 20% 25%, rgba(34,211,238,0.95), transparent 70%),
+      radial-gradient(55% 60% at 80% 30%, rgba(139,92,246,0.95), transparent 70%),
+      radial-gradient(65% 55% at 70% 85%, rgba(16,185,129,0.85), transparent 70%),
+      radial-gradient(60% 60% at 25% 80%, rgba(59,130,246,0.95), transparent 70%),
+      linear-gradient(135deg, #1d4ed8, #6d28d9);
+    background-size: 200% 200%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .who-card:hover::before {
+    opacity: 1;
+    animation: whoAurora 8s ease-in-out infinite alternate;
+  }
+  @keyframes whoAurora {
+    0%   { background-position: 0% 0%;     filter: hue-rotate(0deg); }
+    50%  { background-position: 100% 50%;  filter: hue-rotate(25deg); }
+    100% { background-position: 50% 100%;  filter: hue-rotate(-20deg); }
+  }
   .who-card-wrap {
     animation: whoAmbient 6s ease-in-out infinite;
   }
@@ -47,6 +73,7 @@ import Layout from '../layouts/Layout.astro';
     .who-card-wrap { animation: none; }
     .who-shine { animation: none; opacity: 0; }
     .who-label.glowing { animation: none; }
+    .who-card:hover::before { animation: none; }
   }
 </style>
 
@@ -79,7 +106,7 @@ import Layout from '../layouts/Layout.astro';
         { keyword: '仲間を\n大切にできる', sub: 'CARE' },
       ].map((t) => (
         <div class="who-card-wrap aspect-square">
-          <div class="who-card group relative bg-white/5 hover:bg-blue-600 w-full h-full flex flex-col items-center justify-center text-center transition-colors duration-500 cursor-default overflow-hidden">
+          <div class="who-card group relative bg-white/5 w-full h-full flex flex-col items-center justify-center text-center transition-colors duration-500 cursor-default overflow-hidden">
             <div class="who-shine"></div>
             <p class="who-label text-blue-400 group-hover:text-blue-200 text-[12px] md:text-[16px] font-bold tracking-widest mb-2 transition-colors relative z-[1]">{t.sub}</p>
             <p class="text-xl md:text-3xl font-black leading-snug whitespace-pre-line relative z-[1]">{t.keyword}</p>
