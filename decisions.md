@@ -2,6 +2,27 @@
 
 ---
 
+## トップのヒーロー画像を「原石から輝きへ」に（Three.jsの宝石は撤去）
+**決定日：2026-11-07**
+
+- 3案（A ダイヤ／B 原石から輝きへ／C 現場写真風）から **B** を採用（橋本）。
+- 画像は gpt-image-2 で作り、`public/hero-genseki.webp`（1200×1200・約250KB）に置く。Three.js（3Dの宝石）は外した。
+- 流れ（流れ星のイントロ→「Diamond cuts diamond」→ヒーロー）は変えない。画像はふわっと浮く動き＋光が横切る動きだけ。
+
+### なぜこう決めたか
+- 専用に作り直した画像より、サンプルBを切り抜いた「仮の画像」のほうが良いと判断（橋本「仮の方がよかった」）。
+- そのため、仮の画像を元に「同じ絵のまま高精細に」と描き直させた版を本番にした。新しく生成し直すと別の絵になってしまう。
+
+### 作り方（作り直すときはこの順）
+1. サンプルBを生成（1536×1024）し、石の部分を切り抜く（切り抜き範囲 640,150〜1500,1010）
+   > Cinematic photorealistic still life on a deep midnight navy background (#050816): in the right half of a wide landscape frame, a rough uncut raw diamond crystal stone transforms from left to right into a perfectly cut, polished brilliant diamond; the left part of the stone is rough, cloudy and grey-white with natural crystal texture, the right part is precisely faceted and sparkling with white and electric blue light. Fine glittering dust particles and small shards float around the cutting boundary, as if the stone is being sharpened. Blue rim light. The left half of the frame is empty dark navy space for website text. Premium, dramatic, hopeful mood. No text, no letters, no logos, no tools, no hands, no people, no watermark.
+2. 切り抜いた画像を `edit`（2048×2048・quality high・2枚）で高精細にし、元にいちばん近い1枚を選ぶ
+   > Recreate this exact image as a higher-resolution, sharper version with finer detail. Keep everything the same: the same composition and framing, the same stone shape, size, angle and position, the left half rough grey rocky raw stone and the right half cut brilliant diamond, the same glowing electric blue crystal dust and sparkles at the boundary and around the stone, the same deep navy almost black background and the same blue glow under the stone. Only improve sharpness, facet crispness, rock texture detail and clean fine particles. No text, no letters, no logos, no watermark.
+3. 1200×1200 の webp（品質86）にして `public/hero-genseki.webp` を差し替える
+- 注意：gpt-image-2 は `--input-fidelity` が使えない（エラーになる）。
+
+---
+
 ## SEO対策の方針（2026-08-05実施）
 **決定日：2026-08-05**
 

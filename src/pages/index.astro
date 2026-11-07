@@ -275,7 +275,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <!-- 右：ダイヤモンド（Three.js） / モバイルではテキストの上 -->
+      <!-- 右：原石の画像 / モバイルではテキストの上 -->
       <div class="order-first lg:order-2 lg:col-span-5 flex justify-center items-center">
         <div class="gem-wrap relative">
           <!-- 原石から輝きへ（gpt-image-2 で生成した画像） -->
@@ -303,8 +303,8 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
 
-  <!-- スクロール -->
-  <div class="fade-in absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-blue-300/60">
+  <!-- スクロール（スマホでは「社員の声を聞く」と重なるので出さない） -->
+  <div class="fade-in absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3 text-blue-300/60">
     <span class="text-[10px] tracking-[0.4em] font-semibold">SCROLL</span>
     <div class="relative w-px h-14 overflow-hidden bg-blue-300/15">
       <div class="scroll-dot absolute left-0 top-0 w-px h-4 bg-gradient-to-b from-transparent via-blue-200 to-blue-300"></div>
