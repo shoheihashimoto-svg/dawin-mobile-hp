@@ -15,18 +15,18 @@ import Layout from '../layouts/Layout.astro';
           送信できませんでした。通信状況を確認して、もう一度お試しください。
         </div>
         <div>
-          <label class="block text-sm font-bold text-gray-700 mb-2">お名前 <span class="text-red-500">*</span></label>
-          <input type="text" name="name" required placeholder="橋本 章平"
-            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+          <label for="contact-name" class="block text-sm font-bold text-gray-700 mb-2">お名前 <span class="text-red-500">*</span></label>
+          <input type="text" id="contact-name" name="name" autocomplete="name" required placeholder="橋本 章平"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
         </div>
         <div>
-          <label class="block text-sm font-bold text-gray-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
-          <input type="email" name="email" required placeholder="example@email.com"
-            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+          <label for="contact-email" class="block text-sm font-bold text-gray-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
+          <input type="email" id="contact-email" name="email" autocomplete="email" required placeholder="example@email.com"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
         </div>
         <div>
-          <label class="block text-sm font-bold text-gray-700 mb-2">お問い合わせ種別</label>
-          <select name="category" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition bg-white">
+          <label for="contact-category" class="block text-sm font-bold text-gray-700 mb-2">お問い合わせ種別</label>
+          <select id="contact-category" name="category" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition bg-white">
             <option>採用について</option>
             <option>事業・サービスについて</option>
             <option>取材・メディア</option>
@@ -34,9 +34,9 @@ import Layout from '../layouts/Layout.astro';
           </select>
         </div>
         <div>
-          <label class="block text-sm font-bold text-gray-700 mb-2">メッセージ <span class="text-red-500">*</span></label>
-          <textarea name="message" required rows="5" placeholder="お問い合わせ内容をご記入ください"
-            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"></textarea>
+          <label for="contact-message" class="block text-sm font-bold text-gray-700 mb-2">メッセージ <span class="text-red-500">*</span></label>
+          <textarea id="contact-message" name="message" required rows="5" placeholder="お問い合わせ内容をご記入ください"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"></textarea>
         </div>
         <button type="submit" id="contactBtn"
           class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-colors text-sm">

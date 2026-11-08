@@ -132,6 +132,29 @@ import Layout from '../layouts/Layout.astro';
     clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
     position: relative;
   }
+  /* 3つの理由：カードごとの色味のまま、ゆっくり流れるグラデーション */
+  .hex-g1, .hex-g2, .hex-g3 {
+    background-size: 200% 200%;
+    animation: hexGrad 10s ease-in-out infinite alternate;
+  }
+  .hex-g1 { background-image:
+    radial-gradient(70% 60% at 20% 15%, rgba(34,211,238,0.85), transparent 70%),
+    linear-gradient(135deg, #2563eb 0%, #1d4ed8 45%, #1e3a8a 100%); }
+  .hex-g2 { background-image:
+    radial-gradient(70% 60% at 20% 15%, rgba(129,140,248,0.9), transparent 70%),
+    radial-gradient(60% 60% at 85% 85%, rgba(56,189,248,0.45), transparent 70%),
+    linear-gradient(135deg, #4f46e5 0%, #4338ca 50%, #312e81 100%); }
+  .hex-g3 { background-image:
+    radial-gradient(70% 60% at 20% 15%, rgba(232,121,249,0.85), transparent 70%),
+    radial-gradient(60% 60% at 85% 85%, rgba(99,102,241,0.5), transparent 70%),
+    linear-gradient(135deg, #9333ea 0%, #7e22ce 50%, #581c87 100%); }
+  @keyframes hexGrad {
+    0%   { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hex-g1, .hex-g2, .hex-g3 { animation: none; }
+  }
   .hex-card .card-shine {
     position: absolute;
     inset: -20px;
@@ -259,7 +282,7 @@ import Layout from '../layouts/Layout.astro';
           </span>
         </h1>
         <p class="rise rise-2 text-blue-200/90 font-semibold text-base md:text-lg tracking-[0.45em] mb-7">削り合い、輝いていけ。</p>
-        <p class="rise rise-3 text-gray-400 text-base leading-relaxed mb-11 max-w-md">
+        <p class="rise rise-3 text-gray-400 text-base leading-relaxed mb-11 max-w-md [word-break:auto-phrase]">
           挑戦を楽しみ、仲間を大切にする人たちが集まるチーム。<br />あなたの「成長したい」を、ここで形にしませんか。
         </p>
         <div class="rise rise-4 flex flex-col sm:flex-row sm:flex-wrap gap-4">
@@ -562,11 +585,6 @@ import Layout from '../layouts/Layout.astro';
     })();
   })();
 
-  // bfcache（ブラウザの戻る・進む）から復元されたとき
-  // WebGLコンテキストが失われているためリロードして再初期化する
-  window.addEventListener('pageshow', (e) => {
-    if ((e as PageTransitionEvent).persisted) location.reload();
-  });
 </script>
 
 <!-- 数字で見るダウイン -->
@@ -574,30 +592,30 @@ import Layout from '../layouts/Layout.astro';
   <div class="max-w-6xl mx-auto">
     <p class="text-blue-400 font-bold text-center text-xs tracking-widest uppercase mb-12">DAWIN Numbers</p>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-      <div class="group rounded-2xl p-8 hover:bg-blue-600/20 transition-all duration-300">
-        <div class="h-32 flex flex-col items-center justify-center text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
+      <div class="group rounded-2xl p-4 md:p-8 hover:bg-blue-600/20 transition-all duration-300">
+        <div class="h-20 md:h-32 flex items-baseline justify-center gap-0.5 pt-6 md:pt-12 text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
           <span class="text-blue-400">26</span><span class="text-2xl text-white font-bold">歳</span>
         </div>
         <div class="w-8 h-px bg-blue-500 mx-auto mb-3"></div>
         <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">平均年齢</p>
       </div>
-      <div class="group rounded-2xl p-8 hover:bg-blue-600/20 transition-all duration-300">
-        <div class="h-32 flex flex-col items-center justify-center text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
+      <div class="group rounded-2xl p-4 md:p-8 hover:bg-blue-600/20 transition-all duration-300">
+        <div class="h-20 md:h-32 flex items-baseline justify-center gap-0.5 pt-6 md:pt-12 text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
           No.<span class="text-blue-400">1</span>
         </div>
         <div class="w-8 h-px bg-blue-500 mx-auto mb-3"></div>
         <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">週間全国獲得実績</p>
-        <p class="text-gray-600 text-xs mt-2">※キャリア別週間獲得台数</p>
+        <p class="text-gray-400 text-xs mt-2">※キャリア別週間獲得台数</p>
       </div>
-      <div class="group rounded-2xl p-8 hover:bg-blue-600/20 transition-all duration-300">
-        <div class="h-32 flex flex-col items-center justify-center text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
+      <div class="group rounded-2xl p-4 md:p-8 hover:bg-blue-600/20 transition-all duration-300">
+        <div class="h-20 md:h-32 flex items-baseline justify-center gap-0.5 pt-6 md:pt-12 text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
           <span class="text-blue-400">480</span><span class="text-2xl text-white font-bold">+</span>
         </div>
         <div class="w-8 h-px bg-blue-500 mx-auto mb-3"></div>
         <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">年間イベント数</p>
       </div>
-      <div class="group rounded-2xl p-8 hover:bg-blue-600/20 transition-all duration-300">
-        <div class="h-32 flex flex-col items-center justify-center text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
+      <div class="group rounded-2xl p-4 md:p-8 hover:bg-blue-600/20 transition-all duration-300">
+        <div class="h-20 md:h-32 flex items-baseline justify-center gap-0.5 pt-6 md:pt-12 text-4xl md:text-5xl font-black text-white tracking-tight mb-3 leading-tight">
           <span class="text-blue-400">98</span><span class="text-2xl text-white font-bold">%</span>
         </div>
         <div class="w-8 h-px bg-blue-500 mx-auto mb-3"></div>
@@ -621,17 +639,17 @@ import Layout from '../layouts/Layout.astro';
   <div class="max-w-5xl mx-auto">
     <p class="text-blue-600 font-bold text-center text-xs tracking-widest uppercase mb-4">Why DAWIN</p>
     <h2 class="text-2xl md:text-4xl font-black text-center mb-16">ダウインで働く3つの理由</h2>
-    <div class="grid grid-cols-4 md:grid-cols-3 gap-3 md:gap-6 w-full sm:max-w-2xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-[18rem] md:max-w-2xl mx-auto">
 
-      <div class="hex-card-wrap aspect-square col-span-2 md:col-span-1">
-        <div class="hex-card w-full h-full bg-blue-600 flex flex-col items-center justify-center gap-2">
+      <div class="hex-card-wrap aspect-square">
+        <div class="hex-card hex-g1 w-full h-full flex flex-col items-center justify-center gap-2">
           <div class="text-center w-[56%] md:w-[62%] relative z-[1]">
-            <p class="text-blue-200 text-[9px] md:text-[11px] font-bold tracking-widest uppercase leading-none mb-1">Income</p>
-            <p class="text-lg font-black text-white leading-tight">収入</p>
+            <p class="text-blue-200 text-[11px] font-bold tracking-widest uppercase leading-none mb-1">Income</p>
+            <p class="text-xl md:text-lg font-black text-white leading-tight">収入</p>
           </div>
           <div class="w-[35%] md:w-[42%] h-px bg-white/25 flex-shrink-0 relative z-[1]"></div>
           <div class="w-[56%] md:w-[62%] relative z-[1]">
-            <ul class="text-[8px] md:text-xs text-white/85 space-y-1.5 leading-relaxed">
+            <ul class="text-sm md:text-xs text-white/90 space-y-1.5 leading-relaxed">
               <li>✦ 月収42万円〜可</li>
               <li>✦ 歩合＋等級制</li>
               <li>✦ 昇格基準が明確</li>
@@ -640,15 +658,15 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <div class="hex-card-wrap aspect-square col-span-2 md:col-span-1">
-        <div class="hex-card w-full h-full bg-indigo-600 flex flex-col items-center justify-center gap-2">
+      <div class="hex-card-wrap aspect-square">
+        <div class="hex-card hex-g2 w-full h-full flex flex-col items-center justify-center gap-2">
           <div class="text-center w-[56%] md:w-[62%] relative z-[1]">
-            <p class="text-indigo-200 text-[9px] md:text-[11px] font-bold tracking-widest uppercase leading-none mb-1">Team</p>
-            <p class="text-lg font-black text-white leading-tight">チーム</p>
+            <p class="text-indigo-200 text-[11px] font-bold tracking-widest uppercase leading-none mb-1">Team</p>
+            <p class="text-xl md:text-lg font-black text-white leading-tight">チーム</p>
           </div>
           <div class="w-[35%] md:w-[42%] h-px bg-white/25 flex-shrink-0 relative z-[1]"></div>
           <div class="w-[56%] md:w-[62%] relative z-[1]">
-            <ul class="text-[8px] md:text-xs text-white/85 space-y-1.5 leading-relaxed">
+            <ul class="text-sm md:text-xs text-white/90 space-y-1.5 leading-relaxed">
               <li>✦ 平均26歳の職場</li>
               <li>✦ 本音で相談できる</li>
               <li>✦ 打ち上げも充実</li>
@@ -657,15 +675,15 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <div class="hex-card-wrap aspect-square col-start-2 col-span-2 md:col-start-auto md:col-span-1">
-        <div class="hex-card w-full h-full bg-purple-600 flex flex-col items-center justify-center gap-2">
+      <div class="hex-card-wrap aspect-square">
+        <div class="hex-card hex-g3 w-full h-full flex flex-col items-center justify-center gap-2">
           <div class="text-center w-[56%] md:w-[62%] relative z-[1]">
-            <p class="text-purple-200 text-[9px] md:text-[11px] font-bold tracking-widest uppercase leading-none mb-1">Skill</p>
-            <p class="text-lg font-black text-white leading-tight">スキル</p>
+            <p class="text-purple-200 text-[11px] font-bold tracking-widest uppercase leading-none mb-1">Skill</p>
+            <p class="text-xl md:text-lg font-black text-white leading-tight">スキル</p>
           </div>
           <div class="w-[35%] md:w-[42%] h-px bg-white/25 flex-shrink-0 relative z-[1]"></div>
           <div class="w-[56%] md:w-[62%] relative z-[1]">
-            <ul class="text-[8px] md:text-xs text-white/85 space-y-1.5 leading-relaxed">
+            <ul class="text-sm md:text-xs text-white/90 space-y-1.5 leading-relaxed">
               <li>✦ 未経験入社98%</li>
               <li>✦ 年480件で即実践</li>
               <li>✦ 汎用スキルが育つ</li>
@@ -836,11 +854,11 @@ import Layout from '../layouts/Layout.astro';
     </p>
     <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
       <a href="/recruit"
-        class="inline-block bg-white text-blue-900 font-black text-xl px-14 py-5 rounded-full hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] hover:scale-105 transition-all duration-300">
+        class="inline-block whitespace-nowrap bg-white text-blue-900 font-black text-lg md:text-xl px-10 md:px-14 py-5 rounded-full hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] hover:scale-105 transition-all duration-300">
         採用エントリーはこちら →
       </a>
       <a href="https://lin.ee/Z7jiZg1" target="_blank" rel="noopener"
-        class="inline-block border-2 border-green-400/50 text-green-200 font-bold text-base px-10 py-4 rounded-full hover:border-green-400 hover:text-green-100 hover:bg-green-500/10 transition-all duration-300">
+        class="inline-block whitespace-nowrap border-2 border-green-400/50 text-green-200 font-bold text-sm md:text-base px-6 md:px-10 py-4 rounded-full hover:border-green-400 hover:text-green-100 hover:bg-green-500/10 transition-all duration-300">
         LINEでカジュアル相談（履歴書不要）
       </a>
     </div>

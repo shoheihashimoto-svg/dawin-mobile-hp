@@ -167,11 +167,18 @@ import Layout from '../layouts/Layout.astro';
 </section>
 
 <!-- エントリーフォーム -->
-<section class="py-20 px-6 bg-gray-950 text-white">
+<section id="entry" class="scroll-mt-16 py-20 px-6 bg-gray-950 text-white">
   <div class="max-w-2xl mx-auto">
     <p class="text-blue-400 font-bold text-xs tracking-widest uppercase mb-4 text-center">Entry</p>
     <h2 class="text-3xl font-black text-center mb-4">エントリーはこちら</h2>
-    <p class="text-gray-400 text-center text-sm mb-12">入力いただいた情報は採用目的のみに使用します。</p>
+    <p class="text-gray-400 text-center text-sm mb-8">入力いただいた情報は採用目的のみに使用します。</p>
+
+    <!-- 迷っている人向け：LINE相談の入口 -->
+    <a href="https://lin.ee/Z7jiZg1" target="_blank" rel="noopener"
+      class="mb-10 flex items-center justify-between gap-4 rounded-2xl border border-green-400/40 px-5 py-4 hover:bg-green-500/10 transition-colors">
+      <span class="text-sm text-gray-300 leading-relaxed">迷ったら、まずLINEで相談<br /><span class="text-gray-400">履歴書不要・質問だけでもOK</span></span>
+      <span class="shrink-0 rounded-full bg-[#06C755] px-4 py-2 text-sm font-bold text-gray-950">LINEで相談</span>
+    </a>
 
     <form id="entryForm" class="space-y-5">
       <div id="formError" class="hidden bg-red-500/20 border border-red-500/40 text-red-300 text-sm rounded-xl px-4 py-3">
@@ -179,53 +186,53 @@ import Layout from '../layouts/Layout.astro';
       </div>
       <div class="grid md:grid-cols-2 gap-5">
         <div>
-          <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">お名前 <span class="text-red-400">*</span></label>
-          <input type="text" name="name" required placeholder="橋本 章平"
-            class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
+          <label for="entry-name" class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">お名前 <span class="text-red-400">*</span></label>
+          <input type="text" id="entry-name" name="name" autocomplete="name" required placeholder="橋本 章平"
+            class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-base text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
         </div>
         <div>
-          <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">フリガナ <span class="text-red-400">*</span></label>
-          <input type="text" name="kana" required placeholder="ハシモト ショウヘイ"
-            class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
-        </div>
-      </div>
-      <div class="grid md:grid-cols-2 gap-5">
-        <div>
-          <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">メールアドレス <span class="text-red-400">*</span></label>
-          <input type="email" name="email" required placeholder="example@email.com"
-            class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">電話番号 <span class="text-red-400">*</span></label>
-          <input type="tel" name="tel" required placeholder="090-0000-0000"
-            class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
+          <label for="entry-kana" class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">フリガナ <span class="text-red-400">*</span></label>
+          <input type="text" id="entry-kana" name="kana" required placeholder="ハシモト ショウヘイ"
+            class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-base text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
         </div>
       </div>
       <div class="grid md:grid-cols-2 gap-5">
         <div>
-          <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">年齢</label>
-          <input type="number" name="age" placeholder="25"
-            class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
+          <label for="entry-email" class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">メールアドレス <span class="text-red-400">*</span></label>
+          <input type="email" id="entry-email" name="email" autocomplete="email" required placeholder="example@email.com"
+            class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-base text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
         </div>
         <div>
-          <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">希望職種</label>
-          <select name="position" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition">
+          <label for="entry-tel" class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">電話番号 <span class="text-red-400">*</span></label>
+          <input type="tel" id="entry-tel" name="tel" autocomplete="tel" required placeholder="090-0000-0000"
+            class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-base text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div>
+          <label for="entry-age" class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">年齢</label>
+          <input type="number" id="entry-age" name="age" placeholder="25"
+            class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-base text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition" />
+        </div>
+        <div>
+          <label for="entry-position" class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">希望職種</label>
+          <select id="entry-position" name="position" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-blue-500 transition">
             <option class="text-gray-900">イベントスタッフ</option>
             <option class="text-gray-900">マネージャー候補</option>
             <option class="text-gray-900">どちらでも可</option>
           </select>
         </div>
         <div>
-          <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">希望種類</label>
-          <select name="type" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition">
+          <label for="entry-type" class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">希望種類</label>
+          <select id="entry-type" name="type" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-blue-500 transition">
             <option class="text-gray-900">アルバイト</option>
             <option class="text-gray-900">社員</option>
             <option class="text-gray-900">どちらでも可</option>
           </select>
         </div>
         <div>
-          <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">希望勤務地</label>
-          <select name="location" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition">
+          <label for="entry-location" class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">希望勤務地</label>
+          <select id="entry-location" name="location" class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-base text-white focus:outline-none focus:border-blue-500 transition">
             <option class="text-gray-900">東京</option>
             <option class="text-gray-900">福岡</option>
             <option class="text-gray-900">どちらでも可</option>
@@ -233,15 +240,15 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
       <div>
-        <label class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">志望動機・自己PR</label>
-        <textarea name="message" rows="4" placeholder="応募のきっかけや、自己PRをご記入ください"
-          class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition resize-none"></textarea>
+        <label for="entry-message" class="block text-xs font-bold text-gray-400 mb-2 tracking-widest uppercase">志望動機・自己PR</label>
+        <textarea id="entry-message" name="message" rows="4" placeholder="応募のきっかけや、自己PRをご記入ください"
+          class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-base text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition resize-none"></textarea>
       </div>
       <button type="submit" id="submitBtn"
         class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-4 rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(96,165,250,0.4)] text-base">
         エントリーする →
       </button>
-      <p class="text-xs text-gray-600 text-center">送信後、3営業日以内にご連絡いたします。</p>
+      <p class="text-xs text-gray-400 text-center">送信後、3営業日以内にご連絡いたします。</p>
     </form>
 
     <script>

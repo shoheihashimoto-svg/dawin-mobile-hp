@@ -4,11 +4,13 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 const {
   title,
   description = '株式会社ダウイン モバイル事業部 採用サイト。未経験歓迎・インセンティブ充実。関東・福岡でモバイルイベントスタッフ募集中。',
   ogImage = '/og-default.jpg',
+  noindex = false,
 } = Astro.props;
 const siteUrl = 'https://mobile.dawin.co.jp';
 const pageUrl = `${siteUrl}${Astro.url.pathname}`;
@@ -20,6 +22,7 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex" />}
   <title>{title} | ダウイン モバイル事業部</title>
   <!-- OGP -->
   <meta property="og:type" content="website" />
@@ -58,23 +61,23 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
           <a href="/recruit" class="hover:text-blue-600 transition-colors">RECRUIT</a>
           <a href="/contact" class="hover:text-blue-600 transition-colors">CONTACT</a>
         </nav>
-        <a href="https://lin.ee/Z7jiZg1" target="_blank" rel="noopener" class="hidden md:inline-block border border-green-500/50 text-green-600 text-sm font-bold px-5 py-2.5 rounded-full hover:bg-green-50 transition-colors">
+        <a href="https://lin.ee/Z7jiZg1" target="_blank" rel="noopener" class="hidden md:inline-block border border-green-500/50 text-green-700 text-sm font-bold px-5 py-2.5 rounded-full hover:bg-green-50 transition-colors">
           応募前にLINEで相談
         </a>
         <!-- LINE丸アイコン（モバイルのみ） -->
         <a href="https://lin.ee/Z7jiZg1" target="_blank" rel="noopener"
-           class="md:hidden w-9 h-9 flex items-center justify-center rounded-full bg-[#06C755] text-white flex-shrink-0 active:scale-95 transition-transform"
+           class="md:hidden w-11 h-11 flex items-center justify-center rounded-full bg-[#06C755] text-white flex-shrink-0 active:scale-95 transition-transform"
            aria-label="LINEで相談">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
           </svg>
         </a>
-        <a href="/recruit" class="bg-blue-600 text-white text-sm font-bold px-4 py-2 md:px-5 md:py-2.5 rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap">
+        <a href="/recruit#entry" class="bg-blue-600 text-white text-sm font-bold px-4 py-3 md:px-5 md:py-2.5 rounded-full hover:bg-blue-700 transition-colors whitespace-nowrap">
           <span class="md:hidden">ENTRY</span>
           <span class="hidden md:inline">エントリーはこちら →</span>
         </a>
         <!-- ハンバーガーボタン（モバイルのみ・一番右） -->
-        <button id="ham-btn" class="md:hidden p-2 text-gray-600 hover:text-blue-600 transition-colors" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-drawer">
+        <button id="ham-btn" class="md:hidden p-2.5 text-gray-600 hover:text-blue-600 transition-colors" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-drawer">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
@@ -89,7 +92,7 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
     <!-- 背景オーバーレイ -->
     <div id="drawer-backdrop" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300"></div>
     <!-- パネル（右からスライドイン） -->
-    <div id="drawer-panel" class="absolute top-0 right-0 h-full w-72 bg-white transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col">
+    <div id="drawer-panel" class="absolute top-0 right-0 h-full w-72 bg-white transform translate-x-full transition-transform duration-300 ease-in-out [&:not(.translate-x-full)]:shadow-2xl flex flex-col">
       <!-- パネルヘッダー -->
       <div class="flex items-center justify-between px-6 h-16 border-b border-gray-100 flex-shrink-0">
         <span class="font-bold text-lg"><span class="text-blue-600">DAWIN</span> Mobile</span>
@@ -114,10 +117,10 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
       </nav>
       <!-- 下部 CTA -->
       <div class="px-4 pb-24 pt-4 border-t border-gray-100 flex flex-col gap-3 flex-shrink-0">
-        <a href="/recruit" class="block text-center bg-blue-600 text-white font-black text-sm px-6 py-4 rounded-2xl hover:bg-blue-700 transition-colors">
+        <a href="/recruit#entry" class="block text-center bg-blue-600 text-white font-black text-sm px-6 py-4 rounded-2xl hover:bg-blue-700 transition-colors">
           エントリーはこちら →
         </a>
-        <a href="https://lin.ee/Z7jiZg1" target="_blank" rel="noopener" class="block text-center border border-green-500 text-green-600 font-bold text-sm px-6 py-3 rounded-2xl hover:bg-green-50 transition-colors">
+        <a href="https://lin.ee/Z7jiZg1" target="_blank" rel="noopener" class="block text-center border border-green-500 text-green-700 font-bold text-sm px-6 py-3 rounded-2xl hover:bg-green-50 transition-colors">
           LINEで相談する
         </a>
       </div>
@@ -140,7 +143,7 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
       <a href="/recruit" class="hover:text-white transition-colors">RECRUIT</a>
       <a href="/contact" class="hover:text-white transition-colors">CONTACT</a>
     </nav>
-    <p class="text-xs text-gray-600">© 2026 DAWIN Co., Ltd. All rights reserved.</p>
+    <p class="text-xs text-gray-400">© 2026 DAWIN Co., Ltd. All rights reserved.</p>
   </footer>
 
 

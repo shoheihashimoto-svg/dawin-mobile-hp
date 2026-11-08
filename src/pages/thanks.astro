@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="送信完了">
+<Layout title="送信完了" noindex>
 <section class="min-h-screen bg-gray-950 text-white flex items-center justify-center px-6">
   <div class="text-center max-w-lg">
     <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-8">
@@ -16,6 +16,17 @@ import Layout from '../layouts/Layout.astro';
       3営業日以内に担当者よりご連絡いたします。<br />
       しばらくお待ちください。
     </p>
+    <div class="text-left bg-white/5 rounded-2xl p-6 mb-10 space-y-4">
+      <p class="text-sm font-bold text-white">ご連絡までの間に</p>
+      <a href="https://lin.ee/Z7jiZg1" target="_blank" rel="noopener" class="flex items-center justify-between gap-4 rounded-xl border border-green-400/40 px-4 py-3 hover:bg-green-500/10 transition-colors">
+        <span class="text-sm text-gray-300">LINEを追加しておくと、連絡がスムーズです</span>
+        <span class="shrink-0 text-sm font-bold text-green-300">追加 →</span>
+      </a>
+      <a href="/blog/mensetsu-nani-wo-kikareru" class="flex items-center justify-between gap-4 rounded-xl border border-white/10 px-4 py-3 hover:bg-white/5 transition-colors">
+        <span class="text-sm text-gray-300">ブログ：面接で聞かれること</span>
+        <span class="shrink-0 text-sm font-bold text-blue-300">読む →</span>
+      </a>
+    </div>
     <a href="/" class="inline-block bg-blue-600 text-white font-black px-10 py-4 rounded-full hover:bg-blue-500 transition-all duration-300">
       トップページへ戻る
     </a>
