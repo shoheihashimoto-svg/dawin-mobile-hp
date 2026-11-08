@@ -9,20 +9,24 @@ import Layout from '../layouts/Layout.astro';
       <h1 class="text-3xl md:text-4xl font-black text-center mb-4">お問い合わせ</h1>
       <p class="text-gray-500 text-center mb-12">採用以外のご質問・ご相談もお気軽にどうぞ。</p>
 
-      <form class="bg-white rounded-2xl shadow-sm p-8 space-y-6">
+      <form id="contactForm" class="bg-white rounded-2xl shadow-sm p-8 space-y-6">
+        <input type="hidden" name="formType" value="contact" />
+        <div id="contactError" class="hidden bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3">
+          送信できませんでした。通信状況を確認して、もう一度お試しください。
+        </div>
         <div>
           <label class="block text-sm font-bold text-gray-700 mb-2">お名前 <span class="text-red-500">*</span></label>
-          <input type="text" required placeholder="橋本 章平"
+          <input type="text" name="name" required placeholder="橋本 章平"
             class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
         </div>
         <div>
           <label class="block text-sm font-bold text-gray-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
-          <input type="email" required placeholder="example@email.com"
+          <input type="email" name="email" required placeholder="example@email.com"
             class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
         </div>
         <div>
           <label class="block text-sm font-bold text-gray-700 mb-2">お問い合わせ種別</label>
-          <select class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition bg-white">
+          <select name="category" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition bg-white">
             <option>採用について</option>
             <option>事業・サービスについて</option>
             <option>取材・メディア</option>
@@ -31,10 +35,10 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <div>
           <label class="block text-sm font-bold text-gray-700 mb-2">メッセージ <span class="text-red-500">*</span></label>
-          <textarea required rows="5" placeholder="お問い合わせ内容をご記入ください"
+          <textarea name="message" required rows="5" placeholder="お問い合わせ内容をご記入ください"
             class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"></textarea>
         </div>
-        <button type="submit"
+        <button type="submit" id="contactBtn"
           class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-colors text-sm">
           送信する →
         </button>
@@ -43,11 +47,47 @@ import Layout from '../layouts/Layout.astro';
         </p>
       </form>
 
+      <!-- 送信完了（送信後にフォームと入れ替える） -->
+      <div id="contactDone" class="hidden bg-white rounded-2xl shadow-sm p-8 text-center">
+        <p class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-3">Thank You</p>
+        <p class="text-xl font-black mb-3">お問い合わせを受け付けました。</p>
+        <p class="text-gray-500 text-sm leading-relaxed">2営業日以内にご返信いたします。しばらくお待ちください。</p>
+      </div>
+
       <div class="mt-10 text-center text-sm text-gray-500">
         <p>採用エントリーはこちら →</p>
         <a href="/recruit" class="inline-block mt-2 text-blue-600 font-bold hover:underline">採用情報ページへ</a>
       </div>
     </div>
   </section>
+
+<script>
+  // お問い合わせ：応募フォームと同じGASに送り、「お問い合わせ」タブに記録する
+  const form = document.getElementById('contactForm') as HTMLFormElement;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('contactBtn') as HTMLButtonElement;
+    const err = document.getElementById('contactError')!;
+    btn.textContent = '送信中...';
+    btn.disabled = true;
+    err.classList.add('hidden');
+    try {
+      const params = new URLSearchParams(new FormData(form) as any);
+      await fetch('https://script.google.com/macros/s/AKfycbzH4z-YGU85Y8M75R1mMlGA3hfOeVdLgiRDFJKIa0os69NI9iAFWI-paAEqRDtUz_qB/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: params,
+      });
+      form.classList.add('hidden');
+      const done = document.getElementById('contactDone')!;
+      done.classList.remove('hidden');
+      done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch {
+      btn.textContent = '送信する →';
+      btn.disabled = false;
+      err.classList.remove('hidden');
+    }
+  });
+</script>
 
 </Layout>
