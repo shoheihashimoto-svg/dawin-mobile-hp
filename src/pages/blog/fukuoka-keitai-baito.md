@@ -5,6 +5,7 @@ date: 2026-08-05
 description: 福岡エリアでモバイルイベントスタッフを募集しています。週1日〜OK・副業歓迎・未経験歓迎。商業施設での携帯イベント販売スタッフです。
 author: 橋本 章平
 category: 部長より
+image: /blog/fukuoka-keitai-baito.jpg
 ---
 
 ## 福岡エリアで一緒に働く仲間を探しています

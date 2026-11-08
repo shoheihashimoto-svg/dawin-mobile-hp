@@ -67,12 +67,12 @@ import Layout from '../layouts/Layout.astro';
     <div class="relative">
       <div class="absolute left-16 top-0 bottom-0 w-px bg-blue-100"></div>
       {[
-        { time: '08:30', label: '出発・移動', body: '会場への移動。車や電車で現場へ向かいます。' },
-        { time: '09:30', label: '会場設営', body: 'ブースのセッティング、機材の確認、当日の打ち合わせ。' },
-        { time: '10:00', label: 'イベント開始', body: 'お客様への接客・案内・提案がスタート。チームで連携しながら動きます。' },
-        { time: '13:00', label: '休憩・昼食', body: 'チームで交代しながら休憩。仲間との会話もリフレッシュの時間。' },
-        { time: '18:00', label: 'イベント終了・片付け', body: '撤収・清算・日報作成。チームで振り返りも行います。' },
-        { time: '19:00', label: '帰宅', body: '直帰OK。オン・オフの切り替えがしやすい環境です。' },
+        { time: '08:30', img: '/day/day-1-idou.jpg', label: '出発・移動', body: '会場への移動。車や電車で現場へ向かいます。' },
+        { time: '09:30', img: '/day/day-2-setsuei.jpg', label: '会場設営', body: 'ブースのセッティング、機材の確認、当日の打ち合わせ。' },
+        { time: '10:00', img: '/day/day-3-sekkyaku.jpg', label: 'イベント開始', body: 'お客様への接客・案内・提案がスタート。チームで連携しながら動きます。' },
+        { time: '13:00', img: '/day/day-4-kyukei.jpg', label: '休憩・昼食', body: 'チームで交代しながら休憩。仲間との会話もリフレッシュの時間。' },
+        { time: '18:00', img: '/day/day-5-katazuke.jpg', label: 'イベント終了・片付け', body: '撤収・清算・日報作成。チームで振り返りも行います。' },
+        { time: '19:00', img: '/day/day-6-kitaku.jpg', label: '帰宅', body: '直帰OK。オン・オフの切り替えがしやすい環境です。' },
       ].map((s) => (
         <div class="flex gap-6 mb-8 relative">
           <div class="w-16 flex-shrink-0 text-right">
@@ -81,9 +81,12 @@ import Layout from '../layouts/Layout.astro';
           <div class="relative">
             <div class="absolute -left-[1.65rem] top-1 w-3 h-3 bg-blue-600 rounded-full border-2 border-white"></div>
           </div>
-          <div class="flex-1 bg-gray-50 rounded-xl px-5 py-4 -mt-1">
-            <p class="font-black text-gray-900 mb-1">{s.label}</p>
-            <p class="text-sm text-gray-500 leading-relaxed">{s.body}</p>
+          <div class="flex-1 min-w-0 bg-gray-50 rounded-xl p-3 md:p-4 -mt-1 flex flex-col sm:flex-row gap-3 sm:gap-4 sm:items-center">
+            <img src={s.img} alt="" width="800" height="600" loading="lazy" decoding="async" class="w-full sm:w-36 md:w-44 h-auto rounded-lg bg-white shrink-0" />
+            <div class="px-2 sm:px-0 pb-1 sm:pb-0">
+              <p class="font-black text-gray-900 mb-1">{s.label}</p>
+              <p class="text-sm text-gray-500 leading-relaxed">{s.body}</p>
+            </div>
           </div>
         </div>
       ))}

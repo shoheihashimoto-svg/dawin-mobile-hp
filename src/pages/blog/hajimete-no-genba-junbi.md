@@ -5,6 +5,7 @@ date: 2026-09-07
 description: 「初日に何を持っていけばいい？」「どんな服装で行くの？」——よくある疑問に、現場を管理している部長の立場から答えます。
 author: 橋本 章平
 category: 部長より
+image: /blog/hajimete-no-genba-junbi.jpg
 ---
 
 ## 初日が一番、緊張する

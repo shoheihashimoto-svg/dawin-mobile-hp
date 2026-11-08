@@ -5,6 +5,7 @@ date: 2026-08-17
 description: 入ってすぐ辞める人と、何年も続ける人は何が違うのか。部長の立場から見えてきた、長続きするスタッフの共通点を書きます。
 author: 橋本 章平
 category: 部長より
+image: /blog/nagaku-tsuzuku-staff.jpg
 ---
 
 ## 長続きする人を見ていて、気づいたことがあります

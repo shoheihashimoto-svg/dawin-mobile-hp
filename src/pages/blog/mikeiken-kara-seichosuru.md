@@ -5,6 +5,7 @@ date: "2026-07-01"
 description: "「未経験歓迎」の言葉をどこまで信じていいか、わからないですよね。うちのチームで実際に何が起きているかを書きます。"
 author: "橋本 章平"
 category: "部長より"
+image: /blog/mikeiken-kara-seichosuru.jpg
 ---
 
 「未経験歓迎」という言葉、どこの求人にも書いてありますよね。

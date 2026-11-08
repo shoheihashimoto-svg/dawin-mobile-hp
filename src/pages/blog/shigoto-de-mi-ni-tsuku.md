@@ -5,6 +5,7 @@ date: 2026-07-21
 description: スマホ販売のバイトって将来に何が残るの？接客力・数字感覚・自己管理力など、部長が実感をもとに正直に書きます。
 author: 橋本 章平
 category: 部長より
+image: /blog/shigoto-de-mi-ni-tsuku.jpg
 ---
 
 ## 「将来に何か残りますか？」

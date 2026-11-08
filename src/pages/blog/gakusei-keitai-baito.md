@@ -5,6 +5,7 @@ date: 2026-08-10
 description: 授業やサークルの合間に入れる、週1〜2日OKの携帯イベントバイト。夏休み・冬休みの長期休みにまとめて稼ぎたい学生にも向いています。
 author: 橋本 章平
 category: 部長より
+image: /blog/gakusei-keitai-baito.jpg
 ---
 
 ## 接客・コミュニケーションの経験が就活で使えます

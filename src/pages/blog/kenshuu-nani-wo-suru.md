@@ -5,6 +5,7 @@ date: 2026-09-14
 description: 「研修って難しそう」「覚えることが多そう」——よくある不安に答えます。うちの研修でやることを、そのまま書きます。
 author: 橋本 章平
 category: 部長より
+image: /blog/kenshuu-nani-wo-suru.jpg
 ---
 
 ## 「研修」という言葉だけで構えてしまう人へ

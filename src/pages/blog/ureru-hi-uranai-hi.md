@@ -5,6 +5,7 @@ date: 2026-08-24
 description: 同じ現場で同じ時間働いても、件数に差が出る日があります。その差がどこから来るのか、現場で見えてきたことを書きます。
 author: 橋本 章平
 category: 部長より
+image: /blog/ureru-hi-uranai-hi.jpg
 ---
 
 ## 「今日は全然ダメだった」は、何が原因なのか

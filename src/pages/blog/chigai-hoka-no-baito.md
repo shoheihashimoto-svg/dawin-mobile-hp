@@ -5,6 +5,7 @@ date: 2026-09-28
 description: コンビニや飲食との違い、日給制と時給制の違い。「携帯イベントスタッフ」という仕事の特徴を、正直に並べて書きます。
 author: 橋本 章平
 category: 部長より
+image: /blog/chigai-hoka-no-baito.jpg
 ---
 
 ## 「他のバイトと比べてどうですか？」とよく聞かれます

@@ -5,6 +5,7 @@ date: 2026-10-19
 description: 「土日しか入れない」「逆に平日しか空いていない」——シフトの相談で一番多い質問に、現場を回している部長の立場から正直に答えます。
 author: 橋本 章平
 category: 部長より
+image: /blog/donichi-dake-heijitsu-dake.jpg
 ---
 
 ## シフトの質問で一番多いのがこれです

@@ -5,6 +5,7 @@ date: "2026-06-19"
 description: "このブログを始めた理由と、私たちのチームのことを少しだけお伝えします。"
 author: "橋本 章平"
 category: "部長より"
+image: /blog/hajimemashite.jpg
 ---
 
 はじめまして。株式会社ダウイン モバイル事業部 部長の橋本 章平です。

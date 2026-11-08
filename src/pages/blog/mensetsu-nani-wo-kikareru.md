@@ -5,6 +5,7 @@ date: 2026-10-12
 description: 「面接で何を聞かれますか？」「スーツで行くべきですか？」——応募前に一番多い質問に、面接をしている部長の立場から答えます。
 author: 橋本 章平
 category: 部長より
+image: /blog/mensetsu-nani-wo-kikareru.jpg
 ---
 
 ## 面接の前が、一番不安だと思います

@@ -5,6 +5,7 @@ date: 2026-10-05
 description: 「立ち仕事だからきつそう」「一日中動き回るの？」という疑問に、現場を管理している立場から正直に答えます。
 author: 橋本 章平
 category: 部長より
+image: /blog/tairyoku-kitsui-no-ka.jpg
 ---
 
 ## 「体力的にきついですか？」はよく聞かれます

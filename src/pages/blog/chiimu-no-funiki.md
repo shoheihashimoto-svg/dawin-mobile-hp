@@ -5,6 +5,7 @@ date: 2026-08-05
 description: 「スタッフ同士の関係ってどんな感じですか？」よく聞かれます。ベタなことは言いません。実際のことを書きます。
 author: 橋本 章平
 category: 部長より
+image: /blog/chiimu-no-funiki.jpg
 ---
 
 ## 「チームの雰囲気ってどうですか？」

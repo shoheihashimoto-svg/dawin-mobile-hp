@@ -5,12 +5,14 @@ interface Props {
   description?: string;
   ogImage?: string;
   noindex?: boolean;
+  ogType?: string;
 }
 const {
   title,
   description = '株式会社ダウイン モバイル事業部 採用サイト。未経験歓迎・インセンティブ充実。関東・福岡でモバイルイベントスタッフ募集中。',
   ogImage = '/og-default.jpg',
   noindex = false,
+  ogType = 'website',
 } = Astro.props;
 const siteUrl = 'https://mobile.dawin.co.jp';
 const pageUrl = `${siteUrl}${Astro.url.pathname}`;
@@ -25,7 +27,7 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
   {noindex && <meta name="robots" content="noindex" />}
   <title>{title} | ダウイン モバイル事業部</title>
   <!-- OGP -->
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={ogType} />
   <meta property="og:site_name" content="ダウイン モバイル事業部" />
   <meta property="og:title" content={`${title} | ダウイン モバイル事業部`} />
   <meta property="og:description" content={description} />

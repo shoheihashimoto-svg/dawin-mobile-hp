@@ -5,6 +5,7 @@ date: 2026-08-05
 description: 初めての環境でも物怖じせずに飛び込んでいく息子を見て、仕事に通じるものを感じました。
 author: 橋本 章平
 category: 部長より
+image: /blog/musuko-no-gassyuku.jpg
 ---
 
 ## 親より先に、息子は準備ができていた
