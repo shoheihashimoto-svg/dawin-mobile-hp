@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="HOME">
+<Layout title="携帯イベントスタッフ求人｜未経験OK・日給12,000円保証" description="商業施設での携帯キャリアのイベントスタッフ募集（東京・福岡）。未経験入社98%、アルバイトは日給12,000円保証＋インセンティブ、週1日〜・副業OK。株式会社ダウイン モバイル事業部の採用サイトです。">
 
 <style>
   /* ================= INTRO ================= */
@@ -282,9 +282,15 @@ import Layout from '../layouts/Layout.astro';
           </span>
         </h1>
         <p class="rise rise-2 text-blue-200/90 font-semibold text-base md:text-lg tracking-[0.45em] mb-7">削り合い、輝いていけ。</p>
-        <p class="rise rise-3 text-gray-400 text-base leading-relaxed mb-11 max-w-md [word-break:auto-phrase]">
-          挑戦を楽しみ、仲間を大切にする人たちが集まるチーム。<br />あなたの「成長したい」を、ここで形にしませんか。
-        </p>
+        <div class="rise rise-3 mb-11 max-w-md">
+          <p class="text-white/90 font-bold text-base md:text-lg leading-relaxed mb-3 [word-break:auto-phrase]">商業施設での、携帯イベントスタッフ募集。</p>
+          <ul class="flex flex-wrap gap-2 text-sm font-bold text-blue-100">
+            <li class="rounded-full border border-blue-300/30 bg-blue-400/10 px-3 py-1">未経験OK</li>
+            <li class="rounded-full border border-blue-300/30 bg-blue-400/10 px-3 py-1">日給12,000円保証</li>
+            <li class="rounded-full border border-blue-300/30 bg-blue-400/10 px-3 py-1">週1日〜</li>
+            <li class="rounded-full border border-blue-300/30 bg-blue-400/10 px-3 py-1">東京・福岡</li>
+          </ul>
+        </div>
         <div class="rise rise-4 flex flex-col sm:flex-row sm:flex-wrap gap-4">
           <a href="/recruit"
             class="group relative overflow-hidden rounded-full bg-white px-10 py-4 text-center text-lg font-black text-blue-950 transition-all duration-500 hover:-translate-y-0.5 hover:shadow-[0_0_50px_rgba(96,165,250,0.55)]">
@@ -811,23 +817,22 @@ import Layout from '../layouts/Layout.astro';
     <p class="text-gray-400 text-center mb-16">実際に働くスタッフが、リアルな言葉で語ります。</p>
     <div class="grid md:grid-cols-3 gap-6">
       {[
-        { name: '橋本 章平', role: 'モバイル事業部長', tag: '挑戦×成長', href: '/interview/hashimoto', photo: '/hashimoto.jpg' },
-        { name: '高橋 里佳', role: 'モバイルイベントスタッフ', tag: '楽しい×仲間', href: '/interview/takahashi', photo: null },
-        { name: '中村 翔', role: 'スタッフ', tag: '仲間×自発性', href: '/interview/nakamura', photo: '/nakamura.jpg' },
+        { name: '橋本 章平', role: 'モバイル事業部長', tag: '挑戦×成長', href: '/interview/hashimoto', photo: '/hashimoto.jpg', pos: '50% 25%', quote: '自ら掴んだチャンスが、自分を変える。' },
+        { name: '髙田 亜里沙', role: 'スタッフ', tag: '未経験×挑戦', href: '/interview/takata', photo: '/takata.jpg', pos: '50% 35%', quote: 'とりあえず、やってみよう！ほとんどの人が未経験からのスタートです。' },
+        { name: '中村 翔', role: 'スタッフ', tag: '仲間×自発性', href: '/interview/nakamura', photo: '/nakamura.jpg', pos: '50% 12%', quote: 'いつの間にか、ここが自分の場所になってた。' },
       ].map((p) => (
         <a href={p.href}
-          class="group block bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-blue-500 hover:bg-gray-800 transition-all duration-300">
-          {p.photo ? (
-            <img src={p.photo} alt={p.name} class="w-14 h-14 rounded-full object-cover mb-4" style="object-position: 50% 30%;" />
-          ) : (
-            <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full mb-4 flex items-center justify-center text-xl font-black">
-              {p.name[0]}
-            </div>
-          )}
+          class="group block bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden hover:border-blue-500 hover:bg-gray-800 transition-all duration-300">
+          <div class="aspect-[4/3] overflow-hidden">
+            <img src={p.photo} alt={p.name} loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" style={`object-position: ${p.pos};`} />
+          </div>
+          <div class="p-6">
           <span class="text-xs font-bold text-blue-400 bg-blue-950 px-3 py-1 rounded-full">{p.tag}</span>
           <h3 class="font-bold text-lg mt-3 mb-1">{p.name}</h3>
-          <p class="text-sm text-gray-400 mb-4">{p.role}</p>
+          <p class="text-sm text-gray-400 mb-3">{p.role}</p>
+          <p class="text-sm text-gray-300 leading-relaxed mb-4">「{p.quote}」</p>
           <p class="text-sm text-blue-400 font-bold group-hover:underline">インタビューを読む →</p>
+          </div>
         </a>
       ))}
     </div>
