@@ -76,9 +76,9 @@ import Layout from '../layouts/Layout.astro';
 
 <!-- ティッカー -->
 <div class="bg-blue-600 py-4 overflow-hidden whitespace-nowrap">
-  <div class="ticker-track inline-flex gap-12 text-white font-bold text-sm tracking-widest">
-    {Array(2).fill(['CHALLENGE', 'GROWTH', 'TEAMWORK', 'PASSION', 'CAREER', 'MOTIVATION', 'MOBILE', 'NOW HIRING']).flat().map((w) => (
-      <span>✦ {w}</span>
+  <div class="ticker-track inline-flex text-white font-bold text-sm tracking-widest">
+    {Array(6).fill(['CHALLENGE', 'GROWTH', 'TEAMWORK', 'PASSION', 'CAREER', 'MOTIVATION', 'MOBILE', 'NOW HIRING']).flat().map((w) => (
+      <span class="pr-12">✦ {w}</span>
     ))}
   </div>
 </div>

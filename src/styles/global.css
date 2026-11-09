@@ -18,7 +18,7 @@
 }
 
 .ticker-track {
-  animation: ticker 20s linear infinite;
+  animation: ticker 60s linear infinite; /* 8語×6回並べ、半分（3回分）ずつ流す。少ないと広い画面で右が空く */
 }
 
 /* ─── タップカード: モバイルでオーバーレイを常時表示 ─── */
