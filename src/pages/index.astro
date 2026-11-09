@@ -593,6 +593,36 @@ import Layout from '../layouts/Layout.astro';
 
 </script>
 
+<!-- 仕事内容（画像はイラスト。いい現場写真が撮れたら差し替える） -->
+<section class="py-20 md:py-24 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <p class="text-blue-600 font-bold text-center text-xs tracking-widest uppercase mb-4">Our Work</p>
+    <h2 class="text-2xl md:text-4xl font-black text-center mb-4">どんな仕事？</h2>
+    <p class="text-gray-500 text-center mb-12 [word-break:auto-phrase]">ショッピングモールや量販店の一角にブースを出して、スマホの相談会を開きます。</p>
+    <div class="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
+      <img src="/work-booth.jpg" alt="ショッピングモールのイベントブースで、スタッフがお客様と話している様子（イラスト）" width="1200" height="900" loading="lazy" decoding="async" class="w-full h-auto rounded-2xl border border-gray-100" />
+      <ol class="space-y-6">
+        {[
+          { n: '1', t: '声をかける', b: 'ブースの前を通るお客様に「スマホのことで気になることはありませんか？」と声をかけます。' },
+          { n: '2', t: '話を聞いて、案内する', b: '料金や使い方の困りごとを聞いて、合いそうなプランやキャンペーンを分かりやすく説明します。' },
+          { n: '3', t: '手続きをサポートする', b: '申し込みの手続きは、チームで声をかけ合いながら進めます。わからないことは先輩がすぐフォローします。' },
+        ].map((s) => (
+          <li class="flex gap-4">
+            <span class="shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white font-black flex items-center justify-center">{s.n}</span>
+            <div>
+              <p class="font-black text-lg text-gray-900 mb-1">{s.t}</p>
+              <p class="text-gray-600 leading-relaxed">{s.b}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <p class="text-center mt-12">
+      <a href="/culture" class="inline-block text-blue-600 font-bold hover:underline">スタッフの1日の流れを見る →</a>
+    </p>
+  </div>
+</section>
+
 <!-- 数字で見るダウイン -->
 <section class="bg-gray-950 text-white py-20 px-6">
   <div class="max-w-6xl mx-auto">
