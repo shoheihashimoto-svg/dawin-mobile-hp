@@ -23,6 +23,15 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google アナリティクス（GA4）：採用HPの閲覧数を数える。2026-11-28 橋本さんが入れると決めた。
+       アカウント「ダウイン モバイル事業部」＞プロパティ「採用HP」（approg.com）・測定ID G-YJ347PX6Q7。
+       下の2つは Google の画面に出た貼り付け用のコードそのまま（is:inline は Astro に手を入れさせないため） -->
+  <script is:inline async src="https://www.googletagmanager.com/gtm.js?id=GTM-W698LD3K"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
   <meta name="description" content={description} />
   {noindex && <meta name="robots" content="noindex" />}
   <title>{title} | ダウイン モバイル事業部</title>
